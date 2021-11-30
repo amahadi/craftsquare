@@ -36,3 +36,5 @@
 /vendor/ruby
 
 .env
+
+/node_modules
