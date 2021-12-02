@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+merchant = Merchant.find_by(email: "merchant@example.com")
+
+unless merchant.present?
+    merchant = Merchant.create(
+        email: "merchant@example.com",
+        password: "password",
+        password_confirmation: "password",
+        first_name: "Example",
+        last_name: "Merchant"
+    )
+end

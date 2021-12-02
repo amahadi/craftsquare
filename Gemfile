@@ -25,6 +25,11 @@ gem 'jbuilder', '~> 2.7'
 # render react with rails
 gem 'react-rails'
 
+# device for authentication
+gem 'devise'
+gem 'devise_token_auth'
+
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
