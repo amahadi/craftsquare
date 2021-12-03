@@ -17,3 +17,15 @@ unless merchant.present?
         last_name: "Merchant"
     )
 end
+
+customer = Customer.find_by(email: "customer@example.com")
+
+unless customer.present?
+    customer = Customer.create(
+        email: "customer@example.com",
+        password: "password",
+        password_confirmation: "password",
+        first_name: "Example",
+        last_name: "Customer"
+    )
+end
