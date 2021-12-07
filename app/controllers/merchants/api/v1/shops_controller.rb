@@ -4,6 +4,11 @@ class Merchants::Api::V1::ShopsController < Merchants::Api::V1::BaseController
     return render json: respond_success_with(@shops)
   end
 
+  def show
+    @shop = current_merchant.shops.find(params[:id])
+    return render json: respond_success_with(@shop)
+  end
+
   def create
     @shop = current_merchant.shops.create!(shop_params)
     return render json: respond_success_with(@shop)

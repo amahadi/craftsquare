@@ -29,7 +29,8 @@ gem 'react-rails'
 gem 'devise'
 gem 'devise_token_auth'
 
-
+# pagination
+gem 'pagy'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
