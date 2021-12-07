@@ -1,5 +1,5 @@
 class BaseApiController < ApplicationController
-  def respond_successfull_with object
+  def respond_success_with object
     {
       success: true,
       data: object
