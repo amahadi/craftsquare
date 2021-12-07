@@ -27,11 +27,11 @@ class Merchants::Api::V1::ShopsController < Merchants::Api::V1::BaseController
     params.require(:shop).permit(
       :name, :street_number, :street_name, :apartment_number,
       :suite_number, :postal_code, :city, :province, :country,
-      :latitude, :longitude, :currency, :language, :timezone
+      :latitude, :longitude, :currency, :language, :timezone,
+      :tag_list
 
       # TODO: Need to assign country_code
       # TODO: Need to assign categories
-      # TODO: Need to assign Tags
     )
   end
 end
