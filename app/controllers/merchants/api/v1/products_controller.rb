@@ -35,27 +35,6 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
         )
     end
 
-    def image_params
-        params[:product][:images].map do |img|
-            if img[:data].present?
-                {
-                    data: img[:data],
-                    filename: img[:filename],
-                    content_type: img[:content_type]
-                }
-            else
-                # TODO: Need to define proper way of doing that
-                data = Base64.encode64(File.read(img[:src])) # for opening file from local storage
-                # data = Base64.encode64(File.read(open(img[:src]))) # for opening file from aws or any external source
-                {
-                    data: "data:#{img[:content_type]};base64,#{data}",
-                    filename: img[:filename],
-                    content_type: img[:content_type]
-                }
-            end
-        end
-    end
-
     def shop
         @shop = current_merchant.shops.find(params[:shop_id])
     end

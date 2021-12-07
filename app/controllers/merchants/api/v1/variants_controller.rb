@@ -5,25 +5,26 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
     def index
         @variants = @product.variants
         return respond_success_with(
-            @variants, [:variant_options]
+            @variants, [:variant_options], [:images]
         )
     end
 
     def show
         @variant = @product.variants.find(params[:id])
-        return respond_success_with(@variant)
+        return respond_success_with(@variant, [:variant_options], [:images])
     end
 
     def create
         @variants = variants_params[:variants].map do |variant|
             @variant = @product.variants.create!(variant)
             @variant.attributes.merge!({
-                    variant_options: @variant.variant_options.map { 
+                    variant_options: @variant.variant_options.map {
                         |vo| vo.attributes.merge!({
                                 value_list: vo.value_list
                             }
-                        ) 
-                    }
+                        )
+                    },
+                    images: @variant.images
                 }
             )
         end
@@ -34,7 +35,7 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
         @variant = @product.variants.find(params[:id])
         @variant.update(variant_params)
         @variant.reload
-        return respond_success_with(@variant)
+        return respond_success_with(@variant, [:variant_options], [:images])
     end
 
     def destroy
@@ -49,7 +50,7 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
         params.require(:variant).permit(
             :title, :description, :weight, :weight_unit,
             :inventory_quantity, :price, :ingredient_list,
-            :option_list,
+            images: [:data, :filename, :content_type],
             variant_options_attributes: [:title, :value_list]
         )
     end
@@ -59,6 +60,7 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
             variants: [
                 :title, :description, :weight, :weight_unit,
                 :inventory_quantity, :price, :ingredient_list,
+                images: [:data, :filename, :content_type],
                 variant_options_attributes: [:title, :value_list]
             ]
         )
