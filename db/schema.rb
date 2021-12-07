@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_080501) do
+ActiveRecord::Schema.define(version: 2021_12_07_020652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,28 @@ ActiveRecord::Schema.define(version: 2021_12_02_080501) do
     t.index ["email"], name: "index_merchants_on_email", unique: true
     t.index ["reset_password_token"], name: "index_merchants_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_merchants_on_uid_and_provider", unique: true
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.bigint "merchant_id"
+    t.string "name"
+    t.string "street_number"
+    t.string "street_name"
+    t.string "apartment_number"
+    t.string "suite_number"
+    t.string "postal_code"
+    t.string "city"
+    t.string "province"
+    t.string "country"
+    t.string "country_code"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.string "currency"
+    t.string "language"
+    t.string "timezone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["merchant_id"], name: "index_shops_on_merchant_id"
   end
 
 end

@@ -6,4 +6,8 @@ Rails.application.routes.draw do
     # Define routes for Customer within this block.
   end
   root to: "home#index"
+
+  # define all routes after this
+
+  draw 'merchants/api_v1.rb'
 end
