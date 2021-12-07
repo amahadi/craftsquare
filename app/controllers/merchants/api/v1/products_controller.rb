@@ -4,12 +4,12 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
     
     def index
         @products = @shop.products
-        return render json: respond_success_with(@products)
+        return respond_success_with(@products)
     end
 
     def create
         @product = @shop.products.create!(product_params)
-        return render json: respond_success_with(@product)
+        return respond_success_with(@product)
     end
 
     private

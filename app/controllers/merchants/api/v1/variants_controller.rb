@@ -4,32 +4,43 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
 
     def index
         @variants = @product.variants
-        return render json: respond_success_with(@variants)
+        return respond_success_with(
+            @variants, [:variant_options]
+        )
     end
 
     def show
         @variant = @product.variants.find(params[:id])
-        return render json: respond_success_with(@variant)
+        return respond_success_with(@variant)
     end
 
     def create
         @variants = variants_params[:variants].map do |variant|
-            @product.variants.create!(variant)
+            @variant = @product.variants.create!(variant)
+            @variant.attributes.merge!({
+                    variant_options: @variant.variant_options.map { 
+                        |vo| vo.attributes.merge!({
+                                value_list: vo.value_list
+                            }
+                        ) 
+                    }
+                }
+            )
         end
-        return render json: respond_success_with(@variants)
+        return respond_success_with(@variants)
     end
 
     def update
         @variant = @product.variants.find(params[:id])
         @variant.update(variant_params)
         @variant.reload
-        return render json: respond_success_with(@variant)
+        return respond_success_with(@variant)
     end
 
     def destroy
         @variant = @product.variants.find(params[:id])
         @variant.destroy
-        return render json: respond_success_with(@variant)
+        return respond_success_with(@variant)
     end
 
     private
@@ -37,7 +48,9 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
     def variant_params
         params.require(:variant).permit(
             :title, :description, :weight, :weight_unit,
-            :inventory_quantity, :price, :ingredient_list
+            :inventory_quantity, :price, :ingredient_list,
+            :option_list,
+            variant_options_attributes: [:title, :value_list]
         )
     end
 
@@ -45,7 +58,8 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
         params.permit(
             variants: [
                 :title, :description, :weight, :weight_unit,
-                :inventory_quantity, :price, :ingredient_list
+                :inventory_quantity, :price, :ingredient_list,
+                variant_options_attributes: [:title, :value_list]
             ]
         )
     end

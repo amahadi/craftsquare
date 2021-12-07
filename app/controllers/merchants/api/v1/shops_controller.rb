@@ -1,24 +1,24 @@
 class Merchants::Api::V1::ShopsController < Merchants::Api::V1::BaseController
   def index
     @shops = current_merchant.shops
-    return render json: respond_success_with(@shops)
+    return respond_success_with(@shops)
   end
 
   def show
     @shop = current_merchant.shops.find(params[:id])
-    return render json: respond_success_with(@shop)
+    return respond_success_with(@shop)
   end
 
   def create
     @shop = current_merchant.shops.create!(shop_params)
-    return render json: respond_success_with(@shop)
+    return respond_success_with(@shop)
   end
 
   def update
     @shop = current_merchant.shops.find(params[:id])
     @shop.update!(shop_params)
     @shop.reload
-    return render json: respond_success_with(@shop)
+    return respond_success_with(@shop)
   end
 
   private

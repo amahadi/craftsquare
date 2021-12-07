@@ -11,6 +11,7 @@ class CreateVariants < ActiveRecord::Migration[6.1]
       t.timestamps
 
       # taggable -- ingredients
+      # taggable -- options
     end
   end
 end
