@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "f46473b1-acf5-4074-9b1a-318ae85046db",
+		"name": "Homemade",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Merchant",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "sign in",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"merchant@example.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{root_url}}/merchants/sign_in",
+									"host": [
+										"{{root_url}}"
+									],
+									"path": [
+										"merchants",
+										"sign_in"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sign_out",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{root_url}}/merchants/sign_out",
+									"host": [
+										"{{root_url}}"
+									],
+									"path": [
+										"merchants",
+										"sign_out"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Shop",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{merchant_api}}/shops",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"shop\": {\n        \"name\": \"Example shop\",\n        \"street_number\": \"3100\",\n        \"street_name\": \"Johnson st\",\n        \"apartment_number\": \"117\",\n        \"suite_number\": null,\n        \"postal_code\": \"V8N3L3\",\n        \"city\": \"Victoria\",\n        \"province\": \"British Columbia\",\n        \"country\": \"Canada\",\n        \"latitude\": 49.3226172,\n        \"longitude\": -124.9956802,\n        \"tag_list\": \"one, two, three\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{merchant_api}}/shops",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"shop\": {\n        \"tag_list\": \"one, two\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{merchant_api}}/shops/1",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{merchant_api}}/shops/1",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{merchant_api}}/shops/1/products",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops",
+										"1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product\": {\n        \"title\": \"Example product\",\n        \"description\": \"Demo description\",\n        \"tag_list\": \"one, two, three\",\n        \"ingredient_list\": \"Ten, eleven, twelve\",\n        \"product_type_list\": \"twenty, twentyone, twentytwo\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{merchant_api}}/shops/1/products",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops",
+										"1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Variant",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"variants\": [\n        {\n            \"title\": \"title 1\",\n            \"description\": \"description 1\",\n            \"weight\": 10.00,\n            \"weight_unit\": \"gram\",\n            \"inventory_quantity\": 10,\n            \"price\": 18.50,\n            \"ingredient_list\": \"chal, dal, tel\",\n            \"variant_options\": [\n                {\n                    \"title\": \"Spice level\",\n                    \"value_list\": \"Mild, Medium, High\"\n                }\n            ]\n        },\n        {\n            \"title\": \"title 2\",\n            \"description\": \"description 2\",\n            \"weight\": 12.00,\n            \"weight_unit\": \"gram\",\n            \"inventory_quantity\": 10,\n            \"price\": 19.50,\n            \"ingredient_list\": \"chal, dal, tel\",\n            \"variant_options_attributes\": [\n                {\n                    \"title\": \"Spice level\",\n                    \"value_list\": \"Mild, Medium, High, Very high\"\n                }\n            ]\n            \n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{merchant_api}}/products/1/variants",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"products",
+										"1",
+										"variants"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{merchant_api}}/products/1/variants",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"products",
+										"1",
+										"variants"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"variant\": {\n        \"title\": \"title 3\",\n        \"description\": \"description 3\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{merchant_api}}/products/1/variants/3",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"products",
+										"1",
+										"variants",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var uid = pm.environment.get(\"uid\");",
+					"var access_token = pm.environment.get(\"access_token\");",
+					"var client = pm.environment.get(\"client\");",
+					"",
+					"if(uid){",
+					"    pm.request.headers.add({",
+					"    key: 'uid',",
+					"    value: uid",
+					"    });",
+					"}",
+					"",
+					"if(client){",
+					"    pm.request.headers.add({",
+					"    key: 'client',",
+					"    value: client",
+					"    });",
+					"}",
+					"",
+					"if(access_token){",
+					"    pm.request.headers.add({",
+					"    key: 'access-token',",
+					"    value: access_token",
+					"    });",
+					"}",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var access_token = pm.response.headers.get(\"access-token\");",
+					"var client = pm.response.headers.get(\"client\");",
+					"var uid = pm.response.headers.get(\"uid\");",
+					"",
+					"if(access_token){",
+					"    pm.environment.set(\"access_token\", access_token);",
+					"}",
+					"if(client){",
+					"    pm.environment.set(\"client\", client);",
+					"}",
+					"if(uid){",
+					"    pm.environment.set(\"uid\", uid);",
+					"}",
+					""
+				]
+			}
+		}
+	]
+}
