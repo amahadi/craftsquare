@@ -15,7 +15,7 @@ class Merchants::Api::V1::ShopsController < Merchants::Api::V1::BaseController
   end
 
   def update
-    @shop = Shop.find(params[:id])
+    @shop = current_merchant.shops.find(params[:id])
     @shop.update!(shop_params)
     @shop.reload
     return render json: respond_success_with(@shop)
