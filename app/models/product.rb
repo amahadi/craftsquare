@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
     belongs_to :shop
     has_many :variants
+    has_many :adverts
 
     include Rails.application.routes.url_helpers
 

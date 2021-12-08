@@ -4,7 +4,7 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
 
     def index
         @products = @shop.products
-        return respond_success_with(@products, [], [:images])
+        return respond_success_with(@products, [:variants], [:images])
     end
 
     def show
