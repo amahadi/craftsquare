@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_193511) do
+ActiveRecord::Schema.define(version: 2021_12_08_085406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,19 @@ ActiveRecord::Schema.define(version: 2021_12_07_193511) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "adverts", force: :cascade do |t|
+    t.bigint "shop_id"
+    t.bigint "product_id"
+    t.string "title"
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_adverts_on_product_id"
+    t.index ["shop_id"], name: "index_adverts_on_shop_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -152,6 +165,15 @@ ActiveRecord::Schema.define(version: 2021_12_07_193511) do
     t.datetime "updated_at"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "variant_configurations", force: :cascade do |t|
+    t.bigint "advert_id"
+    t.bigint "variant_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["advert_id"], name: "index_variant_configurations_on_advert_id"
+    t.index ["variant_id"], name: "index_variant_configurations_on_variant_id"
   end
 
   create_table "variant_options", force: :cascade do |t|
