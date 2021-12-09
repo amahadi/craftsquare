@@ -2,9 +2,32 @@ class Merchants::Api::V1::VariantConfigurationsController < Merchants::Api::V1::
 
   before_action :advert
 
+  def index
+    @variant_configurations = @advert.variant_configurations
+    return respond_success_with(@variant_configurations, [], [:selected_variants])
+  end
+
+  def show
+    @variant_configuration = @advert.variant_configurations.find(params[:id])
+    return respond_success_with(@variant_configuration, [], [:selected_variants])
+  end
+
   def create
     @variant_configuration = @advert.variant_configurations.create!(variant_params)
-    return respond_success_with(@variant_configuration, [], [:selected_options])
+    return respond_success_with(@variant_configuration, [], [:selected_variants])
+  end
+
+  def update
+    @variant_configuration = @advert.variant_configurations.find(params[:id])
+    @variant_configuration.update!(variant_params)
+    @variant_configuration.reload
+    return respond_success_with(@variant_configuration, [], [:selected_variants])
+  end
+
+  def delete
+    @variant_configuration = @advert.variant_configurations.find(params[:id])
+    @variant_configuration.destroy
+    return respond_success_with(@variant_configuration)
   end
 
   private

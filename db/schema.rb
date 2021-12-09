@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_085406) do
     t.text "description"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_adverts_on_product_id"

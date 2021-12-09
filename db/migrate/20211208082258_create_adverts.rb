@@ -7,6 +7,7 @@ class CreateAdverts < ActiveRecord::Migration[6.1]
       t.text :description
       t.datetime :start_date
       t.datetime :end_date
+      t.integer :status, default: 0 # draft, active, inactive
       t.timestamps
 
       # taggable -- variants
