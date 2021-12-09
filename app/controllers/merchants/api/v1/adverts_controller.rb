@@ -17,12 +17,25 @@ class Merchants::Api::V1::AdvertsController < Merchants::Api::V1::BaseController
     return respond_success_with(@advert, [], [:selected_product])
   end
 
+  def update
+    @advert = @shop.adverts.find(params[:id])
+    @advert.update(advert_params)
+    @advert.reload
+    return respond_success_with(@advert, [], [:selected_product])
+  end
+
+  def destroy
+    @advert = @shop.adverts.find(params[:id])
+    @advert.destroy
+    return respond_success_with(@advert)
+  end
+
   private
 
   def advert_params
     params.require(:advert).permit(
       :product_id, :title, :description, :start_date, :end_date,
-      variant_configurations_attributes: [:variant_id, :option_list]
+      variant_configurations_attributes: [:id, :variant_id, :option_list]
     )
   end
 

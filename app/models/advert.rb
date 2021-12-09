@@ -25,6 +25,7 @@ class Advert < ApplicationRecord
                     variant_configuration.option_list.include?(variant_option.id.to_s)
                 }
                 variant = variant.attributes.merge!({
+                    variant_configuration_id: variant_configuration.id,
                     options: options
                 })
                 variant
