@@ -8,6 +8,9 @@ namespace :merchants do
       resources :products, only: [] do
         resources :variants
       end
+      resources :adverts, only: [] do
+        resources :variant_configurations
+      end
     end
   end
 end

@@ -347,7 +347,123 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": null
+								"url": {
+									"raw": "{{merchant_api}}/products/1/variants/5",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"products",
+										"1",
+										"variants",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Advert",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_id\": 1,\n    \"title\": \"Advert 1\",\n    \"description\": \"Advert 1 description\",\n    \"variant_configurations_attributes\": [\n        {\n            \"variant_id\": 2,\n            \"option_list\": \"1\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{merchant_api}}/shops/1/adverts",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops",
+										"1",
+										"adverts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{merchant_api}}/shops/1/adverts",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops",
+										"1",
+										"adverts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{merchant_api}}/shops/1/adverts/1",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"shops",
+										"1",
+										"adverts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Variant Configuration",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"variant_configuration\": {\n        \"variant_id\": 3,\n        \"option_list\": \"1\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{merchant_api}}/adverts/2/variant_configurations",
+									"host": [
+										"{{merchant_api}}"
+									],
+									"path": [
+										"adverts",
+										"2",
+										"variant_configurations"
+									]
+								}
 							},
 							"response": []
 						}

@@ -2,9 +2,19 @@ class Merchants::Api::V1::AdvertsController < Merchants::Api::V1::BaseController
 
   before_action :shop
 
+  def index
+    @adverts = @shop.adverts
+    return respond_success_with(@adverts)
+  end
+
+  def show
+    @advert = @shop.adverts.find(params[:id])
+    return respond_success_with(@advert, [], [:selected_product])
+  end
+
   def create
     @advert = @shop.adverts.create!(advert_params)
-    return respond_success_with(@advert, [:product, :variant_configurations])
+    return respond_success_with(@advert, [], [:selected_product])
   end
 
   private
