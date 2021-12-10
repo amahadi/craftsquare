@@ -1,6 +1,7 @@
 namespace :merchants do
   namespace :api do
     namespace :v1 do
+      resources :merchants
       resources :shops do
         resources :products
         resources :adverts
