@@ -15,6 +15,7 @@ class CreateShops < ActiveRecord::Migration[6.1]
       t.string :province
       t.string :country
       t.string :country_code
+      t.string :phone
       t.decimal :latitude
       t.decimal :longitude
 

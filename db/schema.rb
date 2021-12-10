@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_085406) do
     t.string "province"
     t.string "country"
     t.string "country_code"
+    t.string "phone"
     t.decimal "latitude"
     t.decimal "longitude"
     t.string "currency"
