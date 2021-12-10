@@ -3,7 +3,7 @@ class Product < ApplicationRecord
     has_many :variants
     has_many :adverts
 
-    include Rails.application.routes.url_helpers
+    include ObjectFile
 
     acts_as_taggable_on :tags, :ingredients, :product_types
 
@@ -11,13 +11,4 @@ class Product < ApplicationRecord
 
     enum status: [:draft, :active, :inactive]
 
-    def images
-        super.map do |image|
-            {
-                filename: image.blob.filename,
-                content_type: image.blob.content_type,
-                src: ActiveStorage::Blob.service.send(:path_for, image.key)
-            }
-        end
-    end
 end
