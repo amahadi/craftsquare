@@ -1,4 +1,4 @@
-module Instance
+module HomemadeInstanceMethods
   module Shop
     extend ActiveSupport::Concern
 

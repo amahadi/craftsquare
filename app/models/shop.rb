@@ -3,7 +3,7 @@ class Shop < ApplicationRecord
   has_many :products
   has_many :adverts
 
-  include Instance::Shop
+  include HomemadeInstanceMethods::Shop
 
   geocoded_by :address
   after_validation :geocode

@@ -3,6 +3,7 @@ class Address < ApplicationRecord
 
   include HomemadeInstanceMethods::Address
   include HomemadeCallbackMethods::Address
+  include HomemadeClassMethods::Address
 
   after_save :configure_active_address
 

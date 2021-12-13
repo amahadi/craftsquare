@@ -1,7 +1,9 @@
 class Customers::Api::V1::AdvertsController < Customers::Api::V1::BaseController
 
+  include Customers::Api::V1::Adverts
+
   def index
-    @adverts = Advert.all
+    @adverts = adverts
     return respond_success_with(@adverts)
   end
 

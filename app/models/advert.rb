@@ -7,4 +7,7 @@ class Advert < ApplicationRecord
     accepts_nested_attributes_for :variant_configurations
 
     include Api::Advert
+    include HomemadeClassMethods::Advert
+
+    enum status: [:draft, :active, :inactive]
 end
