@@ -1,4 +1,4 @@
-module Instance
+module HomemadeInstanceMethods
   module Address
     extend ActiveSupport::Concern
 
