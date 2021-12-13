@@ -120,8 +120,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_085406) do
   create_table "shops", force: :cascade do |t|
     t.bigint "merchant_id"
     t.string "name"
-    t.string "street_number"
-    t.string "street_name"
+    t.string "street"
     t.string "apartment_number"
     t.string "suite_number"
     t.string "postal_code"

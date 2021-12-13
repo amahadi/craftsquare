@@ -38,6 +38,9 @@ gem 'acts-as-taggable-on', '~> 8.1.0'
 # base64 image attachment
 gem 'active_storage_base64'
 
+# location gem
+gem 'geocoder'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

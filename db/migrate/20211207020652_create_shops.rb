@@ -6,8 +6,7 @@ class CreateShops < ActiveRecord::Migration[6.1]
       t.string :name
 
       # address and location
-      t.string :street_number
-      t.string :street_name
+      t.string :street
       t.string :apartment_number
       t.string :suite_number
       t.string :postal_code
