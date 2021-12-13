@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_08_085406) do
+ActiveRecord::Schema.define(version: 2021_12_13_201557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,23 @@ ActiveRecord::Schema.define(version: 2021_12_08_085406) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.string "street"
+    t.string "apartment_number"
+    t.string "suite_number"
+    t.string "city"
+    t.string "province"
+    t.string "postal_code"
+    t.string "country"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.boolean "current", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_addresses_on_customer_id"
   end
 
   create_table "adverts", force: :cascade do |t|
@@ -136,6 +153,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_085406) do
     t.string "timezone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["latitude", "longitude"], name: "index_shops_on_latitude_and_longitude"
     t.index ["merchant_id"], name: "index_shops_on_merchant_id"
   end
 

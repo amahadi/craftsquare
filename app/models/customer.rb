@@ -6,4 +6,8 @@ class Customer < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  has_many :addresses, dependent: :destroy
+
+  accepts_nested_attributes_for :addresses
 end

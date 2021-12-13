@@ -24,5 +24,7 @@ class CreateShops < ActiveRecord::Migration[6.1]
       t.string :timezone
       t.timestamps
     end
+
+    add_index :shops, [:latitude, :longitude]
   end
 end
