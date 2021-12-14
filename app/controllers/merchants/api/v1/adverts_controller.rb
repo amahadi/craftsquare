@@ -35,6 +35,8 @@ class Merchants::Api::V1::AdvertsController < Merchants::Api::V1::BaseController
   def advert_params
     params.require(:advert).permit(
       :product_id, :title, :description, :start_date, :end_date, :status,
+      :delivery_method, :note,
+      pick_up_times: [:day, :from, :to, :delivery_method],
       variant_configurations_attributes: [:id, :variant_id, :option_list]
     )
   end

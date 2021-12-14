@@ -10,4 +10,5 @@ class Advert < ApplicationRecord
     include HomemadeClassMethods::Advert
 
     enum status: [:draft, :active, :inactive]
+    enum delivery_method: [:both, :pick_up_only, :drop_off_only]
 end

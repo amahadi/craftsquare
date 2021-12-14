@@ -374,7 +374,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"product_id\": 1,\n    \"title\": \"Advert 1\",\n    \"description\": \"Advert 1 description\",\n    \"variant_configurations_attributes\": [\n        {\n            \"variant_id\": 1,\n            \"option_list\": \"1, 2\"\n        }\n    ]\n}",
+									"raw": "{\n    \"product_id\": 1,\n    \"title\": \"Advert 4\",\n    \"description\": \"Advert 4 description\",\n    \"note\": \"INPORTANT NOTICE: PLEASE REFER TO THE PICK UP TIMES SECTION FOR TIMES TO PICK UP AND DROP OFF.\",\n    \"variant_configurations_attributes\": [\n        {\n            \"variant_id\": 1,\n            \"option_list\": \"1, 2\"\n        }\n    ],\n    \"delivery_method\": \"both\",\n    \"pick_up_times\": [\n        {\n            \"day\": \"Saturday\",\n            \"from\": \"9:00\",\n            \"to\": \"17:30\",\n            \"delivery_method\": \"pick_up\"\n        },\n        {\n            \"day\": \"Sunday\",\n            \"from\": \"9:00\",\n            \"to\": \"15:00\",\n            \"delivery_method\": \"drop_off\"\n        },\n        {\n            \"day\": \"Monday\",\n            \"from\": \"9:00\",\n            \"to\": \"17:30\",\n            \"delivery_method\": \"both\"\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"

@@ -68,6 +68,10 @@ ActiveRecord::Schema.define(version: 2021_12_13_201557) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer "status", default: 0
+    t.integer "delivery_method", default: 0
+    t.jsonb "pick_up_times"
+    t.jsonb "drop_off_times"
+    t.text "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_adverts_on_product_id"
