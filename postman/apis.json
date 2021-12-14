@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "883737f4-1ed5-4604-b321-2fef638da977",
+		"_postman_id": "74a6eee7-b35c-436c-8111-a0e98f9c7ba1",
 		"name": "Homemade",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -85,7 +85,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"shop\": {\n        \"name\": \"Example shop\",\n        \"street_number\": \"3100\",\n        \"street_name\": \"Johnson st\",\n        \"apartment_number\": \"117\",\n        \"suite_number\": null,\n        \"postal_code\": \"V8N3L3\",\n        \"city\": \"Victoria\",\n        \"province\": \"British Columbia\",\n        \"country\": \"Canada\",\n        \"latitude\": 49.3226172,\n        \"longitude\": -124.9956802,\n        \"tag_list\": \"one, two, three\"\n    }\n}",
+									"raw": "{\n    \"shop\": {\n        \"name\": \"Example shop 1\",\n        \"street\": \"4347 Torquay dr\",\n        \"apartment_number\": \"117\",\n        \"suite_number\": null,\n        \"postal_code\": \"V8W 1N4\",\n        \"city\": \"Victoria\",\n        \"province\": \"British Columbia\",\n        \"country\": \"Canada\",\n        \"latitude\": 48.483553,\n        \"longitude\": -123.3283281,\n        \"tag_list\": \"one, two, three\"\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -374,7 +374,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"product_id\": 1,\n    \"title\": \"Advert 3\",\n    \"description\": \"Advert 3 description\",\n    \"variant_configurations_attributes\": [\n        {\n            \"variant_id\": 2,\n            \"option_list\": \"1\"\n        }\n    ]\n}",
+									"raw": "{\n    \"product_id\": 1,\n    \"title\": \"Advert 1\",\n    \"description\": \"Advert 1 description\",\n    \"variant_configurations_attributes\": [\n        {\n            \"variant_id\": 1,\n            \"option_list\": \"1, 2\"\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -449,7 +449,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{merchant_api}}/shops/1/adverts/4",
+									"raw": "{{merchant_api}}/shops/1/adverts/1",
 									"host": [
 										"{{merchant_api}}"
 									],
@@ -457,7 +457,7 @@
 										"shops",
 										"1",
 										"adverts",
-										"4"
+										"1"
 									]
 								}
 							},
@@ -585,6 +585,33 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "sign in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"merchant_1@homemade.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/merchants/",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"merchants",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -610,7 +637,232 @@
 		},
 		{
 			"name": "Customer",
-			"item": []
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "sign in",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"customer_1@homemade.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{root_url}}/customers/sign_in",
+									"host": [
+										"{{root_url}}"
+									],
+									"path": [
+										"customers",
+										"sign_in"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Adverts",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{customer_api}}/adverts",
+									"host": [
+										"{{customer_api}}"
+									],
+									"path": [
+										"adverts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{customer_api}}/adverts/2",
+									"host": [
+										"{{customer_api}}"
+									],
+									"path": [
+										"adverts",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Address",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{customer_api}}/addresses?filtres=current=true",
+									"host": [
+										"{{customer_api}}"
+									],
+									"path": [
+										"addresses"
+									],
+									"query": [
+										{
+											"key": "filtres",
+											"value": "current=true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address\": {\n        \"street\": \"4347 Torquay dr\",\n        \"city\": \"Victoria\",\n        \"province\": \"British Columbia\",\n        \"postal_code\": \"V8N3L3\",\n        \"country\": \"Canada\",\n        \"latitude\": 48.483553,\n        \"longitude\": -123.3283281,\n        \"current\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{customer_api}}/addresses",
+									"host": [
+										"{{customer_api}}"
+									],
+									"path": [
+										"addresses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address\": {\n        \"latitude\": 48.483553,\n        \"longitude\": -123.3283281\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{customer_api}}/addresses/1",
+									"host": [
+										"{{customer_api}}"
+									],
+									"path": [
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{customer_api}}/addresses/1",
+									"host": [
+										"{{customer_api}}"
+									],
+									"path": [
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"customer_1@homemade.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/customers",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer\": {\n        \"first_name\": \"Demo\",\n        \"last_name\": \"Customer\",\n        \"addresses_attributes\": [\n            {\n                \"street\": \"4347 Torquay dr\",\n                \"city\": \"Victoria\",\n                \"province\": \"British Columbia\",\n                \"postal_code\": \"V8N3L3\",\n                \"country\": \"Canada\",\n                \"current\": true\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{customer_api}}/customers/1",
+							"host": [
+								"{{customer_api}}"
+							],
+							"path": [
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [

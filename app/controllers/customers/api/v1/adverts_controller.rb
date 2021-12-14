@@ -8,7 +8,7 @@ class Customers::Api::V1::AdvertsController < Customers::Api::V1::BaseController
   end
 
   def show
-    @advert = Advert.find(params[:id])
+    @advert = Advert.active.find(params[:id])
     return respond_success_with(@advert, [], [:selected_product])
   end
 end
