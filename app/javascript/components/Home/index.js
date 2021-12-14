@@ -1,14 +1,10 @@
 import React from "react";
-import { Button } from "@mui/material";
+import NavBar from "./NavBar";
 
 export default function Home(props){
     return (
         <div>
-            <Button 
-                variant="contained"
-            >
-                
-            </Button>
+            <NavBar />
         </div>
     );
 }

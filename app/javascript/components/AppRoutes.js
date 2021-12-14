@@ -7,12 +7,11 @@ import {
 
 import Home from "./Home";
 
-export default function Routes(){
+export default function AppRoutes(){
     return (
         <Router>
             <Routes>
-                <Route path='/'>
-                    <Home />
+                <Route path='/' element={<Home />}>
                 </Route>
             </Routes>
         </Router>
