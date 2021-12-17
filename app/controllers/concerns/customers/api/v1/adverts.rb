@@ -14,6 +14,7 @@ module Customers
 
         def current_address_location
           current_address = current_customer.current_address
+          return nil unless current_address.present?
           return [
             current_address.latitude,
             current_address.longitude

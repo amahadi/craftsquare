@@ -1,8 +1,5 @@
 class BaseApiController < ApplicationController
 
-  before_action :set_headers_from_cookie
-  after_action :set_cookie, if: :sign_in_action?
-
   include Pagy::Backend
 
   rescue_from ActiveRecord::RecordNotFound, with: :respond_not_found
