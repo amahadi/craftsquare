@@ -1,6 +1,6 @@
 class DeviseTokenAuthCreateMerchants < ActiveRecord::Migration[6.1]
   def change
-    
+
     create_table(:merchants) do |t|
       ## Required
       t.string :provider, :null => false, :default => "email"
@@ -33,6 +33,10 @@ class DeviseTokenAuthCreateMerchants < ActiveRecord::Migration[6.1]
       t.string :last_name
       t.date :date_of_birth
       t.string :email
+
+      # Determines if the merchant profile is complete
+      # when all the necessary fields are filled, mark the profile as complete
+      t.boolean :complete, default: false
 
       ## Tokens
       t.json :tokens

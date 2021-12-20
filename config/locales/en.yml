@@ -33,3 +33,19 @@ en:
   hello: "Hello world"
   errors:
     not_found: Not Found
+    model:
+      address:
+        validation:
+          presence:
+            street: Street number and name must be provided
+            city: City name must be provided
+            province: Province name must be provided
+            postal_code: Postal code must be provided
+            country: Country name must be provided
+      merchant:
+        validation:
+          presence:
+            email: Email must be provided
+            password: Password must be provided
+          first_name_has_valid_characters: First name is not valid, numeric and invalid name character is not allowed as first name.
+          last_name_has_valid_characters: First name is not valid, numeric and invalid name character is not allowed as first name.
