@@ -19,6 +19,7 @@ class Merchant < ActiveRecord::Base
     { message: I18n.t('errors.model.merchant.validation.presence.password') }, on: :create
 
   validate :first_name_has_valid_characters,
-           :last_name_has_valid_characters ,
+           :last_name_has_valid_characters,
+           :over_valid_age_limit,
            on: :update
 end

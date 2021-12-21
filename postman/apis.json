@@ -18,7 +18,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"merchant@example.com\",\n    \"password\": \"password\"\n}",
+									"raw": "{\n    \"email\": \"merchant_1@homemade.com\",\n    \"password\": \"password\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -587,13 +587,13 @@
 					]
 				},
 				{
-					"name": "sign in",
+					"name": "sign up",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"merchant_1@homemade.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
+							"raw": "{\n    \"email\": \"merchant_2@homemade.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -608,6 +608,33 @@
 							"path": [
 								"merchants",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Ex@mple\",\n    \"last_name\": \"Merchant\",\n    \"date_of_birth\": \"1993-10-20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{merchant_api}}/merchants/1",
+							"host": [
+								"{{merchant_api}}"
+							],
+							"path": [
+								"merchants",
+								"1"
 							]
 						}
 					},
@@ -871,30 +898,30 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"var uid = pm.environment.get(\"uid\");",
-					"var access_token = pm.environment.get(\"access_token\");",
-					"var client = pm.environment.get(\"client\");",
+					"// var uid = pm.environment.get(\"uid\");",
+					"// var access_token = pm.environment.get(\"access_token\");",
+					"// var client = pm.environment.get(\"client\");",
 					"",
-					"if(uid){",
-					"    pm.request.headers.add({",
-					"    key: 'uid',",
-					"    value: uid",
-					"    });",
-					"}",
+					"// if(uid){",
+					"//     pm.request.headers.add({",
+					"//     key: 'uid',",
+					"//     value: uid",
+					"//     });",
+					"// }",
 					"",
-					"if(client){",
-					"    pm.request.headers.add({",
-					"    key: 'client',",
-					"    value: client",
-					"    });",
-					"}",
+					"// if(client){",
+					"//     pm.request.headers.add({",
+					"//     key: 'client',",
+					"//     value: client",
+					"//     });",
+					"// }",
 					"",
-					"if(access_token){",
-					"    pm.request.headers.add({",
-					"    key: 'access-token',",
-					"    value: access_token",
-					"    });",
-					"}",
+					"// if(access_token){",
+					"//     pm.request.headers.add({",
+					"//     key: 'access-token',",
+					"//     value: access_token",
+					"//     });",
+					"// }",
 					""
 				]
 			}
@@ -904,19 +931,19 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"var access_token = pm.response.headers.get(\"access-token\");",
-					"var client = pm.response.headers.get(\"client\");",
-					"var uid = pm.response.headers.get(\"uid\");",
+					"// var access_token = pm.response.headers.get(\"access-token\");",
+					"// var client = pm.response.headers.get(\"client\");",
+					"// var uid = pm.response.headers.get(\"uid\");",
 					"",
-					"if(access_token){",
-					"    pm.environment.set(\"access_token\", access_token);",
-					"}",
-					"if(client){",
-					"    pm.environment.set(\"client\", client);",
-					"}",
-					"if(uid){",
-					"    pm.environment.set(\"uid\", uid);",
-					"}",
+					"// if(access_token){",
+					"//     pm.environment.set(\"access_token\", access_token);",
+					"// }",
+					"// if(client){",
+					"//     pm.environment.set(\"client\", client);",
+					"// }",
+					"// if(uid){",
+					"//     pm.environment.set(\"uid\", uid);",
+					"// }",
 					""
 				]
 			}

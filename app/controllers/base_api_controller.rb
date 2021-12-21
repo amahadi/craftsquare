@@ -1,8 +1,10 @@
 class BaseApiController < ApplicationController
 
   include Pagy::Backend
+  include ErrorHandler
 
   rescue_from ActiveRecord::RecordNotFound, with: :respond_not_found
+  rescue_from ActiveModel::ValidationError, with: :respond_validation_error
 
   def respond_success_with(object, includes = [], methods = [])
     if object.is_a?(ActiveRecord::Relation)
@@ -25,29 +27,5 @@ class BaseApiController < ApplicationController
       }
     end
   end
-
-  def respond_not_found(exception)
-    log_errors(exception)
-    return render status: 404, json: {
-      success: false,
-      message: 'Not found'
-    }
-  end
-
-  def log_errors(exception)
-    if exception&.backtrace.present? && exception&.backtrace[0].present?
-      backtrace = exception&.backtrace[0]
-    else
-      backtrace = nil
-    end
-    Logger.new(Rails.root.join("log/", "#{Rails.env}.log")).error(
-      "PATH=#{params[:controller]} \
-      ACTION=#{params[:action]} \
-      EXCEPTION=#{exception} \
-      BACKTRACE=#{backtrace.present? ? backtrace : 'N/A'}"
-    )
-  end
-
-
 
 end

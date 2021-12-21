@@ -13,8 +13,10 @@ class Merchants::Api::V1::MerchantsController < Merchants::Api::V1::BaseControll
     private
 
     def merchant_params
+        # params[:merchant][:complete] = true
         params.require(:merchant).permit(
-            :first_name, :last_name, :date_of_birth
+            :first_name, :last_name, :date_of_birth,
+            # :complete
         )
     end
 end
