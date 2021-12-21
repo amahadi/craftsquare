@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  mount_devise_token_auth_for 'Merchant', at: 'merchants'
+  mount_devise_token_auth_for 'Merchant', at: 'auth/merchants'
 
-  mount_devise_token_auth_for 'Customer', at: 'customers'
+  mount_devise_token_auth_for 'Customer', at: 'auth/customers'
 
   root to: 'home#index'
-  get '/home', to: 'home#index'
-  get 'home/*path', to: 'home#index'
+  get '/customer/*path', to: 'customers#index'
+  get '/merchant/*path', to: 'merchants#index'
 
   # define all routes after this
 

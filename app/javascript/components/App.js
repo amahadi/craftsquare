@@ -1,10 +1,10 @@
 import React from "react";
-import AppRoutes from "./AppRoutes";
+import Home from "./home";
 
 export default function App(props){
     return (
         <div>
-            <AppRoutes />
+            <Home />
         </div>
     )
 }

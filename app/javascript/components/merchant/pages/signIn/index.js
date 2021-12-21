@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-export default function SignIn() {
+export default function signIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
