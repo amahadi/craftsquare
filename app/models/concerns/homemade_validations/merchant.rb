@@ -24,6 +24,7 @@ module HomemadeValidations
     end
 
     def over_valid_age_limit
+      return unless date_of_birth.present?
       unless age >= 16
         errors.add(:base, I18n.t('errors.model.merchant.validation.over_valid_age_limit'))
         raise ActiveModel::ValidationError.new(self)

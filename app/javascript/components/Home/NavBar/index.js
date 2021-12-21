@@ -28,12 +28,21 @@ export default function NavBar(){
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        
+
                     </Typography>
-                    
-                    <Button color="inherit">Login</Button>
-                    <Button color="inherit">Signup</Button>
-                    
+
+                    <Button
+                        color="inherit"
+                        href="/home/merchant"
+                    >
+                        Login
+                    </Button>
+                    <Button
+                        color="inherit"
+                    >
+                        Signup
+                    </Button>
+
                 </Toolbar>
             </AppBar>
       </Box>

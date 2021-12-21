@@ -6,13 +6,15 @@ import {
 } from "react-router-dom";
 
 import Home from "./Home";
+import MerchantHome from "./Merchant";
 
 export default function AppRoutes(){
     return (
         <Router>
             <Routes>
-                <Route path='/' element={<Home />}>
-                </Route>
+                <Route path='/' element={<Home />} />
+                <Route path='/home' element={<Home />} />
+                <Route path='/home/merchant' element={<MerchantHome />} />
             </Routes>
         </Router>
     );

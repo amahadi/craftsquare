@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   mount_devise_token_auth_for 'Customer', at: 'customers'
 
-  root to: "home#index"
+  root to: 'home#index'
+  get '/home', to: 'home#index'
+  get 'home/*path', to: 'home#index'
 
   # define all routes after this
 
