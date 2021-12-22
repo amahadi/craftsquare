@@ -31,6 +31,9 @@ function getJson(url) {
         })
       }
     )
+    .catch((error) => {
+      reject(["Something went wrong", error]);
+    });
   });
   return promise;
 }
@@ -63,12 +66,15 @@ function postJson(url, body) {
         }
       },
       error => {
-        error.json()
+        reject(["Something went wrong", error]);
+      }
+    )
+    .catch((error) => {
+      error.json()
         .then((errorResponse) => {
           reject(errorResponse.errors);
         })
-      }
-    )
+    });
   });
   return promise;
 }
@@ -88,25 +94,28 @@ function putJson(url, body) {
     })
     .then(
       response => {
-        if(response.ok){
+        if (response.ok) {
           response.json()
-          .then((response) => {
-            resolve(response.data);
-          })
+            .then((response) => {
+              resolve(response.data);
+            })
         } else {
           response.json()
-          .then((response) => {
-            reject(response.errors);
-          })
+            .then((response) => {
+              reject(response.errors);
+            })
         }
       },
       error => {
         error.json()
-        .then((errorResponse) => {
-          reject(errorResponse.errors);
-        })
+          .then((errorResponse) => {
+            reject(errorResponse.errors);
+          })
       }
     )
+    .catch((error) => {
+      reject(["Something went wrong", error]);
+    });
   });
   return promise;
 }
@@ -144,6 +153,9 @@ function deleteJson(url) {
         })
       }
     )
+    .catch((error) => {
+      reject(["Something went wrong", error]);
+    });
   });
   return promise;
 }

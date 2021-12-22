@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "@mui/material";
 import { deleteJson } from "../../../utils";
+import MerchantContext from "../../_contexts/merchantContext";
+import Dashboard from "../Dashboard";
+import SignIn from "../signIn";
+
 
 export default function Home() {
+
+  const merchant = useContext(MerchantContext);
 
   const signOut = () => {
     deleteJson(
@@ -18,17 +24,5 @@ export default function Home() {
     )
   }
 
-  return (
-    <div>
-      <h2>
-        Merchant home
-      </h2>
-      <Button
-        variant="contained"
-        onClick={signOut}
-      >
-        Sign out
-      </Button>
-    </div>
-  );
+  return merchant ? <Dashboard /> : <SignIn />
 }
