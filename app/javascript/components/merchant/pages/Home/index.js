@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
-import { AuthenticatedGet } from "../../../utils/AuthenticatedFetch";
+import { getJson, deleteJson } from "../../../utils";
 
 export default function Home() {
 
@@ -9,7 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     if (loading) {
-      AuthenticatedGet(
+      getJson(
         `${process.env.HOST_NAME}/auth/merchants/validate_token`
       )
         .then(
@@ -27,16 +27,17 @@ export default function Home() {
   })
 
   const signOut = () => {
-    fetch(`${process.env.HOST_NAME}/auth/merchants/sign_out`, {
-      method: "DELETE",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    deleteJson(
+      `${process.env.HOST_NAME}/auth/merchants/sign_out`
+    ).then(
+      response => {
+        console.log(response);
+        window.location.href = '/merchant/sign-in';
+      },
+      error => {
+        console.log(error);
       }
-    })
-      .then((response) => {
-        console.log(response.json());
-    })
+    )
   }
 
   return (

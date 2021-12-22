@@ -1,5 +1,5 @@
-import { AuthenticatedGet } from "./AuthenticatedFetch";
+import { getJson, postJson, putJson, deleteJson } from "./FetchJson";
 
 export {
-  AuthenticatedGet
+  getJson, postJson, putJson, deleteJson
 };

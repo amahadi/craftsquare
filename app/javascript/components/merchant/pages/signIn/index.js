@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
 
+import { postJson } from "../../../utils";
+
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,22 +15,28 @@ export default function SignIn() {
     setPassword(e.target.value);
   }
 
+  const buildRequestBody = () => {
+    return {
+      email: email,
+      password: password
+    }
+  }
+
   const handleOnSignInButtonClick = () => {
-    console.log({email: email, password: password})
-    fetch(
-      `${process.env.HOST_NAME}/auth/merchants/sign_in`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    const body = buildRequestBody();
+    postJson(
+      `${process.env.HOST_NAME}/auth/merchants/sign_in`,
+      body
+    )
+    .then(
+      response => {
+        console.log(response);
+        window.location.href = '/merchant';
       },
-      body: JSON.stringify({
-          email, password
-        })
+      error => {
+        console.log(error);
       }
-    ).then((response) => {
-      console.log(response.json());
-    })
+    )
   }
 
   return (
