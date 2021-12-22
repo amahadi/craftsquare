@@ -5,7 +5,7 @@ import MerchantContext from "./_contexts/merchantContext";
 
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
-import { getJson } from "../utils";
+import { getJson, CircularLoader } from "../utils";
 
 export default function App(props) {
 
@@ -37,15 +37,18 @@ export default function App(props) {
   return (
     <div>
       {
-        signUpRequest() ?
-          <SignUp />
+        loading ?
+          <CircularLoader />
           :
-          merchant ?
-            <MerchantContext.Provider value={merchant}>
-              <MerchantRoutes />
-            </MerchantContext.Provider>
+          signUpRequest() ?
+            <SignUp />
             :
-            <SignIn />
+            merchant ?
+              <MerchantContext.Provider value={merchant}>
+                <MerchantRoutes />
+              </MerchantContext.Provider>
+              :
+              <SignIn />
       }
     </div>
   );
