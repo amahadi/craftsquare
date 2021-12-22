@@ -10,19 +10,28 @@ function getJson(url) {
         'Content-Type': 'application/json'
       }
     })
-    .then((response) => {
-      if (response.ok) {
-        response.json()
-        .then((response) => {
-          resolve(response);
-        });
-      } else {
-        response.json()
-        .then((response) => {
-          reject(response);
-        });
+    .then(
+      response => {
+        if(response.ok){
+          response.json()
+          .then((response) => {
+            resolve(response.data);
+          })
+        } else {
+          response.json()
+          .then((response) => {
+            resolve(response.errors);
+          })
+          reject(response.errors);
+        }
+      },
+      error => {
+        error.json()
+        .then((errorResponse) => {
+          reject(errorResponse.errors);
+        })
       }
-    })
+    )
   });
   return promise;
 }
@@ -40,19 +49,28 @@ function postJson(url, body) {
       },
       body: JSON.stringify(body)
     })
-    .then((response) => {
-      if (response.ok) {
-        response.json()
-        .then((response) => {
-          resolve(response);
-        });
-      } else {
-        response.json()
-        .then((response) => {
-          reject(response);
-        });
+    .then(
+      response => {
+        if(response.ok){
+          response.json()
+          .then((response) => {
+            resolve(response.data);
+          })
+        } else {
+          response.json()
+          .then((response) => {
+            resolve(response.errors);
+          })
+          reject(response.errors);
+        }
+      },
+      error => {
+        error.json()
+        .then((errorResponse) => {
+          reject(errorResponse.errors);
+        })
       }
-    })
+    )
   });
   return promise;
 }
@@ -70,19 +88,28 @@ function putJson(url, body) {
       },
       body: JSON.stringify(body)
     })
-    .then((response) => {
-      if (response.ok) {
-        response.json()
-        .then((response) => {
-          resolve(response);
-        });
-      } else {
-        response.json()
-        .then((response) => {
-          reject(response);
-        });
+    .then(
+      response => {
+        if(response.ok){
+          response.json()
+          .then((response) => {
+            resolve(response.data);
+          })
+        } else {
+          response.json()
+          .then((response) => {
+            resolve(response.errors);
+          })
+          reject(response.errors);
+        }
+      },
+      error => {
+        error.json()
+        .then((errorResponse) => {
+          reject(errorResponse.errors);
+        })
       }
-    })
+    )
   });
   return promise;
 }
@@ -99,19 +126,28 @@ function deleteJson(url, body) {
         'Content-Type': 'application/json'
       }
     })
-    .then((response) => {
-      if (response.ok) {
-        response.json()
-        .then((response) => {
-          resolve(response);
-        });
-      } else {
-        response.json()
-        .then((response) => {
-          reject(response);
-        });
+    .then(
+      response => {
+        if(response.ok){
+          response.json()
+          .then((response) => {
+            resolve(response.data);
+          })
+        } else {
+          response.json()
+          .then((response) => {
+            resolve(response.errors);
+          })
+          reject(response.errors);
+        }
+      },
+      error => {
+        error.json()
+        .then((errorResponse) => {
+          reject(errorResponse.errors);
+        })
       }
-    })
+    )
   });
   return promise;
 }
