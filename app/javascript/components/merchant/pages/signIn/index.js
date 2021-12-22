@@ -56,15 +56,15 @@ export default function SignIn() {
       `${process.env.HOST_NAME}/auth/merchants/sign_in`,
       body
     )
-      .then(
-        response => {
-          console.log(response);
-          window.location.href = '/merchant';
-        },
-        error => {
-          console.log(error);
-        }
-      )
+    .then(
+      response => {
+        console.log(response);
+        window.location.href = '/merchant';
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   return (

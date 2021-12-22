@@ -1,10 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,6 +10,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { postJson } from "../../../utils";
 
 function Copyright(props) {
   return (
@@ -30,14 +30,40 @@ const theme = createTheme();
 
 export default function SignUp() {
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailFieldChange = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handlePasswordFieldChange = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const buildRequestBody = () => {
+    return {
+      email: email,
+      password: password
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const body = buildRequestBody();
+    postJson(
+      `${process.env.HOST_NAME}/auth/merchants`,
+      body
+    )
+    .then(
+      response => {
+        console.log(response);
+        window.location.href = '/merchant';
+      },
+      error => {
+        console.log(error);
+      }
+    )
   };
 
   return (
@@ -68,6 +94,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleEmailFieldChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -79,6 +106,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handlePasswordFieldChange}
                 />
               </Grid>
             </Grid>

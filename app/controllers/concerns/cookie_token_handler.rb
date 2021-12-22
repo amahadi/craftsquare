@@ -8,7 +8,13 @@ module CookieTokenHandler
       params[:action] == "create"
   end
 
+  def sign_up_action?
+    params[:controller] == "devise_token_auth/registrations" &&
+    params[:action] == "create"
+  end
+
   def set_token_cookie
+    if sign_in_action? || sign_up_action?
       cookies.signed[:__hm_tokens] = {
           value: JSON.generate({
             access_token: response.headers["access-token"],
@@ -18,6 +24,7 @@ module CookieTokenHandler
           expires: Time.at(response.headers["expiry"].to_i),
           http_only: true
       }
+    end
   end
 
   def unpack_cookie
