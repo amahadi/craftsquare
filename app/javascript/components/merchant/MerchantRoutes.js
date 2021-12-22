@@ -7,6 +7,7 @@ import {
 
 import Home from "./pages/Home";
 import SignIn from "./pages/signIn";
+import SignUp from "./pages/signUp";
 
 export default function MerchantRoutes() {
 
@@ -16,6 +17,7 @@ export default function MerchantRoutes() {
         <Route path='/merchant' element={<Home />} />
         <Route path='/merchant/home' element={<Home />} />
         <Route path='/merchant/sign-in' element={<SignIn />} />
+        <Route path='/merchant/sign-up' element={<SignUp />} />
       </Routes>
     </Router>
   );

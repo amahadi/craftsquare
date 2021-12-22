@@ -37,6 +37,7 @@ class DeviseTokenAuthCreateMerchants < ActiveRecord::Migration[6.1]
       # Determines if the merchant profile is complete
       # when all the necessary fields are filled, mark the profile as complete
       t.boolean :complete, default: false
+      t.boolean :approved, default: false
 
       ## Tokens
       t.json :tokens

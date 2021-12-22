@@ -4,6 +4,7 @@ import MerchantRoutes from "./MerchantRoutes";
 import MerchantContext from "./_contexts/merchantContext";
 
 import SignIn from "./pages/signIn";
+import SignUp from "./pages/signUp";
 import { getJson } from "../utils";
 
 export default function App(props) {
@@ -29,15 +30,22 @@ export default function App(props) {
     }
   });
 
+  const signUpRequest = () => {
+    return document.location.pathname === '/merchant/sign-up';
+  }
+
   return (
     <div>
       {
-        merchant ? 
-          <MerchantContext.Provider value={merchant}>
-            <MerchantRoutes />
-          </MerchantContext.Provider>
+        signUpRequest() ?
+          <SignUp />
           :
-          <SignIn />
+          merchant ?
+            <MerchantContext.Provider value={merchant}>
+              <MerchantRoutes />
+            </MerchantContext.Provider>
+            :
+            <SignIn />
       }
     </div>
   );

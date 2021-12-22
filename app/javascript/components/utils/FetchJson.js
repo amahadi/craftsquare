@@ -20,9 +20,8 @@ function getJson(url) {
         } else {
           response.json()
           .then((response) => {
-            resolve(response.errors);
+            reject(response.errors);
           })
-          reject(response.errors);
         }
       },
       error => {
@@ -59,9 +58,8 @@ function postJson(url, body) {
         } else {
           response.json()
           .then((response) => {
-            resolve(response.errors);
+            reject(response.errors);
           })
-          reject(response.errors);
         }
       },
       error => {
@@ -98,9 +96,8 @@ function putJson(url, body) {
         } else {
           response.json()
           .then((response) => {
-            resolve(response.errors);
+            reject(response.errors);
           })
-          reject(response.errors);
         }
       },
       error => {
@@ -114,7 +111,7 @@ function putJson(url, body) {
   return promise;
 }
 
-function deleteJson(url, body) {
+function deleteJson(url) {
   const promise = new Promise((resolve, reject) => {
     fetch(url, {
       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
@@ -136,9 +133,8 @@ function deleteJson(url, body) {
         } else {
           response.json()
           .then((response) => {
-            resolve(response.errors);
+            reject(response.errors);
           })
-          reject(response.errors);
         }
       },
       error => {

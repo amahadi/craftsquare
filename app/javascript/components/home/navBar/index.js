@@ -33,12 +33,13 @@ export default function NavBar(){
 
                     <Button
                         color="inherit"
-                        href="/home/merchant"
+                        href="/merchant/sign-in"
                     >
                         Login
                     </Button>
                     <Button
                         color="inherit"
+                        href="/merchant/sign-up"
                     >
                         Signup
                     </Button>
