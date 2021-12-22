@@ -13,7 +13,5 @@ Turbolinks.start()
 ActiveStorage.start()
 // Support component names relative to this directory:
 var componentRequireContext = require.context("components", true);
-var componentRequireContext = require.context("components/merchant", true);
-var componentRequireContext = require.context("components/customer", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);

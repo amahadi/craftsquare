@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Merchant(props) {
+export default function App(props) {
   return (
     <div>
       <h2>
