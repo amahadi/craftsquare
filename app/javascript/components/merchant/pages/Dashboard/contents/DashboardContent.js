@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
 import Box from '@mui/material/Box';
-
 import Toolbar from '@mui/material/Toolbar';
 
 // import { mainListItems, secondaryListItems } from './listItems';
@@ -17,6 +16,7 @@ import SideDrawer from './SideDrawer';
 export default function DashboardContent() {
 
   const [open, setOpen] = useState(true);
+  const [title, setTitle] = useState("Dashboard");
 
   const mdTheme = createTheme();
 
@@ -26,6 +26,7 @@ export default function DashboardContent() {
         <CssBaseline />
         {/** NavBar goes here */}
         <NavBar
+          title={title}
           styled={styled}
           open={open}
           theme={mdTheme}
@@ -37,6 +38,7 @@ export default function DashboardContent() {
           open={open}
           theme={mdTheme}
           setOpen={setOpen}
+          setTitle={setTitle}
         />
         <Box
           component="main"

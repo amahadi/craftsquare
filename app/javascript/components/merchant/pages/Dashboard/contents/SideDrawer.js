@@ -6,11 +6,14 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
 
+import ListItems from "./ListItems";
+
 export default function ({
   styled,
   open,
   setOpen,
   theme,
+  setTitle,
   drawerWidth = 240
 }) {
 
@@ -65,6 +68,9 @@ export default function ({
       </Toolbar>
       <Divider />
       {/** ListItems goes here */}
+      <ListItems
+        setTitle={setTitle}
+      />
     </Drawer>
   );
 }

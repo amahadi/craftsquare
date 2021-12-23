@@ -9,6 +9,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 
 export default function NavBar(
   {
+    title,
     styled,
     open,
     setOpen,
@@ -68,7 +69,7 @@ export default function NavBar(
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          Dashboard
+          {title}
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
