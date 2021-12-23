@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -12,9 +12,12 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
 import { deleteJson } from "../../utils";
+import MerchantContext from "../_contexts/merchantContext";
 
 
 export default function AccountMenu() {
+
+  const merchant = useContext(MerchantContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -42,11 +45,24 @@ export default function AccountMenu() {
     )
   }
 
+  const getMerchantInitial = () => {
+    const fullName = merchant
+      ? `${merchant.first_name ? merchant.first_name : ""} ${merchant.last_name ? merchant.last_name : ""}`
+      : null;
+    if (fullName && fullName.trim() != "") {
+      var initials = fullName.split(' ').map((str) => str ? str[0].toUpperCase() : "").join('');
+    }
+    else {
+      var initials = 'M'
+    }
+    return initials;
+  }
+
   return (
     <div>
       <Tooltip title="Account settings">
         <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-          <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+          <Avatar sx={{ width: 32, height: 32 }}>{getMerchantInitial()}</Avatar>
         </IconButton>
       </Tooltip>
       <Menu
