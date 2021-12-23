@@ -53,13 +53,13 @@ export default function ListItems({
   }
 
   const mainListObjects = [
-    { title: "Dashboard", href: "/merchant" },
-    { title: "Shops", href: "" },
-    { title: "Products", href: "" },
-    { title: "Orders", href: "" },
-    { title: "Adverts", href: "" },
-    { title: "Customers", href: "" },
-    { title: "Reports", href: "" }
+    { title: "Dashboard", href: "/merchant/dashboard" },
+    { title: "Shops", href: "/merchant/shops" },
+    { title: "Products", href: "/merchant/products" },
+    { title: "Orders", href: "/merchant/orders" },
+    { title: "Adverts", href: "/merchant/adverts" },
+    { title: "Customers", href: "/merchant/customers" },
+    { title: "Reports", href: "/merchant/reports" }
   ]
 
   const handleListItemOnClick = (event, index, title) => {
@@ -74,6 +74,7 @@ export default function ListItems({
           return (
             <ListItemButton
               key={`mainListItem__${index}`}
+              component='a'
               href={mainListObject.href}
               // selected={selectedIndex === index}
               onClick={(event) => handleListItemOnClick(event, index, mainListObject.title)}
