@@ -16,13 +16,13 @@ import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo'; // advert
 import AccountBoxIcon from '@mui/icons-material/AccountBox'; // customer
 import BarChartIcon from '@mui/icons-material/BarChart'; // report
 
-import Dashboard from '..';
-import Advert from '../../Advert';
-import Customer from '../../Customer';
-import Order from '../../Order';
-import Product from '../../Product';
-import Report from '../../Report';
-import Shop from '../../Shop';
+import Dashboard from '../pages/Dashboard';
+import Advert from '../pages/Advert';
+import Customer from '../pages/Customer';
+import Order from '../pages/Order';
+import Product from '../pages/Product';
+import Report from '../pages/Report';
+import Shop from '../pages/Shop';
 
 import { Link } from 'react-router-dom';
 
@@ -74,8 +74,8 @@ export default function ListItems({
           return (
             <ListItemButton
               key={`mainListItem__${index}`}
-              component='a'
-              href={mainListObject.href}
+              // component='a'
+              // href={mainListObject.href}
               // selected={selectedIndex === index}
               onClick={(event) => handleListItemOnClick(event, index, mainListObject.title)}
             >

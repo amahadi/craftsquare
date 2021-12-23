@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
-import { deleteJson } from "../../../../utils";
+import { deleteJson } from "../../utils";
 
 
 export default function AccountMenu() {
