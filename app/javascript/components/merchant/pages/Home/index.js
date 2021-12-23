@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import MerchantContext from "../../_contexts/merchantContext";
 import Dashboard from "../Dashboard";
 
@@ -10,13 +11,14 @@ export default function Home(props) {
   const [loading, setLoading] = useState(true);
   const [merchant, setMerchant] = useState(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (loading) {
       getJson(
         `${process.env.HOST_NAME}/auth/merchants/validate_token`
       ).then(
         response => {
-          console.log(response);
           setMerchant(response);
           setLoading(false);
         },
@@ -28,15 +30,17 @@ export default function Home(props) {
     }
   });
 
-  if(loading){
-    return <CircularLoader />
-  }
-
-  return merchant 
+  return (
+    loading 
+    ? 
+    <CircularLoader />
+    :
+    merchant 
     ?
     <MerchantContext.Provider value={merchant}>
       <Dashboard /> 
     </MerchantContext.Provider> 
     : 
-    window.location.assign("/merchant/sign-in")
+    navigate("/merchant/sign-in")
+  )
 }
