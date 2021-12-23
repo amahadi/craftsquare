@@ -1,4 +1,5 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,15 +16,34 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Copyright from '../../_components/Copyright';
 
-import { postJson } from "../../../utils";
+import { postJson, getJson, CircularLoader } from "../../../utils";
 
 
 const theme = createTheme();
 
 export default function SignIn() {
 
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      getJson(
+        `${process.env.HOST_NAME}/auth/merchants/validate_token`
+      ).then(
+        response => {
+          console.log(response);
+          navigate("/merchant/")
+        },
+        error => {
+          console.log(error);
+          setLoading(false);
+        }
+      )
+    }
+  });
 
   const handleEmailFieldChange = (e) => {
     setEmail(e.target.value);
@@ -49,7 +69,7 @@ export default function SignIn() {
     .then(
       response => {
         console.log(response);
-        window.location.href = "/merchant";
+        navigate("/merchant");
       },
       error => {
         console.log(error);
@@ -58,6 +78,9 @@ export default function SignIn() {
   }
 
   return (
+    loading ?
+      <CircularLoader />
+      :
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -75,7 +98,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
