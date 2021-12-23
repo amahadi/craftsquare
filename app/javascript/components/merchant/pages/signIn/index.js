@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -49,7 +49,7 @@ export default function SignIn() {
     .then(
       response => {
         console.log(response);
-        window.location.href = '/merchant';
+        window.location.href = "/merchant";
       },
       error => {
         console.log(error);

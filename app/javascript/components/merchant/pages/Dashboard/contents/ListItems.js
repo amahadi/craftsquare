@@ -52,21 +52,10 @@ export default function ListItems({
     { title: "Reports", href: "" }
   ]
 
-  // const handleListItemOnClick = useCallback(
-  //   (index, title) => {
-  //     setSelectedIndex(index);
-  //     setTitle(title);
-  //   },
-  //   [selectedIndex],
-  // )
-
   const handleListItemOnClick = (event, index, title) => {
     setSelectedIndex(index);
     setTitle(title);
   }
-
-  console.log(selectedIndex);
-
 
   const mainListItems = (
     <div>
@@ -88,39 +77,6 @@ export default function ListItems({
         })
       }
     </div>
-
-    // <div>
-    //   <ListItem button>
-    //     <ListItemIcon>
-    //       <DashboardIcon />
-    //     </ListItemIcon>
-    //     <ListItemText primary="Dashboard" />
-    //   </ListItem>
-    //   <ListItem button>
-    //     <ListItemIcon>
-    //       <ShoppingCartIcon />
-    //     </ListItemIcon>
-    //     <ListItemText primary="Orders" />
-    //   </ListItem>
-    //   <ListItem button>
-    //     <ListItemIcon>
-    //       <PeopleIcon />
-    //     </ListItemIcon>
-    //     <ListItemText primary="Customers" />
-    //   </ListItem>
-    //   <ListItem button>
-    //     <ListItemIcon>
-    //       <BarChartIcon />
-    //     </ListItemIcon>
-    //     <ListItemText primary="Reports" />
-    //   </ListItem>
-    //   <ListItem button>
-    //     <ListItemIcon>
-    //       <LayersIcon />
-    //     </ListItemIcon>
-    //     <ListItemText primary="Integrations" />
-    //   </ListItem>
-    // </div>
   );
 
   // const secondaryListItems = (

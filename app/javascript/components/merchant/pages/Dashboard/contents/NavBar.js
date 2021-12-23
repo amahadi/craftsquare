@@ -7,6 +7,9 @@ import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
+
+import AccountMenu from "./AccountMenu";
+
 export default function NavBar(
   {
     title,
@@ -76,6 +79,7 @@ export default function NavBar(
             <NotificationsIcon />
           </Badge>
         </IconButton>
+        <AccountMenu />
       </Toolbar>
     </AppBar>
   );

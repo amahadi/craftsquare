@@ -9,7 +9,7 @@ import { getJson, CircularLoader } from "../utils";
 
 export default function App(props) {
 
-  const [merchant, setMerchant] = useState(null);
+  const [merchant, setMerchant] = useState(props.merchant);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
