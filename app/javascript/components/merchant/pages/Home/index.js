@@ -6,6 +6,7 @@ import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
+import { Container } from "@mui/material";
 
 import NavBar from '../../_components/NavBar';
 import SideDrawer from '../../_components/SideDrawer';
@@ -17,17 +18,52 @@ import Order from "../Order";
 import Advert from "../Advert";
 import Customer from "../Customer";
 import Report from "../Report";
+import Copyright from "../../_components/Copyright";
 
 import { getJson, CircularLoader } from "../../../utils";
 
 
 export default function Home(props) {
 
+  const getIdFromPath = () => {
+    try {
+      const pathArray = window.location.pathname.replace(/(^\/)|(\/$)/g, "").split("/");
+      const len = pathArray.length;
+      if (isNaN(pathArray[len - 1])) {
+        return null;
+      } else {
+        return pathArray[len - 1];
+      }
+    } catch {
+      console.log("exception caught!")
+      return null;
+    }
+  }
+
+  const getTitleFromPath = () => {
+    try {
+      const pathArray = window.location.pathname.replace(/(^\/)|(\/$)/g, "").split("/");
+      const len = pathArray.length;
+      if (isNaN(pathArray[len - 1])) {
+        return pathArray[len - 1] === 'merchant'
+          ? null
+          : pathArray[len - 1].charAt(0).toUpperCase() + pathArray[len - 1].slice(1);
+      } else {
+        return pathArray[len - 2] === 'merchant'
+          ? null
+          : pathArray[len - 2].charAt(0).toUpperCase() + pathArray[len - 1].slice(1);
+      }
+    } catch {
+      return null;
+    }
+  }
+
   const [loading, setLoading] = useState(true);
   const [merchant, setMerchant] = useState(null);
   const [open, setOpen] = useState(true);
-  const [title, setTitle] = useState("Dashboard");
-  const [mainContent, setMainContent] = useState(<Dashboard />);
+  const [title, setTitle] = useState(getTitleFromPath() || "Dashboard");
+  const [resourceId, setResourceId] = useState(getIdFromPath());
+  const [mainContent, setMainContent] = useState(null);
 
   const mdTheme = createTheme();
 
@@ -39,6 +75,7 @@ export default function Home(props) {
         `${process.env.HOST_NAME}/auth/merchants/validate_token`
       ).then(
         response => {
+          setMainContent(getMainContent());
           setMerchant(response);
           setLoading(false);
         },
@@ -66,7 +103,7 @@ export default function Home(props) {
   }
 
   return (
-    loading
+    loading || !mainContent
     ?
     <CircularLoader />
     :
@@ -105,8 +142,11 @@ export default function Home(props) {
             }}
           >
             <Toolbar />
-            {/** Main content goes here */}
-            {mainContent}
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+              {/** Main content goes here */}
+              {mainContent}
+              <Copyright />
+            </Container>
           </Box>
         </Box>
       </ThemeProvider>
