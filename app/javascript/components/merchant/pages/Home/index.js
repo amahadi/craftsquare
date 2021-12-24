@@ -102,6 +102,14 @@ export default function Home(props) {
     else if (title === "Reports") return <Report />;
   }
 
+  window.addEventListener('popstate', function (event) {
+    try {
+      setTitle(event.state);
+    } catch {
+      setTitle('/merchant');
+    }
+  });
+
   return (
     loading || !mainContent
     ?
