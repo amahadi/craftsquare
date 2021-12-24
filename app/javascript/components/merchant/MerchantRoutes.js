@@ -8,13 +8,7 @@ import {
 import Home from "./pages/Home";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
-import Dashboard from "./pages/Dashboard";
-import Advert from './pages/Advert';
-import Customer from './pages/Customer';
-import Order from './pages/Order';
-import Product from './pages/Product';
-import Report from './pages/Report';
-import Shop from './pages/Shop';
+import Profile from "./pages/Profile";
 
 export default function MerchantRoutes() {
 
@@ -32,6 +26,7 @@ export default function MerchantRoutes() {
         <Route path='/merchant/products' element={<Home />} />
         <Route path='/merchant/reports' element={<Home />} />
         <Route path='/merchant/shops' element={<Home />} />
+        <Route path='merchant/profile' element={<Profile />} />
 
       </Routes>
     </Router>

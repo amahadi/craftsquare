@@ -58,6 +58,10 @@ export default function AccountMenu() {
     return initials;
   }
 
+  const handleOnProfileMenuClick = () => {
+    window.open('/merchant/profile', '_blank');
+  }
+
   return (
     <div>
       <Tooltip title="Account settings">
@@ -99,7 +103,9 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        <MenuItem
+          onClick={handleOnProfileMenuClick}
+        >
           <Avatar /> Profile
         </MenuItem>
         <Divider />
