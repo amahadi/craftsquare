@@ -16,7 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Copyright from '../../_components/Copyright';
 
-import { postJson, getJson, CircularLoader } from "../../../utils";
+import { postJson, getJson, CircularLoader, FlashMessage } from "../../../utils";
 
 
 const theme = createTheme();
@@ -27,6 +27,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     if (loading) {
@@ -35,7 +36,7 @@ export default function SignIn() {
       ).then(
         response => {
           console.log(response);
-          navigate("/merchant/")
+          navigate("/merchant/");
         },
         error => {
           console.log(error);
@@ -72,6 +73,7 @@ export default function SignIn() {
         navigate("/merchant");
       },
       error => {
+        setErrorMessage(error);
         console.log(error);
       }
     )
@@ -84,6 +86,15 @@ export default function SignIn() {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        {
+          errorMessage 
+          ?
+          <FlashMessage 
+            type="error"
+            errorMessageArray={errorMessage}
+          />
+          : null 
+        }
         <Box
           sx={{
             marginTop: 8,
