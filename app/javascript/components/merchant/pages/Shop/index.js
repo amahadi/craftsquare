@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function Shop(){
+import ShopList from "./ShopList";
+import ShopDetail from "./ShopDetail";
+
+export default function Shop({
+    id = null
+}){
 
     return (
-        <h2>
-            Hello Shop!
-        </h2>
+        id ? <ShopDetail /> : <ShopList />
     )
 }

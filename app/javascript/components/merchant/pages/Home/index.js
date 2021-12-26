@@ -101,7 +101,7 @@ export default function Home(props) {
 
   const getMainContent = () => {
     if (title === "Dashboard") return <Dashboard />;
-    else if (title === "Shops") return <Shop />;
+    else if (title === "Shops") return <Shop id={resourceId}/>;
     else if (title === "Products") return <Product />;
     else if (title === "Orders") return <Order />;
     else if (title === "Adverts") return <Advert />;
