@@ -3,11 +3,13 @@ import { CircularLoader } from "./LoadingState";
 import { generateAvatarFromName } from "./AvatarGenerator";
 import FlashMessage from "./FlashMessage";
 import ErrorParser from "./ErrorParser";
+import Toast from "./Toast";
 
 export {
   getJson, postJson, putJson, deleteJson,
   CircularLoader,
   generateAvatarFromName,
   FlashMessage,
-  ErrorParser
+  ErrorParser,
+  Toast
 };
