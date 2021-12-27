@@ -1,7 +1,14 @@
 import React from "react";
+import PageHeader from "../../../_components/PageHeader";
+import { Grid } from "@mui/material";
 
 export default function CreateShop(){
-    return <h2>
-        New Shop
-    </h2>
+    return (
+        <Grid container spacing={5}>
+            <PageHeader 
+                pageType={"new"}
+                resourceName={"Shop"}
+            />
+        </Grid>
+    );
 }
