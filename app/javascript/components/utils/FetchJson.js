@@ -15,7 +15,7 @@ function getJson(url) {
         if(response.ok){
           response.json()
           .then((response) => {
-            resolve(response.data);
+            resolve(response);
           })
         } else {
           response.json()

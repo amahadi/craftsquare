@@ -28,21 +28,6 @@ export default function Home(props) {
 
   const setToast = useContext(ToastContext);
 
-  const getIdFromPath = () => {
-    try {
-      const pathArray = window.location.pathname.replace(/(^\/)|(\/$)/g, "").split("/");
-      const len = pathArray.length;
-      if (isNaN(pathArray[len - 1])) {
-        return null;
-      } else {
-        return pathArray[len - 1];
-      }
-    } catch {
-      console.log("exception caught!")
-      return null;
-    }
-  }
-
   const getTitleFromPath = () => {
     try {
       const pathArray = window.location.pathname.replace(/(^\/)|(\/$)/g, "").split("/");
@@ -65,7 +50,6 @@ export default function Home(props) {
   const [merchant, setMerchant] = useState(null);
   const [open, setOpen] = useState(true);
   const [title, setTitle] = useState(getTitleFromPath() || "Dashboard");
-  const [resourceId, setResourceId] = useState(getIdFromPath());
   const [mainContent, setMainContent] = useState(null);
 
   const mdTheme = createTheme();
@@ -83,7 +67,7 @@ export default function Home(props) {
             message: "Logged in successfully"
           })
           setMainContent(getMainContent());
-          setMerchant(response);
+          setMerchant(response.data);
           setLoading(false);
         },
         error => {
@@ -101,7 +85,7 @@ export default function Home(props) {
 
   const getMainContent = () => {
     if (title === "Dashboard") return <Dashboard />;
-    else if (title === "Shops") return <Shop id={resourceId}/>;
+    else if (title === "Shops") return <Shop />;
     else if (title === "Products") return <Product />;
     else if (title === "Orders") return <Order />;
     else if (title === "Adverts") return <Advert />;
