@@ -3,7 +3,8 @@ import React, {useState, useEffect, useContext} from "react";
 import { Grid, Button } from "@mui/material";
 
 import MerchantContext from "../../_contexts/merchantContext";
-import { getJson } from "../../../utils";
+import { getJson, pathName } from "../../../utils";
+import PageHeader from "../../_components/PageHeader";
 
 export default function ShopList({
     setNewShop,
@@ -50,27 +51,10 @@ export default function ShopList({
 
     const handleAddNewButtonClick = () => {
         setNewShop(true);
-        window.history.pushState("newShop", "newShop", `${window.location.pathname}/new`);
-    }
-
-    const getHeading = () => {
-
-        return (
-            <Grid container spacing={3} className='ShopHeaderGrid' style={styles.header.container}>
-                <Grid item xs={8} md={8} lg={9}>
-                    <h2>Shops</h2>
-                </Grid>
-                {/* Recent Deposits */}
-                <Grid item xs={4} md={4} lg={3}>
-                    <Button 
-                        variant="contained" 
-                        style={styles.header.button}
-                        onClick={handleAddNewButtonClick}
-                    >
-                        Add new
-                    </Button>
-                </Grid>
-            </Grid>
+        window.history.pushState(
+            "newShop", 
+            "newShop", 
+            `/${pathName()}/new`
         );
     }
 
@@ -112,7 +96,11 @@ export default function ShopList({
 
     return (
         <Grid container spacing={5}>
-            {getHeading()}
+            <PageHeader 
+                pageType={"index"}
+                resourceName={"Shop"}
+                handleAddNewButtonClick={handleAddNewButtonClick}
+            />
         </Grid>
     );
 }

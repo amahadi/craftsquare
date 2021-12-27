@@ -21,7 +21,7 @@ import Customer from "../Customer";
 import Report from "../Report";
 import Copyright from "../../_components/Copyright";
 
-import { getJson, CircularLoader } from "../../../utils";
+import { getJson, CircularLoader, pathName } from "../../../utils";
 
 
 export default function Home(props) {
@@ -30,7 +30,7 @@ export default function Home(props) {
 
   const getTitleFromPath = () => {
     try {
-      const pathArray = window.location.pathname.replace(/(^\/)|(\/$)/g, "").split("/");
+      const pathArray = pathName().split("/");
       const len = pathArray.length;
       if (isNaN(pathArray[len - 1])) {
         return pathArray[len - 1] === 'merchant'
