@@ -4,11 +4,14 @@ import ShopList from "./ShopList";
 import CreateShop from "./CreateShop";
 import UpdateShop from "./UpdateShop";
 
+import { pathName } from "../../../utils";
+
 export default function Shop(){
+
+    const pathArray = pathName().split("/");
 
     const getIdFromPath = () => {
         try {
-            const pathArray = window.location.pathname.replace(/(^\/)|(\/$)/g, "").split("/");
             const len = pathArray.length;
             if (isNaN(pathArray[len - 1])) {
             return null;
@@ -21,7 +24,16 @@ export default function Shop(){
         }
     }
 
-    const [newShop, setNewShop] = useState(false);
+    const isNewPath = () => {
+        try {
+            const len = pathArray.length;
+            return pathArray[len-1] === "new";
+        } catch {
+            return false;
+        }
+    }
+
+    const [newShop, setNewShop] = useState(isNewPath());
     const [shopId, setShopId] = useState(getIdFromPath());
 
     console.log("newShop", newShop);

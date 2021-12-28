@@ -13,7 +13,8 @@ export default function PageHeader({
                 marginLeft: "10px"
             },
             backButton: {
-                marginTop: "20px"
+                marginTop: "20px",
+                paddingRight: "0px"
             },
             title: {
                 marginLeft: "10px"
@@ -36,13 +37,12 @@ export default function PageHeader({
 
     const getBackButton = () => {
         return (
-            <Button
-                variant="outlined"
+            <button
                 style={styles.header.backButton}
                 onClick={handleBackButtonClick}
             >
                 <ArrowBackIosIcon />
-            </Button>
+            </button>
         );
     }
 
@@ -92,7 +92,7 @@ export default function PageHeader({
                     <h2
                         style={styles.header.title}
                     >
-                        {`New ${resourceName}s`}
+                        {`New ${resourceName}`}
                     </h2>
                 </Grid>
                 <Grid item xs={4} md={4} lg={3}>

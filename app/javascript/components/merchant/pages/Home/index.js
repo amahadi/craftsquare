@@ -84,13 +84,19 @@ export default function Home(props) {
   }, [title])
 
   const getMainContent = () => {
-    if (title === "Dashboard") return <Dashboard />;
-    else if (title === "Shops") return <Shop />;
-    else if (title === "Products") return <Product />;
-    else if (title === "Orders") return <Order />;
-    else if (title === "Adverts") return <Advert />;
-    else if (title === "Customers") return <Customer />;
-    else if (title === "Reports") return <Report />;
+    const pathArray = pathName().split("/");
+    try{
+      if(pathArray.includes('dashboard')) return <Dashboard />;
+      if(pathArray.includes('shops')) return <Shop />; 
+      if(pathArray.includes('products')) return <Product />; 
+      if(pathArray.includes('orders')) return <Order />; 
+      if(pathArray.includes('adverts')) return <Advert />; 
+      if(pathArray.includes('customers')) return <Customer />; 
+      if(pathArray.includes('reportds')) return <Report />;
+      else return <Dashboard />;
+    } catch {
+      return  <Dashboard />;
+    }
   }
 
   window.addEventListener('popstate', function (event) {
