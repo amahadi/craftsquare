@@ -36,7 +36,7 @@ export default function Home(props) {
       } else {
         return pathArray[len - 2] === 'merchant'
           ? null
-          : pathArray[len - 2].charAt(0).toUpperCase() + pathArray[len - 1].slice(1);
+          : pathArray[len - 2].charAt(0).toUpperCase() + pathArray[len - 2].slice(1);
       }
     } catch {
       return null;

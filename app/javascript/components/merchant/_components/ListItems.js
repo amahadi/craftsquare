@@ -55,7 +55,7 @@ export default function ListItems({
   const handleListItemOnClick = (event, index, title, href) => {
     setSelectedIndex(index);
     setTitle(title);
-    window.history.pushState(title, title, href);
+    window.location.assign(href);
   }
 
   const mainListItems = (
