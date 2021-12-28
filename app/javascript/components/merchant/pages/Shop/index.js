@@ -54,7 +54,7 @@ export default function Shop(){
         return <CreateShop />
     }
     else if(shopId){
-        return <UpdateShop />
+        return <UpdateShop id={shopId}/>
     }
     return (
         <ShopList 
