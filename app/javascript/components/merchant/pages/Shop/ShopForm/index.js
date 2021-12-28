@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Box, Divider } from "@mui/material";
 
 import GeneralForm from "./GeneralForm";
+import AddressForm from "./AddressForm";
 
 export default function ShopFrom({
     formType="new",
@@ -51,7 +52,23 @@ export default function ShopFrom({
             <GeneralForm 
                 setName={setName}
             />
-            <Divider />
+            <Divider
+                sx={{
+                    marginTop: "20px",
+                    marginBottom: "20px"
+                }} 
+            />
+            <AddressForm 
+               setStreet={setStreet}
+               setApartmentNumber={setApartmentNumber}
+               setSuiteNumber={setSuiteNumber}
+               setPostalCode={setPostalCode}
+               setCity={setCity}
+               setProvince={setProvince}
+               setCountry={setCountry}
+               setLatitude={setLatitude}
+               setLongitude={setLongitude}
+            />
         </Box>
     )
 

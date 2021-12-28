@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import PageHeader from "../../../_components/PageHeader";
-import ShopForm from "../_components/ShopForm";
+import ShopForm from "../ShopForm";
 
 export default function CreateShop(){
 
