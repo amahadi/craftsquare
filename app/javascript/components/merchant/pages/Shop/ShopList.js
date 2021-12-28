@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from "react";
 
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Card, CardContent, Typography, CardActions, Box } from "@mui/material";
 
 import MerchantContext from "../../_contexts/merchantContext";
 import { getJson, pathName } from "../../../utils";
@@ -26,6 +26,13 @@ export default function ShopList({
                 float: "right",
                 marginTop: "20px"
             }
+        },
+        box: {
+            width: "90%",
+            margin: "auto"
+        },
+        grid: {
+            margin: "auto auto 20px auto"
         }
     }
 
@@ -36,8 +43,7 @@ export default function ShopList({
             )
             .then(
                 response => {
-                    setShops(response);
-                    console.log(response);
+                    setShops(response.data);
                     setLoading(false);
                 },
                 error => {
@@ -59,40 +65,82 @@ export default function ShopList({
     }
 
     const shopCard = (shop) => {
-        <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-                <Typography 
-                    variant="h5" 
-                    component="div"
+        return (
+            <Card>
+                <CardContent>
+                    <Typography 
+                        variant="h5" 
+                        component="div"
+                    >
+                        {shop.name}
+                    </Typography>
+                    {/* <Typography 
+                        sx={{ fontSize: 14 }} 
+                        color="text.secondary" 
+                        gutterBottom
+                    >
+                        Word of the Day
+                    </Typography>
+                    <Typography 
+                        sx={{ mb: 1.5 }} 
+                        color="text.secondary"
+                    >
+                        adjective
+                    </Typography>
+                    <Typography 
+                        variant="body2"
+                    >
+                        well meaning and kindly.
+                        <br />
+                        {'"a benevolent smile"'}
+                    </Typography> */}
+                </CardContent>
+                <CardActions>
+                    <Button 
+                        size="small"
+                        href={`/merchant/shops/${shop.id}`}
+                    >
+                        Learn More
+                    </Button>
+                </CardActions>
+            </Card>
+        );
+    }
+    
+    const getShops = () => {
+        let start = 0;
+        let end = 3;
+        let tmpShopCards = [];
+        while(start < shops.length){
+            let shopSlice = shops.slice(start, end);
+            tmpShopCards.push(
+                <Grid 
+                    key={`shop_grid_${start}-${end}`} 
+                    container 
+                    spacing={2}
+                    style={styles.grid}
                 >
-                    {shop.title}
-                </Typography>
-                <Typography 
-                    sx={{ fontSize: 14 }} 
-                    color="text.secondary" 
-                    gutterBottom
-                >
-                    Word of the Day
-                </Typography>
-                <Typography 
-                    sx={{ mb: 1.5 }} 
-                    color="text.secondary"
-                >
-                    adjective
-                </Typography>
-                <Typography 
-                    variant="body2"
-                >
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small">Learn More</Button>
-            </CardActions>
-        </Card>
-    } 
+                    {
+                        shopSlice.map((shop) => {
+                            return (
+                                <Grid item
+                                    key={`shopCard_${shop.id}`} 
+                                    xs={4}
+                                    md={4}
+                                    lg={4}
+                                >
+                                    {shopCard(shop)}
+                                </Grid>
+                            );
+                        })
+                    }
+                </Grid>
+            );
+            start = end;
+            end += 3;
+        }
+        return tmpShopCards;
+    }
 
     return (
         <Grid container spacing={5}>
@@ -101,6 +149,9 @@ export default function ShopList({
                 resourceName={"Shop"}
                 handleAddNewButtonClick={handleAddNewButtonClick}
             />
+            <Box style={styles.box}>
+                {getShops()}
+            </Box>
         </Grid>
     );
 }

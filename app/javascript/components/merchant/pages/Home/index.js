@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import MerchantContext from "../../_contexts/merchantContext";
-import ToastContext from "../../_contexts/ToastContext";
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,8 +24,6 @@ import { getJson, CircularLoader, pathName } from "../../../utils";
 
 
 export default function Home(props) {
-
-  const setToast = useContext(ToastContext);
 
   const getTitleFromPath = () => {
     try {
@@ -62,10 +59,6 @@ export default function Home(props) {
         `${process.env.HOST_NAME}/auth/merchants/validate_token`
       ).then(
         response => {
-          setToast({
-            type: "success",
-            message: "Logged in successfully"
-          })
           setMainContent(getMainContent());
           setMerchant(response.data);
           setLoading(false);

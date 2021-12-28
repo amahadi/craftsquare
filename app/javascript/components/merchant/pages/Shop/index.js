@@ -36,8 +36,6 @@ export default function Shop(){
     const [newShop, setNewShop] = useState(isNewPath());
     const [shopId, setShopId] = useState(getIdFromPath());
 
-    console.log("newShop", newShop);
-
     if(newShop){
         return <CreateShop />
     }
