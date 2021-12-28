@@ -109,7 +109,37 @@ export default function PageHeader({
         );
     }
 
-    const getUpdatePageHeader = () => {}
+    const getUpdatePageHeader = () => {
+        return (
+            <Grid 
+                container 
+                spacing={3} 
+                className='ShopHeaderGrid' 
+                style={styles.header.container}
+            >
+                <Grid item xs={1} md={1} lg={1}>
+                    {getBackButton()}
+                </Grid>
+                <Grid item xs={7} md={7} lg={8}>
+                    <h2
+                        style={styles.header.title}
+                    >
+                        {`${resourceName} details`}
+                    </h2>
+                </Grid>
+                <Grid item xs={4} md={4} lg={3}>
+                    <Button 
+                        variant="contained" 
+                        style={styles.header.button}
+                        onClick={handleAddNewButtonClick}
+                        color="success"
+                    >
+                        Save
+                    </Button>
+                </Grid>
+            </Grid>
+        );
+    }
 
     const getPageHeaderByType = () => {
         if(pageType === "index"){
