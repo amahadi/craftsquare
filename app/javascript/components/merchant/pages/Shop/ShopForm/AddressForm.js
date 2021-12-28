@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import {Grid, Paper, TextField} from "@mui/material";
 
 export default function AddressForm({
+    attributes,
     setStreet,
     setApartmentNumber,
     setSuiteNumber,
@@ -12,6 +13,8 @@ export default function AddressForm({
     setLatitude,
     setLongitude
 }){
+
+    const [isLocationSet, setIsLocationSet] = useState(false);
 
     const handleStreetFieldChange = (event) => {
         setStreet(event.target.value);
@@ -41,12 +44,15 @@ export default function AddressForm({
         setCountry(event.target.value);
     }
 
-    const handleLatitudeFetch = (event) => {
-        setLatitude(event.target.value);
-    }
-
-    const handleLongitudeFetch = (event) => {
-        setLongitude(event.target.value);
+    if(!isLocationSet){
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+                setIsLocationSet(true);
+            },
+            error => {}
+        );
     }
 
     return (
@@ -75,72 +81,79 @@ export default function AddressForm({
                     }}>
                         <TextField 
                             id="id__street-textfield" 
-                            label="Street" 
+                            label="Street"
+                            value={attributes.street} 
                             variant="outlined" 
                             sx={{
-                                width: "100%",
                                 paddingBottom: "10px"
                             }}
+                            fullWidth
                             onChange={handleStreetFieldChange}
                         />
                         <TextField 
                             id="id__apartment-textfield" 
-                            label="Apartment" 
+                            label="Apartment number"
+                            value={attributes.apartmentNumber} 
                             variant="outlined" 
                             sx={{
-                                width: "100%",
                                 paddingBottom: "10px"
                             }}
+                            fullWidth
                             onChange={handleApartmentFieldChange}
                         />
                         <TextField 
                             id="id__suite-textfield" 
-                            label="Suite" 
+                            label="Suite"
+                            value={attributes.suiteNumber} 
                             variant="outlined" 
                             sx={{
-                                width: "100%",
                                 paddingBottom: "10px"
                             }}
+                            fullWidth
                             onChange={handleSuiteFieldChange}
                         />
                         <TextField 
                             id="id__postalCode-textfield" 
-                            label="Postal code" 
+                            label="Postal code"
+                            value={attributes.postalCode} 
                             variant="outlined" 
                             sx={{
-                                width: "100%",
                                 paddingBottom: "10px"
                             }}
+                            fullWidth
                             onChange={handlePostalCodeFieldChange}
                         />
                         <TextField 
                             id="id__city-textfield" 
-                            label="City" 
+                            label="City"
+                            value={attributes.city} 
                             variant="outlined" 
                             sx={{
-                                width: "100%",
                                 paddingBottom: "10px"
                             }}
+                            fullWidth
                             onChange={handleCityFieldChange}
                         />
                         <TextField 
                             id="id__province-textfield" 
                             label="Province" 
+                            value={attributes.province}
                             variant="outlined" 
                             sx={{
-                                width: "100%",
                                 paddingBottom: "10px"
                             }}
+                            fullWidth
                             onChange={handleProvinceFieldChange}
                         />
                         <TextField 
                             id="id__country-textfield" 
                             label="Country" 
+                            value={attributes.country}
                             variant="outlined" 
                             sx={{
-                                width: "100%",
                                 paddingBottom: "10px"
                             }}
+                            fullWidth
                             onChange={handleCountryFieldChange}
                         />
                 </Paper>  

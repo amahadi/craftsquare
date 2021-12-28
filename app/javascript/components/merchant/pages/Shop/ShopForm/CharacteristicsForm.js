@@ -1,13 +1,13 @@
 import React from "react";
 import {Grid, Paper, TextField} from "@mui/material";
 
-export default function GeneralForm({
+export default function CharacteristicsForm({
     attributes,
-    setName
+    setTagList
 }){
 
-    const handleNameFieldChange = (event) => {
-        setName(event.target.value);
+    const handleTagListFieldChange = (event) => {
+        setTagList(event.target.value);
     }
 
     return (
@@ -21,7 +21,7 @@ export default function GeneralForm({
                 md={6}
                 lg={4}
             >
-                General
+                Shop characteristics
             </Grid>
             <Grid 
                 item
@@ -35,12 +35,12 @@ export default function GeneralForm({
                         padding: "20px"
                     }}>
                         <TextField 
-                            id="id__name-textfield" 
-                            label="Name"
-                            value={attributes.name} 
+                            id="id__tagList-textfield" 
+                            label="Tags" 
+                            value={attributes.tagList}
                             variant="outlined" 
                             fullWidth
-                            onChange={handleNameFieldChange}
+                            onChange={handleTagListFieldChange}
                         />
                 </Paper>  
             </Grid>

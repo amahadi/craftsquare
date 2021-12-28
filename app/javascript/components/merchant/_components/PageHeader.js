@@ -5,7 +5,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 export default function PageHeader({
     pageType,
     resourceName,
-    handleAddNewButtonClick=null
+    handleAddNewButtonClick=null,
+    handleSaveButtonClick=null
 }){
     const styles = {
         header: {
@@ -99,7 +100,7 @@ export default function PageHeader({
                     <Button 
                         variant="contained" 
                         style={styles.header.button}
-                        onClick={handleAddNewButtonClick}
+                        onClick={handleSaveButtonClick}
                         color="success"
                     >
                         Save
@@ -131,7 +132,7 @@ export default function PageHeader({
                     <Button 
                         variant="contained" 
                         style={styles.header.button}
-                        onClick={handleAddNewButtonClick}
+                        onClick={handleSaveButtonClick}
                         color="success"
                     >
                         Save
