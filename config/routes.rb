@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get '/merchant/*path', to: 'merchants#index'
 
   namespace :merchants do
-    get '/shops/:id/dashboard', to: 'shops#show'
+    # get '/shops/:id/dashboard', to: 'shops#show'
+    get '/shops/:id/*path', to: 'shops#show'
   end
 
   get '/utilities/*path', to: 'utilities#index'

@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import { ListItemButton } from '@mui/material';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShopIcon from '@mui/icons-material/Shop';
@@ -15,6 +11,8 @@ import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt'; // order
 import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo'; // advert
 import AccountBoxIcon from '@mui/icons-material/AccountBox'; // customer
 import BarChartIcon from '@mui/icons-material/BarChart'; // report
+
+import { pathName } from '../../utils';
 
 
 export default function ListItems({
@@ -49,12 +47,12 @@ export default function ListItems({
   ]
 
   const shopListObjects = [
-    { title: "Products", href: "/merchant/products" },
-    { title: "Products", href: "/merchant/products" },
-    { title: "Orders", href: "/merchant/orders" },
-    { title: "Adverts", href: "/merchant/adverts" },
-    { title: "Customers", href: "/merchant/customers" },
-    { title: "Reports", href: "/merchant/reports" }
+    { title: "Dashboard", href: 'dashboard' },
+    { title: "Products", href: 'products' },
+    { title: "Orders", href: 'orders' },
+    { title: "Adverts", href: 'adverts' },
+    { title: "Customers", href: 'customers' },
+    { title: "Reports", href: 'reports' }
   ]
 
   const handleListItemOnClick = (event, index, title, href) => {
