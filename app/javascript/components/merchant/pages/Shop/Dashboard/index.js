@@ -19,7 +19,7 @@ import Customer from "../../Customer";
 import Report from "../../Report";
 import Copyright from "../../../_components/Copyright";
 
-import { getJson, CircularLoader, pathName } from "../../../../utils";
+import { pathName } from "../../../../utils";
 
 
 export default function Dashboard(props) {
@@ -45,7 +45,6 @@ export default function Dashboard(props) {
     }
   }
 
-  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(true);
   const [title, setTitle] = useState(getTitleFromPath() || "Dashboard");
   const [mainContent, setMainContent] = useState(null);
@@ -64,7 +63,7 @@ export default function Dashboard(props) {
       if(pathArray.includes('orders')) return <Order />; 
       if(pathArray.includes('adverts')) return <Advert />; 
       if(pathArray.includes('customers')) return <Customer />; 
-      if(pathArray.includes('reportds')) return <Report />;
+      if(pathArray.includes('reports')) return <Report />;
       else return <DashboardContent />;
     } catch {
       return  <DashboardContent />;

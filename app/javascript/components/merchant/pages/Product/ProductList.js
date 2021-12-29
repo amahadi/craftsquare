@@ -3,6 +3,7 @@ import React, {useState, useEffect, useContext} from "react";
 import { Grid, Button, Card, CardContent, Typography, CardActions, Box } from "@mui/material";
 
 import MerchantContext from "../../_contexts/merchantContext";
+import ShopContext from "../../_contexts/shopContext";
 import { getJson, pathName } from "../../../utils";
 import PageHeader from "../../_components/PageHeader";
 
@@ -12,6 +13,7 @@ export default function ProductList({
 }){
 
     const merchant = useContext(MerchantContext);
+    const shop = useContext(ShopContext);
     const [products, setProducts] = useState([]);
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -39,7 +41,7 @@ export default function ProductList({
     useEffect(() => {
         if(loading){
             getJson(
-                `${process.env.MERCHANT_API}/products`
+                `${process.env.MERCHANT_API}/shops/${shop.id}/products`
             )
             .then(
                 response => {
@@ -67,6 +69,8 @@ export default function ProductList({
     const getProducts = () => {
         
     }
+
+    console.log(products);
 
     return (
         <Grid container spacing={5}>
