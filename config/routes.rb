@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   get '/merchant', to: 'merchants#index'
   get '/merchant/*path', to: 'merchants#index'
 
+  namespace :merchants do
+    get '/shops/:id/dashboard', to: 'shops#show'
+  end
+
   get '/utilities/*path', to: 'utilities#index'
 
   # define all routes after this

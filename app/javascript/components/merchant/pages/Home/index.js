@@ -9,7 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { Container } from "@mui/material";
 
 import NavBar from '../../_components/NavBar';
-import SideDrawer from '../../_components/SideDrawer';
+import HomeSideDrawer from '../../_components/HomeSideDrawer';
 
 import Dashboard from "../Dashboard";
 import Shop from "../Shop";
@@ -120,7 +120,7 @@ export default function Home(props) {
             setOpen={setOpen}
           />
           {/** SideDrawer goes here */}
-          <SideDrawer
+          <HomeSideDrawer
             styled={styled}
             open={open}
             theme={mdTheme}

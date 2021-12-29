@@ -18,6 +18,7 @@ import BarChartIcon from '@mui/icons-material/BarChart'; // report
 
 
 export default function ListItems({
+  type,
   setTitle
 }) {
 
@@ -44,7 +45,11 @@ export default function ListItems({
 
   const mainListObjects = [
     { title: "Dashboard", href: "/merchant/dashboard" },
-    { title: "Shops", href: "/merchant/shops" },
+    { title: "Shops", href: "/merchant/shops" }
+  ]
+
+  const shopListObjects = [
+    { title: "Products", href: "/merchant/products" },
     { title: "Products", href: "/merchant/products" },
     { title: "Orders", href: "/merchant/orders" },
     { title: "Adverts", href: "/merchant/adverts" },
@@ -78,38 +83,45 @@ export default function ListItems({
     </div>
   );
 
-  // const secondaryListItems = (
-  //   <div>
-  //     <ListSubheader inset>Saved reports</ListSubheader>
-  //     <ListItem button>
-  //       <ListItemIcon>
-  //         <AssignmentIcon />
-  //       </ListItemIcon>
-  //       <ListItemText primary="Current month" />
-  //     </ListItem>
-  //     <ListItem button>
-  //       <ListItemIcon>
-  //         <AssignmentIcon />
-  //       </ListItemIcon>
-  //       <ListItemText primary="Last quarter" />
-  //     </ListItem>
-  //     <ListItem button>
-  //       <ListItemIcon>
-  //         <AssignmentIcon />
-  //       </ListItemIcon>
-  //       <ListItemText primary="Year-end sale" />
-  //     </ListItem>
-  //   </div>
-  // );
+  const shopListItems = (
+    <div>
+      {
+        shopListObjects.map((shopListObject, index) => {
+          return (
+            <ListItemButton
+              key={`shopListItem__${index}`}
+              onClick={(event) => handleListItemOnClick(event, index, shopListObject.title, shopListObject.href)}
+            >
+              <ListItemIcon>
+                {getIcon(shopListObject.title)}
+              </ListItemIcon>
+              <ListItemText primary={shopListObject.title} />
+            </ListItemButton>
+          );
+        })
+      }
+    </div>
+  );
+
+  if(type === 'main'){
+    return (
+      <div>
+        <List>{mainListItems}</List>
+      </div>
+    );   
+  }
+
+  else if(type === 'shop'){
+    return (
+      <div>
+        <List>{shopListItems}</List>
+      </div>
+    ); 
+  }
 
   return (
     <div>
       <List>{mainListItems}</List>
-      {/**
-        <Divider />
-        <List>{secondaryListItems}</List>
-      */}
-
     </div>
   );
 

@@ -23,7 +23,6 @@ export default function SettingsForm({
             ])
             .then(
                 response => {
-                    console.log(response);
                     setCurrencyOptions(response[0] && response[0].data);
                     setLanguageOptions(response[1] && response[1].data);
                     setTimezoneOptions(response[2] && response[2].data);

@@ -36,15 +36,6 @@ export default function Shop(){
     const [newShop, setNewShop] = useState(isNewPath());
     const [shopId, setShopId] = useState(getIdFromPath());
 
-    // window.addEventListener('popstate', function (event) {
-    //     try {
-    //         setNewShop(isNewPath());
-    //         setShopId(getIdFromPath());
-    //     } catch {
-    //         setTitle('/merchant');
-    //     }
-    // });
-
     useEffect(() => {
         setNewShop(isNewPath());
         setShopId(getIdFromPath());
@@ -61,5 +52,5 @@ export default function Shop(){
             setNewShop={setNewShop}
             setShopId={setShopId}
         />
-    ); 
+    );
 }

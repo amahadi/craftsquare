@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 
 import ListItems from "./ListItems";
 
-export default function ({
+export default function HomeSideDrawer({
   styled,
   open,
   setOpen,
