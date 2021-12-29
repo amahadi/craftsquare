@@ -1,5 +1,6 @@
-import React from "react";
-import {Grid, Paper, TextField} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {Grid, Paper, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+import { getJson } from "../../../../utils";
 
 export default function SettingsForm({
     attributes,
@@ -7,6 +8,34 @@ export default function SettingsForm({
     setLanguage,
     setTimeZone
 }){
+
+    const [utilitiesLoading, setUtilitiesLoading] = useState(true);
+    const [currencyOptions, setCurrencyOptions] = useState([]);
+    const [languageOptions, setLanguageOptions] = useState([]);
+    const [timezoneOptions, setTimezoneOptions] = useState([]);
+
+    useEffect(() => {
+        if(utilitiesLoading){
+            Promise.all([
+                getJson(`${process.env.HOST_NAME}/utilities/currencies`),
+                getJson(`${process.env.HOST_NAME}/utilities/languages`),
+                getJson(`${process.env.HOST_NAME}/utilities/timezones`)
+            ])
+            .then(
+                response => {
+                    console.log(response);
+                    setCurrencyOptions(response[0] && response[0].data);
+                    setLanguageOptions(response[1] && response[1].data);
+                    setTimezoneOptions(response[2] && response[2].data);
+                    setUtilitiesLoading(false);
+                },
+                error => {
+                    console.log(error);
+                }
+            )
+            .catch((e) => console.log(e));
+        }
+    })
 
     const handleCurrencyFieldChange = (event) => {
         setCurrency(event.target.value);
@@ -17,7 +46,47 @@ export default function SettingsForm({
     }
 
     const handleTimeZoneFieldChange = (event) => {
+        console.log(event.target.value);
         setTimeZone(event.target.value);
+    }
+
+    const getCurrencyOptions = () => {
+        return currencyOptions.map((currencyOption, index) => {
+            return (
+                <MenuItem
+                    key={`menuItem__currencyOptions__${index}`} 
+                    value={currencyOption.cc}
+                >
+                    {`${currencyOption.cc} (${currencyOption.name})`}
+                </MenuItem>
+            );
+        })
+    }
+
+    const getLanguageOptions = () => {
+        return languageOptions.map((languageOption, index) => {
+            return (
+                <MenuItem
+                    key={`menuItem__languageOptions__${index}`} 
+                    value={languageOption.code}
+                >
+                    {`${languageOption.name} (${languageOption.native})`}
+                </MenuItem>
+            );
+        })
+    }
+
+    const getTimezoneOptions = () => {
+        return timezoneOptions.map((timezoneOption, index) => {
+            return (
+                <MenuItem
+                    key={`menuItem__timezoneOptions__${index}`} 
+                    value={timezoneOption.abbr || ""}
+                >
+                    {`${timezoneOption.text}`}
+                </MenuItem>
+            );
+        })
     }
 
     return (
@@ -44,39 +113,54 @@ export default function SettingsForm({
                         width: "100%",
                         padding: "20px"
                     }}>
-                        <TextField 
-                            id="id__currency-textfield" 
-                            label="Currency" 
-                            value={attributes.currency}
-                            variant="outlined" 
-                            sx={{
-                                paddingBottom: "10px"
-                            }}
-                            fullWidth
-                            onChange={handleCurrencyFieldChange}
-                        />
-                        <TextField 
-                            id="id__language-textfield" 
-                            label="Language" 
-                            value={attributes.language}
-                            variant="outlined" 
-                            sx={{
-                                paddingBottom: "10px"
-                            }}
-                            fullWidth
-                            onChange={handleLanguageFieldChange}
-                        />
-                        <TextField 
-                            id="id__timeZone-textfield" 
-                            label="Time zone" 
-                            value={attributes.timeZone}
-                            variant="outlined" 
-                            sx={{
-                                paddingBottom: "10px"
-                            }}
-                            fullWidth
-                            onChange={handleTimeZoneFieldChange}
-                        />
+                        <FormControl fullWidth>
+                            <InputLabel id="currency_selectbox_label">Currency</InputLabel>
+                            <Select
+                                id="id__currency-textfield"
+                                labelId="currency_selectbox_label" 
+                                label="Currency" 
+                                value={attributes.currency}
+                                sx={{
+                                    marginBottom: "10px"
+                                }}
+                                fullWidth
+                                onChange={handleCurrencyFieldChange}
+                            >
+                                {getCurrencyOptions()}
+                            </Select>
+                        </FormControl>
+                        <FormControl fullWidth>
+                            <InputLabel id="language_selectbox_label">Language</InputLabel>
+                            <Select
+                                id="id__language-textfield"
+                                labelId="language_selectbox_label" 
+                                label="Language" 
+                                value={attributes.language}
+                                sx={{
+                                    marginBottom: "10px"
+                                }}
+                                fullWidth
+                                onChange={handleLanguageFieldChange}
+                            >
+                                {getLanguageOptions()}
+                            </Select>
+                        </FormControl>
+                        <FormControl fullWidth>
+                            <InputLabel id="timezone_selectbox_label">Timezone</InputLabel>
+                            <Select
+                                id="id__timezone-textfield"
+                                labelId="timezone_selectbox_label" 
+                                label="Timezone" 
+                                value={attributes.timeZone}
+                                sx={{
+                                    marginBottom: "10px"
+                                }}
+                                fullWidth
+                                onChange={handleTimeZoneFieldChange}
+                            >
+                                {getTimezoneOptions()}
+                            </Select>
+                        </FormControl>
                 </Paper>  
             </Grid>
         </Grid>

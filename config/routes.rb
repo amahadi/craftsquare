@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/merchant', to: 'merchants#index'
   get '/merchant/*path', to: 'merchants#index'
 
+  get '/utilities/*path', to: 'utilities#index'
+
   # define all routes after this
 
   draw 'merchants/api_v1.rb'
