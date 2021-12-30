@@ -35,7 +35,7 @@ export default function MerchantRoutes() {
           <Route path='/merchant/orders/:id' element={<Home />} />
           <Route path='/merchant/products/:id' element={<Home />} />
           <Route path='/merchant/reports/:id' element={<Home />} /> */}
-          <Route path='/merchant/shops/*' element={<Home />} />
+          <Route path='/merchants/shops/*' element={<Home />} /> 
 
           <Route path='merchant/profile' element={<Profile />} />
 

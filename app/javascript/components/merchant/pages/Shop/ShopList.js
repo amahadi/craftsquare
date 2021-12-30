@@ -5,6 +5,7 @@ import { Grid, Button, Card, CardContent, Typography, CardActions, Box } from "@
 import MerchantContext from "../../_contexts/merchantContext";
 import { getJson, pathName } from "../../../utils";
 import PageHeader from "../../_components/PageHeader";
+import ShopOptions from "./ShopOptions";
 
 export default function ShopList({
     setNewShop,
@@ -64,6 +65,23 @@ export default function ShopList({
         );
     }
 
+    const optionMenu = () => {
+        return (
+            <Button
+                id="demo-customized-button"
+                aria-controls={open ? 'demo-customized-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                variant="contained"
+                disableElevation
+                onClick={handleClick}
+                endIcon={<KeyboardArrowDownIcon />}
+            >
+                Options
+            </Button>
+        );
+    }
+
     const shopCard = (shop) => {
         return (
             <Card>
@@ -95,14 +113,15 @@ export default function ShopList({
                         {'"a benevolent smile"'}
                     </Typography> */}
                 </CardContent>
-                <CardActions>
+                {/* <CardActions>
                     <Button 
                         size="small"
                         href={`/merchant/shops/${shop.id}`}
                     >
                         Learn More
                     </Button>
-                </CardActions>
+                </CardActions> */}
+                <ShopOptions shop={shop}/>
             </Card>
         );
     }
