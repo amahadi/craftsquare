@@ -1,3 +1,4 @@
 class Merchants::BaseController < ApplicationController
-    before_action :authenticate_merchant!
+
+    include DeviseTokenAuth::Concerns::SetUserByToken
 end

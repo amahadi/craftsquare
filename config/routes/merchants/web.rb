@@ -1,6 +1,6 @@
 namespace :merchants do
-    get '/sign-in', to: 'home#index'
-    get '/sign-up', to: 'home#index'
+    get '/sign-in', to: 'session#new'
+    get '/sign-up', to: 'registration#new'
     # Merchant home
     get '/', to: 'home#index'
     get '/dashboard', to: 'home#index'

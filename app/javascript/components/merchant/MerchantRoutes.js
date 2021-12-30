@@ -12,10 +12,15 @@ import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import ShopDashboard from "./pages/Shop/ShopDashboard";
-import Product from "./pages/Product";
 import ShopList from "./pages/Shop/ShopList";
 import CreateShop from "./pages/Shop/CreateShop";
 import UpdateShop from "./pages/Shop/UpdateShop";
+
+import Product from "./pages/Product";
+import Order from "./pages/Order";
+import Advert from "./pages/Advert";
+import Customer from "./pages/Customer";
+import Report from "./pages/Report";
 
 
 export default function MerchantRoutes(props) {
@@ -34,13 +39,23 @@ export default function MerchantRoutes(props) {
 
             <Route path='/merchants' element={<Dashboard />} />
             <Route path='/merchants/dashboard' element={<Dashboard />} />
+            {/** Shop routes */}
             <Route path='/merchants/shops/' element={<ShopList />} />
             <Route path='/merchants/shops/new' element={<CreateShop />} />
             <Route path='/merchants/shops/:id' element={<UpdateShop />} />
 
             {/** Shop dashboard routes */}
             <Route path='/merchants/shops/:id/dashboard' element={<ShopDashboard />} />
+            {/** Product routes */}
             <Route path='/merchants/shops/:id/products' element={<Product />} />
+            {/** Order routes */}
+            <Route path='/merchants/shops/:id/orders' element={<Order />} />
+            {/** Advert routes */}
+            <Route path='/merchants/shops/:id/adverts' element={<Advert />} />
+            {/** Customer routes */}
+            <Route path='/merchants/shops/:id/customers' element={<Customer />} />
+            {/** Report routes */}
+            <Route path='/merchants/shops/:id/reports' element={<Report />} />
               
           </Routes>
         </Router>

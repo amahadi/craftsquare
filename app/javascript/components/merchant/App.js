@@ -11,9 +11,16 @@ export default function App(props) {
 
   return (
     <div>
-      <Home
-        merchant={merchant} 
-      />
+      {
+        merchant
+        ?
+        <Home
+          merchant={merchant} 
+        />
+        :
+        <MerchantRoutes />
+      }
+      
     </div>
   );
 

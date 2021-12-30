@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
     after_action :set_token_cookie
 
     include CookieTokenHandler
-    include DeviseTokenAuth::Concerns::SetUserByToken
     skip_before_action :verify_authenticity_token
 
     private

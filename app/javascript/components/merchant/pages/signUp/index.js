@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,7 +19,6 @@ const theme = createTheme();
 
 export default function SignUp() {
 
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
@@ -32,7 +30,7 @@ export default function SignUp() {
       ).then(
         response => {
           console.log(response);
-          navigate("/merchants/dashboard");
+          window.location.href = "/merchants/dashboard";
         },
         error => {
           console.log(error);
@@ -67,7 +65,7 @@ export default function SignUp() {
     .then(
       response => {
         console.log(response);
-        navigate("/merchants/dashboard");
+        window.location.href = "/merchants/dashboard";
       },
       error => {
         console.log(error);

@@ -1,5 +1,6 @@
 class BaseApiController < ApplicationController
 
+  include DeviseTokenAuth::Concerns::SetUserByToken
   include Pagy::Backend
   include ErrorHandler
 
