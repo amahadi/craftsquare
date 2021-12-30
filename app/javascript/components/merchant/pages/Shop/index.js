@@ -48,9 +48,6 @@ export default function Shop(){
         return <UpdateShop id={shopId}/>
     }
     return (
-        <ShopList 
-            setNewShop={setNewShop}
-            setShopId={setShopId}
-        />
+        <ShopList />
     );
 }

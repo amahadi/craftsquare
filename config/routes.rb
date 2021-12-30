@@ -9,18 +9,11 @@ Rails.application.routes.draw do
   get '/customer', to: 'customers#index'
   get '/customer/*path', to: 'customers#index'
 
-  get '/merchant', to: 'merchants#index'
-  get '/merchant/*path', to: 'merchants#index'
-
-  namespace :merchants do
-    # get '/shops/:id/dashboard', to: 'shops#show'
-    get '/shops/:id/*path', to: 'shops#show'
-  end
-
   get '/utilities/*path', to: 'utilities#index'
 
   # define all routes after this
 
   draw 'merchants/api_v1.rb'
+  draw 'merchants/web.rb'
   draw 'customers/api_v1.rb'
 end

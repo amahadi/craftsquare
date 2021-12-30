@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -39,7 +39,7 @@ export default function SignIn() {
       ).then(
         response => {
           console.log(response);
-          navigate("/merchant/");
+          navigate("/merchants/dashboard");
         },
         error => {
           console.log(error);
@@ -73,7 +73,7 @@ export default function SignIn() {
     .then(
       response => {
         console.log(response);
-        navigate("/merchant");
+        navigate("/merchants/dashboard");
       },
       error => {
         setErrorMessage(error);
@@ -155,7 +155,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/merchant/sign-up" variant="body2">
+                <Link href="/merchants/sign-up" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

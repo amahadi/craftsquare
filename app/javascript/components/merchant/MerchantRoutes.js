@@ -5,42 +5,46 @@ import {
   Route
 } from "react-router-dom";
 
-import Home from "./pages/Home";
+import MerchantContext from "./_contexts/merchantContext";
+import ShopContext from "./_contexts/shopContext";
+
+import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
-import Profile from "./pages/Profile";
+import ShopDashboard from "./pages/Shop/ShopDashboard";
+import Product from "./pages/Product";
+import ShopList from "./pages/Shop/ShopList";
+import CreateShop from "./pages/Shop/CreateShop";
+import UpdateShop from "./pages/Shop/UpdateShop";
 
-import { ToastContextProvider } from "./_contexts/ToastContext";
 
-export default function MerchantRoutes() {
+export default function MerchantRoutes(props) {
+
+  const merchant = props.merchant || null;
+  const shop = props.shop || null;
 
   return (
-    <ToastContextProvider>
-      <Router>
-        <Routes>
-          <Route path='/merchant' element={<Home />} />
-          <Route path='/merchant/sign-in' element={<SignIn />} />
-          <Route path='/merchant/sign-up' element={<SignUp />} />
+    <MerchantContext.Provider value={merchant}>
+      <ShopContext.Provider value={shop}>
+        <Router>
+          <Routes>
 
-          <Route path='/merchant/dashboard' element={<Home />} />
-          {/* <Route path='/merchant/adverts' element={<Home />} />
-          <Route path='/merchant/customers' element={<Home />} />
-          <Route path='/merchant/orders' element={<Home />} />
-          <Route path='/merchant/products' element={<Home />} />
-          <Route path='/merchant/reports' element={<Home />} /> */}
-          <Route path='/merchant/shops/' element={<Home />} />
+            <Route path='/merchants/sign-in' element={<SignIn />} />
+            <Route path='/merchants/sign-up' element={<SignUp />} />
 
-          {/* <Route path='/merchant/adverts/:id' element={<Home />} />
-          <Route path='/merchant/customers/:id' element={<Home />} />
-          <Route path='/merchant/orders/:id' element={<Home />} />
-          <Route path='/merchant/products/:id' element={<Home />} />
-          <Route path='/merchant/reports/:id' element={<Home />} /> */}
-          <Route path='/merchants/shops/*' element={<Home />} /> 
+            <Route path='/merchants' element={<Dashboard />} />
+            <Route path='/merchants/dashboard' element={<Dashboard />} />
+            <Route path='/merchants/shops/' element={<ShopList />} />
+            <Route path='/merchants/shops/new' element={<CreateShop />} />
+            <Route path='/merchants/shops/:id' element={<UpdateShop />} />
 
-          <Route path='merchant/profile' element={<Profile />} />
-
-        </Routes>
-      </Router>
-    </ToastContextProvider>
+            {/** Shop dashboard routes */}
+            <Route path='/merchants/shops/:id/dashboard' element={<ShopDashboard />} />
+            <Route path='/merchants/shops/:id/products' element={<Product />} />
+              
+          </Routes>
+        </Router>
+      </ShopContext.Provider>
+    </MerchantContext.Provider>
   );
 }

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
+import Home from "./pages/Home";
 import MerchantRoutes from "./MerchantRoutes";
 
-import MerchantContext from "./_contexts/merchantContext";
 
 export default function App(props) {
 
-  const signUpRequest = () => {
-    return document.location.pathname === '/merchant/sign-up';
-  }
+  const merchant = props.merchant;
+
+  console.log("From App", merchant);
 
   return (
     <div>
-      <MerchantRoutes />
+      <Home
+        merchant={merchant} 
+      />
     </div>
   );
 

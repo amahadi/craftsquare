@@ -7,11 +7,7 @@ import { getJson, pathName } from "../../../utils";
 import PageHeader from "../../_components/PageHeader";
 import ShopOptions from "./ShopOptions";
 
-export default function ShopList({
-    setNewShop,
-    setShopId
-}){
-
+export default function ShopList(){
     const merchant = useContext(MerchantContext);
     const [shops, setShops] = useState([]);
     const [errors, setErrors] = useState([]);
@@ -57,29 +53,7 @@ export default function ShopList({
     })
 
     const handleAddNewButtonClick = () => {
-        setNewShop(true);
-        window.history.pushState(
-            "newShop", 
-            "newShop", 
-            `/${pathName()}/new`
-        );
-    }
-
-    const optionMenu = () => {
-        return (
-            <Button
-                id="demo-customized-button"
-                aria-controls={open ? 'demo-customized-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                variant="contained"
-                disableElevation
-                onClick={handleClick}
-                endIcon={<KeyboardArrowDownIcon />}
-            >
-                Options
-            </Button>
-        );
+        window.location.href = '/merchants/shops/new';
     }
 
     const shopCard = (shop) => {

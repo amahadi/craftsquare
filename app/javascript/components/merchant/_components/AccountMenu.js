@@ -37,7 +37,7 @@ export default function AccountMenu() {
     ).then(
       response => {
         console.log(response);
-        window.location.href = '/merchant/sign-in';
+        window.location.href = '/merchants/sign-in';
       },
       error => {
         console.log(error);

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from '@mui/material';
@@ -43,8 +42,8 @@ export default function ListItems({
   }
 
   const mainListObjects = [
-    { title: "Dashboard", href: "/merchant/dashboard" },
-    { title: "Shops", href: "/merchant/shops" }
+    { title: "Dashboard", href: "/merchants/dashboard" },
+    { title: "Shops", href: "/merchants/shops" }
   ]
 
   const shopListObjects = [
@@ -59,7 +58,7 @@ export default function ListItems({
   const handleListItemOnClick = (event, index, title, href) => {
     setSelectedIndex(index);
     setTitle(title);
-    window.location.assign(href);
+    window.location.href = href;
   }
 
   const mainListItems = (

@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
 import { Grid } from "@mui/material";
 import PageHeader from "../../../_components/PageHeader";
 import ShopForm from "../ShopForm";
 import { Toast, CircularLoader, getJson, putJson } from "../../../../utils";
 
-export default function UpdateShop({ id }){
+export default function UpdateShop(){
+
+    const { id } = useParams();
 
     const [loading, setLoading] = useState(true);
     const [toast, setToast] = useState(null);

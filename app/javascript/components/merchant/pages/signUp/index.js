@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,6 +20,7 @@ const theme = createTheme();
 
 export default function SignUp() {
 
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
@@ -30,7 +32,7 @@ export default function SignUp() {
       ).then(
         response => {
           console.log(response);
-          navigate("/merchant/")
+          navigate("/merchants/dashboard");
         },
         error => {
           console.log(error);
@@ -65,7 +67,7 @@ export default function SignUp() {
     .then(
       response => {
         console.log(response);
-        window.location.href = '/merchant';
+        navigate("/merchants/dashboard");
       },
       error => {
         console.log(error);
@@ -131,7 +133,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/merchant/sign-in" variant="body2">
+                <Link href="/merchants/sign-in" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

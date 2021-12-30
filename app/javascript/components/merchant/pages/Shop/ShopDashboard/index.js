@@ -19,10 +19,12 @@ import Customer from "../../Customer";
 import Report from "../../Report";
 import Copyright from "../../../_components/Copyright";
 
+import MerchantRoutes from "../../../MerchantRoutes";
+
 import { pathName } from "../../../../utils";
 
 
-export default function Dashboard(props) {
+export default function ShopDashboard(props) {
   
   const merchant = props.merchant;
   const shop = props.shop;  
@@ -115,7 +117,10 @@ export default function Dashboard(props) {
                 <Toolbar />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                 {/** Main content goes here */}
-                {mainContent}
+                <MerchantRoutes 
+                  merchant={merchant}
+                  shop={shop}
+                />
                 <Copyright />
                 </Container>
             </Box>
