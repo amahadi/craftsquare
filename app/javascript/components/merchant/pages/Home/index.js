@@ -18,7 +18,7 @@ export default function Home(props) {
   const merchant = props.merchant;
 
   const [open, setOpen] = useState(true);
-  const title = useState(
+  const [title, setTitle] = useState(
     `${merchant.first_name} ${merchant.last_name}`
   );
 
