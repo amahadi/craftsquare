@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Grid, Button, Card, CardContent, Typography, CardActions, Box } from "@mui/material";
 
@@ -8,6 +9,9 @@ import PageHeader from "../../_components/PageHeader";
 import ShopOptions from "./ShopOptions";
 
 export default function ShopList(){
+
+    const navigate = useNavigate();
+
     const merchant = useContext(MerchantContext);
     const [shops, setShops] = useState([]);
     const [errors, setErrors] = useState([]);
@@ -34,14 +38,17 @@ export default function ShopList(){
     }
 
     useEffect(() => {
+        let isMounted = true;
         if(loading){
             getJson(
                 `${process.env.MERCHANT_API}/shops`
             )
             .then(
                 response => {
-                    setShops(response.data);
-                    setLoading(false);
+                    if(isMounted){
+                        setShops(response.data);
+                        setLoading(false);
+                    }
                 },
                 error => {
                     setErrors(error);
@@ -50,10 +57,11 @@ export default function ShopList(){
                 }
             )
         }
+        return () => { isMounted = false };
     })
 
     const handleAddNewButtonClick = () => {
-        window.location.href = '/merchants/shops/new';
+        navigate('/merchants/shops/new');
     }
 
     const shopCard = (shop) => {

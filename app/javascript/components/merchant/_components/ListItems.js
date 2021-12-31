@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from '@mui/material';
@@ -12,13 +12,14 @@ import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo'; // advert
 import AccountBoxIcon from '@mui/icons-material/AccountBox'; // customer
 import BarChartIcon from '@mui/icons-material/BarChart'; // report
 
-import { pathName } from '../../utils';
-
+import ShopContext from '../_contexts/shopContext';
 
 export default function ListItems({
   type,
   setTitle
 }) {
+
+  const shop = useContext(ShopContext);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -47,12 +48,12 @@ export default function ListItems({
   ]
 
   const shopListObjects = [
-    { title: "Dashboard", href: 'dashboard' },
-    { title: "Products", href: 'products' },
-    { title: "Orders", href: 'orders' },
-    { title: "Adverts", href: 'adverts' },
-    { title: "Customers", href: 'customers' },
-    { title: "Reports", href: 'reports' }
+    { title: "Dashboard", href: `/merchants/shops/${shop.id}/dashboard` },
+    { title: "Products", href: `/merchants/shops/${shop.id}/products` },
+    { title: "Orders", href: `/merchants/shops/${shop.id}/orders` },
+    { title: "Adverts", href: `/merchants/shops/${shop.id}/adverts` },
+    { title: "Customers", href: `/merchants/shops/${shop.id}/customers` },
+    { title: "Reports", href: `/merchants/shops/${shop.id}/reports` }
   ]
 
   const handleListItemOnClick = (event, index, title, href) => {

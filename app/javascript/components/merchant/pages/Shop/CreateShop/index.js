@@ -1,4 +1,5 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import PageHeader from "../../../_components/PageHeader";
 import ShopForm from "../ShopForm";
@@ -8,6 +9,7 @@ import { postJson } from "../../../../utils";
 
 export default function CreateShop(){
 
+    const navigate = useNavigate();
     const [toast, setToast] = useState(null);
 
     // general attributes
@@ -34,21 +36,20 @@ export default function CreateShop(){
 
     const handleSaveButtonClick = () => {
         const body = getBody();
+        let isMounted = true;
         postJson(
             `${process.env.MERCHANT_API}/shops`,
             body
         ).then(
             response => {
-                setToast({
-                    type: "success",
-                    message: "Shop created successfully"
-                });
-                window.history.pushState(
-                    `shop_${response.id}`, 
-                    `shop_${response.id}`, 
-                    `/merchant/shops/${response.id}`
-                );
-                console.log(response);
+                if(isMounted){
+                    setToast({
+                        type: "success",
+                        message: "Shop created successfully"
+                    });
+                    navigate(`/merchants/shops/${response.id}`)
+                    console.log(response);
+                }
             },
             error => {
                 console.log(error);
@@ -56,6 +57,7 @@ export default function CreateShop(){
         ).catch((e) => {
             console.log(e);
         })
+        return () => { isMounted = false; };
     }
 
     const getBody = () => {

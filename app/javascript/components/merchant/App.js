@@ -7,8 +7,6 @@ export default function App(props) {
 
   const merchant = props.merchant;
 
-  console.log("From App", merchant);
-
   return (
     <div>
       {

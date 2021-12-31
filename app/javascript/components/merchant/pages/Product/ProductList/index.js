@@ -1,18 +1,16 @@
 import React, {useState, useEffect, useContext} from "react";
+import { useNavigate } from 'react-router-dom';
 
 import { Grid, Button, Card, CardContent, Typography, CardActions, Box } from "@mui/material";
 
-import MerchantContext from "../../_contexts/merchantContext";
-import ShopContext from "../../_contexts/shopContext";
-import { getJson, pathName } from "../../../utils";
-import PageHeader from "../../_components/PageHeader";
+import ShopContext from "../../../_contexts/shopContext";
+import { getJson } from "../../../../utils";
+import PageHeader from "../../../_components/PageHeader";
 
-export default function ProductList({
-    setNewProduct,
-    setProductId
-}){
+export default function ProductList(){
 
-    const merchant = useContext(MerchantContext);
+    const navigate = useNavigate();
+
     const shop = useContext(ShopContext);
     const [products, setProducts] = useState([]);
     const [errors, setErrors] = useState([]);
@@ -58,19 +56,13 @@ export default function ProductList({
     })
 
     const handleAddNewButtonClick = () => {
-        setNewProduct(true);
-        window.history.pushState(
-            "newProduct", 
-            "newProduct", 
-            `/${pathName()}/new`
-        );
+        // history.push(`/merchants/shops/${shop.id}/products/new`);
+        navigate(`/merchants/shops/${shop.id}/products/new`);
     }
     
     const getProducts = () => {
         
     }
-
-    console.log(products);
 
     return (
         <Grid container spacing={5}>

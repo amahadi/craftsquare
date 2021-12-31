@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -49,6 +50,7 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function ShopOptions(props) {
+  const navigate = useNavigate();
   const shop = props.shop;  
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -62,7 +64,7 @@ export default function ShopOptions(props) {
   };
   
   const handleEditMenuClick = () => {
-    window.location.href = `/merchants/shops/${shop.id}`;
+    navigate(`/merchants/shops/${shop.id}`);
     handleClose();
   }
 

@@ -8,6 +8,7 @@ import { Container } from "@mui/material";
 import NavBar from '../../_components/NavBar';
 import ShopSideDrawer from '../../_components/ShopSideDrawer';
 
+import ShopContext from "../../_contexts/shopContext";
 import Copyright from "../../_components/Copyright";
 import MerchantRoutes from "../../MerchantRoutes";
 
@@ -21,6 +22,7 @@ export default function ShopHome(props) {
   const mdTheme = createTheme();
 
   return (
+    <ShopContext.Provider value={shop}>
     <ThemeProvider theme={mdTheme}>
         <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -64,5 +66,6 @@ export default function ShopHome(props) {
         </Box>
         </Box>
     </ThemeProvider>
+    </ShopContext.Provider>
   )
 }
