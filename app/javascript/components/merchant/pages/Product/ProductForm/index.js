@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import PageHeader from "../../../_components/PageHeader";
+import React, { useState, forwardRef,useImperativeHandle } from "react";
 
-export default function ProductForm({
-    product=null
-})
-{
+import { Box } from "@mui/material";
+
+const ProductForm = forwardRef((props, ref) => {
+
     // product attributes
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -13,17 +12,24 @@ export default function ProductForm({
     const [productTypeList, setProductTypeList] = useState("");
     const [images, setImages] = useState([]);
 
-    const createNewProduct = () => {}
-
-    const updateProduct = () => {}
-
-    const handleSaveButtonClick = () => {
-        if(product){
-
-        } else {
-
+    const styles = {
+        box: {
+            display: "block",
+            width: "80%",
+            margin: "auto"
         }
     }
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            getFormBody() {
+                return {
+                    title, description
+                }
+            }
+        }),
+    );
 
     const getAttributes = () => {
         return {
@@ -40,10 +46,10 @@ export default function ProductForm({
     }
 
     return (
-        <PageHeader 
-            pageType={"new"}
-            resourceName={"Product"}
-            handleSaveButtonClick={handleSaveButtonClick}
-        />
+        <Box style={styles.box}>
+            <h2>Product form</h2>
+        </Box>
     );
-}
+});
+
+export default ProductForm;
