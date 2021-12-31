@@ -13,7 +13,6 @@ export default function ShopSideDrawer({
   open,
   setOpen,
   theme,
-  setTitle,
   drawerWidth = 240
 }) {
 
@@ -70,7 +69,6 @@ export default function ShopSideDrawer({
       {/** ListItems goes here */}
       <ListItems
         type='shop'
-        setTitle={setTitle}
       />
     </Drawer>
   );

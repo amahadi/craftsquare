@@ -18,7 +18,9 @@ export default function Home(props) {
   const merchant = props.merchant;
 
   const [open, setOpen] = useState(true);
-  const [title, setTitle] = useState("Dashboard");
+  const title = useState(
+    `${merchant.first_name} ${merchant.last_name}`
+  );
 
   const mdTheme = createTheme();
 
@@ -40,7 +42,6 @@ export default function Home(props) {
             open={open}
             theme={mdTheme}
             setOpen={setOpen}
-            setTitle={setTitle}
           />
           <Box
             component="main"

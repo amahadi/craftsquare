@@ -18,54 +18,53 @@ export default function ShopHome(props) {
   const shop = props.shop;  
 
   const [open, setOpen] = useState(true);
-  const [title, setTitle] = useState("Dashboard");
+  const [title, setTitle] = useState(shop.name);
   const mdTheme = createTheme();
 
   return (
     <ShopContext.Provider value={shop}>
-    <ThemeProvider theme={mdTheme}>
-        <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        {/** NavBar goes here */}
-        <NavBar
-            title={title}
-            styled={styled}
-            open={open}
-            theme={mdTheme}
-            setOpen={setOpen}
-        />
-        {/** SideDrawer goes here */}
-        <ShopSideDrawer
-            styled={styled}
-            open={open}
-            theme={mdTheme}
-            setOpen={setOpen}
-            setTitle={setTitle}
-        />
-        <Box
-            component="main"
-            sx={{
-            backgroundColor: (theme) =>
-                theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-            }}
-        >
-            <Toolbar />
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {/** Main content goes here */}
-            <MerchantRoutes 
-                merchant={merchant}
-                shop={shop}
+        <ThemeProvider theme={mdTheme}>
+            <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            {/** NavBar goes here */}
+            <NavBar
+                title={title}
+                styled={styled}
+                open={open}
+                theme={mdTheme}
+                setOpen={setOpen}
             />
-            <Copyright />
-            </Container>
-        </Box>
-        </Box>
-    </ThemeProvider>
+            {/** SideDrawer goes here */}
+            <ShopSideDrawer
+                styled={styled}
+                open={open}
+                theme={mdTheme}
+                setOpen={setOpen}
+            />
+            <Box
+                component="main"
+                sx={{
+                backgroundColor: (theme) =>
+                    theme.palette.mode === 'light'
+                    ? theme.palette.grey[100]
+                    : theme.palette.grey[900],
+                flexGrow: 1,
+                height: '100vh',
+                overflow: 'auto',
+                }}
+            >
+                <Toolbar />
+                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                {/** Main content goes here */}
+                <MerchantRoutes 
+                    merchant={merchant}
+                    shop={shop}
+                />
+                <Copyright />
+                </Container>
+            </Box>
+            </Box>
+        </ThemeProvider>
     </ShopContext.Provider>
   )
 }

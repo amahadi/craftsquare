@@ -15,8 +15,7 @@ import BarChartIcon from '@mui/icons-material/BarChart'; // report
 import ShopContext from '../_contexts/shopContext';
 
 export default function ListItems({
-  type,
-  setTitle
+  type
 }) {
 
   const shop = useContext(ShopContext);
@@ -56,9 +55,8 @@ export default function ListItems({
     { title: "Reports", href: `/merchants/shops/${shop.id}/reports` }
   ]
 
-  const handleListItemOnClick = (event, index, title, href) => {
+  const handleListItemOnClick = (event, index, href) => {
     setSelectedIndex(index);
-    setTitle(title);
     window.location.href = href;
   }
 
@@ -69,7 +67,7 @@ export default function ListItems({
           return (
             <ListItemButton
               key={`mainListItem__${index}`}
-              onClick={(event) => handleListItemOnClick(event, index, mainListObject.title, mainListObject.href)}
+              onClick={(event) => handleListItemOnClick(event, index, mainListObject.href)}
             >
               <ListItemIcon>
                 {getIcon(mainListObject.title)}

@@ -37,26 +37,30 @@ export default function ProductList(){
     }
 
     useEffect(() => {
+        let isMounted = true;
         if(loading){
             getJson(
                 `${process.env.MERCHANT_API}/shops/${shop.id}/products`
             )
             .then(
                 response => {
-                    setProducts(response.data);
-                    setLoading(false);
+                    if(isMounted){
+                        setProducts(response.data);
+                        setLoading(false);
+                    }
                 },
                 error => {
-                    setErrors(error);
-                    console.log(error);
-                    setLoading(false);
+                    if(isMounted){
+                        setErrors(error);
+                        console.log(error);
+                        setLoading(false);
+                    }
                 }
             )
         }
     })
 
     const handleAddNewButtonClick = () => {
-        // history.push(`/merchants/shops/${shop.id}/products/new`);
         navigate(`/merchants/shops/${shop.id}/products/new`);
     }
     
