@@ -6,6 +6,7 @@ import { Grid, Button, Card, CardContent, Typography, CardActions, Box } from "@
 import ShopContext from "../../../_contexts/shopContext";
 import { getJson } from "../../../../utils";
 import PageHeader from "../../../_components/PageHeader";
+import DataTable from "../../../_components/DataTable";
 
 export default function ProductList(){
 
@@ -15,6 +16,9 @@ export default function ProductList(){
     const [products, setProducts] = useState([]);
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    // DataTable variables
+    const [filters, setFilters] = useState(null);
 
     const styles = {
         header: {
@@ -39,8 +43,13 @@ export default function ProductList(){
     useEffect(() => {
         let isMounted = true;
         if(loading){
-            getJson(
+            let productsUrl = filters 
+                ? 
                 `${process.env.MERCHANT_API}/shops/${shop.id}/products`
+                :
+                `${process.env.MERCHANT_API}/shops/${shop.id}/products?filter=filter`
+            getJson(
+               productsUrl 
             )
             .then(
                 response => {
@@ -63,20 +72,16 @@ export default function ProductList(){
     const handleAddNewButtonClick = () => {
         navigate(`/merchants/shops/${shop.id}/products/new`);
     }
-    
-    const getProducts = () => {
-        
-    }
 
     return (
         <Grid container spacing={5}>
             <PageHeader 
                 pageType={"index"}
-                resourceName={"Product"}
+                resourceName={"Products"}
                 handleAddNewButtonClick={handleAddNewButtonClick}
             />
             <Box style={styles.box}>
-                {getProducts()}
+                <DataTable />
             </Box>
         </Grid>
     );
