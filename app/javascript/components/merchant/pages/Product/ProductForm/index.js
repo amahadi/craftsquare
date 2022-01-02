@@ -1,9 +1,13 @@
 import React, { useState, forwardRef,useImperativeHandle } from "react";
 
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+
+import MainForm from "./MainForm";
+import MiscFrom from "./MiscForm";
 
 const ProductForm = forwardRef((props, ref) => {
 
+    // const { title } = props;
     // product attributes
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -25,29 +29,73 @@ const ProductForm = forwardRef((props, ref) => {
         () => ({
             getFormBody() {
                 return {
-                    title, description
+                    title, description,
+                    tag_list: tagList,
+                    ingredient_list: ingredientList,
+                    product_type_list: productTypeList,
+                    images: images
                 }
             }
         }),
     );
 
-    const getAttributes = () => {
+    const getMainAttributes = () => {
         return {
-            title, description, tagList, 
-            ingredientList, productTypeList,
+            title, description,
             images
         }
     }
 
-    const getCallbacks = () => {
-        setTitle, setDescription, setTagList,
-        setIngredientList, setProductTypeList,
-        setImages
+    const getMainCallbacks = () => {
+        return {
+            setTitle, setDescription, 
+            setImages
+        }
+    }
+
+    const getMiscAttibutes = () => {
+        return {
+            tagList, 
+            ingredientList, productTypeList
+        }
+    }
+
+    const getMiscCallbacks = () => {
+        return {
+            setTagList,
+            setIngredientList, setProductTypeList,
+        }
     }
 
     return (
         <Box style={styles.box}>
-            <h2>Product form</h2>
+            <Grid 
+                container
+                spacing={2}
+            >
+                <Grid 
+                    item
+                    xs={12}
+                    md={12}
+                    lg={8}
+                >
+                    <MainForm 
+                        attributes={getMainAttributes()}
+                        callbacks={getMainCallbacks()}
+                    />
+                </Grid>
+                <Grid 
+                    item
+                    xs={12}
+                    md={12}
+                    lg={4}
+                >
+                    <MiscFrom 
+                        attributes={getMiscAttibutes()}
+                        callbacks={getMiscCallbacks()}
+                    />
+                </Grid>
+            </Grid>
         </Box>
     );
 });

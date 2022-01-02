@@ -4,6 +4,7 @@ namespace :merchants do
     # Merchant home
     get '/', to: 'home#index'
     get '/dashboard', to: 'home#index'
+    get '/profile', to: 'home#index'
     get '/shops', to: 'home#index'
     get '/shops/new', to: 'home#index'
     get '/shops/:id', to: 'home#index'

@@ -11,6 +11,7 @@ import ShopContext from "./_contexts/shopContext";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
+import Profile from "./pages/Profile";
 import ShopDashboard from "./pages/Shop/ShopDashboard";
 import ShopList from "./pages/Shop/ShopList";
 import CreateShop from "./pages/Shop/CreateShop";
@@ -45,6 +46,9 @@ export default function MerchantRoutes(props) {
             <Route path='/merchants/shops/' element={<ShopList />} />
             <Route path='/merchants/shops/new' element={<CreateShop />} />
             <Route path='/merchants/shops/:id' element={<UpdateShop />} />
+            
+            {/** Merchant profile routes */}
+            <Route path='merchants/profile' element={<Profile />} />
 
             {/** Shop dashboard routes */}
             <Route path='/merchants/shops/:id/dashboard' element={<ShopDashboard />} />

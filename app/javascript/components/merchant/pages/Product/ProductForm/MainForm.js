@@ -1,5 +1,8 @@
 import React from "react";
-import { Grid, Paper, TextField } from "@mui/material";
+import { 
+    Stack, Paper, TextField, Typography 
+} from "@mui/material";
+import { DropzoneArea } from "material-ui-dropzone";
 
 export default function MainForm({
     attributes,
@@ -14,48 +17,54 @@ export default function MainForm({
         callbacks.setDescription(e.target.value);
     }
 
-    const handleTagListFieldChange = (e) => {
-        callbacks.setTagList(e.target.value);
-    }
-
-    const handleIngredientListFieldChange = (e) => {
-        callbacks.setIngredientList(e.target.value);
-    }
-
-    const handleProductTypeFieldChange = (e) => {
-        callbacks.setProductTypeList(e.target.value);
-    }
-
-    const handleImagesFieldChange = (e) => {
-        callbacks.setImages(e.target.value);
+    const handleImagesFieldChange = (files) => {
+        // callbacks.setImages(e.target.value);
     }
 
     return (
-        <Grid 
-            container 
-            spacing={2}
-        >
-            <Grid 
-                item
-                xs={12}
-                md={12}
-                lg={12}
-            >
-                <Paper
+        <Stack>
+            <Paper
+                sx={{
+                    padding: "20px",
+                    width: "100%"
+                }}>
+                <TextField 
+                    id="id__productTitle-textfield" 
+                    label="Title"
+                    value={attributes.title} 
+                    variant="outlined" 
                     fullWidth
-                    sx={{
-                        padding: "20px"
-                    }}>
-                        <TextField 
-                            id="id__productTitle-textfield" 
-                            label="Title"
-                            value={attributes.title} 
-                            variant="outlined" 
-                            fullWidth
-                            onChange={handleNameFieldChange}
-                        />
-                </Paper>  
-            </Grid>
-        </Grid>
+                    margin="normal"
+                    onChange={handleTitleFieldChange}
+                />
+                <TextField 
+                    id="id__productDescription-textfield" 
+                    label="Description"
+                    value={attributes.description} 
+                    variant="outlined" 
+                    fullWidth
+                    margin="normal"
+                    onChange={handleDescriptionFieldCHange}
+                />
+            </Paper>
+            <Paper
+                sx={{
+                    padding: "20px",
+                    width: "100%", 
+                    marginTop: "10px"
+                }}>
+                <Stack>
+                    <Typography
+                        variant="h8"
+                    >
+                        Images    
+                    </Typography>
+                    <DropzoneArea 
+                        onChange={handleImagesFieldChange}
+                    />  
+                </Stack>      
+            </Paper>
+        </Stack>
+          
     );
 }

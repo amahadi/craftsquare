@@ -59,7 +59,7 @@ export default function AccountMenu() {
   }
 
   const handleOnProfileMenuClick = () => {
-    window.open('/merchants/profile', '_blank');
+    window.location.href = '/merchants/profile';
   }
 
   return (

@@ -2,7 +2,8 @@ class Merchants::Api::V1::BaseController < BaseApiController
   before_action :authenticate_merchant!
 
   def image_params
-    params[:product][:images].map do |img|
+    return [] unless params[:product][:images].present?
+    params[:product][:images]&.map do |img|
         if img[:data].present?
             {
                 data: img[:data],

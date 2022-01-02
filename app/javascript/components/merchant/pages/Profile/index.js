@@ -1,7 +1,7 @@
 import React from "react";
 
+import ProfileForm from "./ProfileForm";
+
 export default function Profile(){
-    return <h2>
-        Hello profile!
-    </h2>;
+    return <ProfileForm />
 }
