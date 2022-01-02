@@ -3,6 +3,8 @@ class Product < ApplicationRecord
     has_many :variants
     has_many :adverts
 
+    accepts_nested_attributes_for :variants
+
     include ObjectFile
 
     acts_as_taggable_on :tags, :ingredients, :product_types

@@ -56,6 +56,7 @@ export default function ListItems({
   ]
 
   const handleListItemOnClick = (event, index, href) => {
+    console.log(href);
     setSelectedIndex(index);
     window.location.href = href;
   }
@@ -87,7 +88,7 @@ export default function ListItems({
           return (
             <ListItemButton
               key={`shopListItem__${index}`}
-              onClick={(event) => handleListItemOnClick(event, index, shopListObject.title, shopListObject.href)}
+              onClick={(event) => handleListItemOnClick(event, index, shopListObject.href)}
             >
               <ListItemIcon>
                 {getIcon(shopListObject.title)}

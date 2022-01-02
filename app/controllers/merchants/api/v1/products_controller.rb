@@ -27,12 +27,25 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
     private
 
     def product_params
-        params[:product][:images] = image_params
+        params[:product][:images] = image_params_from(params[:product][:images])
+        parse_variant_images
         params.require(:product).permit(
             :title, :description, :status, :published_at,
             :tag_list, :ingredient_list, :product_type_list,
-            images: [:data, :filename, :content_type]
+            images: [:data, :filename, :content_type],
+            variants_attributes: [
+                :title, :description, :weight, :weight_unit,
+                :inventory_quantity, :price, :ingredient_list,
+                images: [:data, :filename, :content_type],
+                variant_options_attributes: [:title, :value_list]
+            ]
         )
+    end
+
+    def parse_variant_images
+        params[:product][:variants_attributes].each do |variant|
+            variant[:images] = image_params_from(variant[:images])
+        end
     end
 
     def shop
