@@ -1,6 +1,7 @@
 import React from "react";
 import { 
-    Stack, Paper, TextField, Typography 
+    Stack, Paper, TextField, Typography,
+    InputLabel 
 } from "@mui/material";
 import { DropzoneArea } from "material-ui-dropzone";
 
@@ -43,6 +44,8 @@ export default function MainForm({
                     value={attributes.description} 
                     variant="outlined" 
                     fullWidth
+                    multiline
+                    rows={4}
                     margin="normal"
                     onChange={handleDescriptionFieldCHange}
                 />
@@ -55,11 +58,14 @@ export default function MainForm({
                 }}>
                 <Stack>
                     <Typography
-                        variant="h8"
+                        variant="h7"
+                        style={{marginBottom: "10px"}}
                     >
                         Images    
                     </Typography>
-                    <DropzoneArea 
+                    <DropzoneArea
+                        id="id__productDropzone" 
+                        labelId="id__productDropzone-label"
                         onChange={handleImagesFieldChange}
                     />  
                 </Stack>      
