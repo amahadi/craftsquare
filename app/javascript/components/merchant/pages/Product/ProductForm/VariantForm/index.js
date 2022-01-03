@@ -3,11 +3,10 @@ import React, {useEffect, useState} from "react";
 import { 
     Paper, Stack, TextField,
     FormControl, InputLabel, Select, MenuItem, FormHelperText,
-    Grid, Divider, IconButton, Button
+    Grid
 } from "@mui/material";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-import VariantOption from "./VariantOption";
+import VariantOptions from "./VariantOptions";
 
 export default function index({
     attributes,
@@ -38,7 +37,7 @@ export default function index({
 
     }
 
-    const handleAddMoreOptionButtonClick = () => {}
+    
 
     const getWeightUnitComponent = () => {
         return (
@@ -146,25 +145,10 @@ export default function index({
                         /> 
                     </Grid>
                 </Grid>
-                <Divider />
-                {
-                    attributes.variantOptions.map((option, index) => (
-                        <VariantOption 
-                            option={option}
-                            index={index}
-                            setOptions={callbacks.setVariantOptions}
-                        />
-                    ))
-                }
-                
-                <Button 
-                    variant="text"
-                    startIcon={<AddCircleOutlineIcon />}
-                    onClick={handleAddMoreOptionButtonClick}
-                >
-                    Add more options
-                </Button>    
-                <Divider />
+                <VariantOptions
+                    options={attributes.variantOptions}
+                    setOptions={callbacks.setVariantOptions}
+                />
            </Stack>
        </Paper> 
     );

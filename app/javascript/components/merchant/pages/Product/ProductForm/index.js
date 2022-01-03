@@ -9,6 +9,7 @@ import VariantForm from "./VariantForm";
 const ProductForm = forwardRef((props, ref) => {
 
     const variantOptionObj = {
+        index: 0,
         title: "",
         optionList: ""
     }

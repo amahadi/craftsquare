@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import {
-    Grid, TextField, IconButton, Stack, Divider,
-    FormHelperText, Button
+    Grid, TextField, IconButton, Stack, Button
 } from "@mui/material";
 
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
@@ -10,7 +9,6 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 export default function VariantOption({
     option,
-    index,
     setOptions
 }){
 
@@ -32,11 +30,11 @@ export default function VariantOption({
         setEditMode(true);
     }
 
-    const createOptionComponent = (option, index) => (
-        <Grid container spacing={2} key={`key__variantOption_${index}`}>
+    return (
+        <Grid container spacing={2} key={`key__variantOption_${option.index}`}>
             <Grid item xs={10} md={5} lg={5}>
                 <TextField 
-                    id={`id__variantOptionTitle-textfield_${index}`} 
+                    id={`id__variantOptionTitle-textfield_${option.index}`} 
                     label="Variant Option title"
                     value={option.title} 
                     variant="outlined" 
@@ -60,6 +58,16 @@ export default function VariantOption({
                 {
                     editMode
                     ?
+                    <Button
+                        sx={{
+                            marginTop: "16px"
+                        }}
+                        variant="text"
+                        onClick={handleOnVariantDoneButton}
+                    >
+                        Done
+                    </Button>
+                    :
                     <Stack 
                         direction="row"
                         style={{
@@ -81,39 +89,8 @@ export default function VariantOption({
                             <DeleteRoundedIcon />
                         </IconButton>
                     </Stack>
-                    :
-                    <Button
-                        sx={{
-                            marginTop: "16px"
-                        }}
-                        variant="text"
-                        onClick={handleOnVariantDoneButton}
-                    >
-                        Done
-                    </Button>
                 }
             </Grid>
         </Grid>
-    );
-
-    return (
-        <Stack>
-            <Divider />
-            {/** This will me wrapped in for loop */}
-            {
-                createOptionComponent(option, index)
-            }
-            {/** This will me wrapped in for loop */}
-            <FormHelperText>
-                {
-                    "List the different options available for a specific variant.\
-                    For ex. a product, shirt, can have multiple variants depending \
-                    on the colors and one color can have various sizes available to \
-                    purchase. Here, 'size' is the variant title and 'xs, s, m, l, xl' \
-                    is the variant value list. Separate each option in the option list \
-                    with a comma(,)."
-                }
-            </FormHelperText>
-        </Stack>
     );
 }
