@@ -8,6 +8,11 @@ import VariantForm from "./VariantForm";
 
 const ProductForm = forwardRef((props, ref) => {
 
+    const variantOptionObj = {
+        title: "",
+        optionList: ""
+    }
+
     // const { title } = props;
     // product attributes
     const [title, setTitle] = useState("");
@@ -29,8 +34,7 @@ const ProductForm = forwardRef((props, ref) => {
     const [variantImages, setVariantImages] = useState([]);
 
     // variant options attributes
-    const [variantOptionTitle, setVariantOptionTitle] = useState("");
-    const [variantOptionValueList, setVariantOptionValueList] = useState("");
+    const [variantOptions, setVariantOptions] = useState([variantOptionObj]);
 
 
     const styles = {
@@ -89,7 +93,7 @@ const ProductForm = forwardRef((props, ref) => {
             variantTitle, variantDescription, variantWeight,
             variantWeightUnit, variantInventoryQuantity, variantPrice,
             variantIngredientList, variantImages,
-            variantOptionTitle, variantOptionValueList
+            variantOptions
         }
     }
 
@@ -99,47 +103,38 @@ const ProductForm = forwardRef((props, ref) => {
             setVariantWeightUnit, setVariantInventoryQuantity,
             setVariantPrice, setVariantIngredientList,
             setVariantImages,
-            setVariantOptionTitle, setVariantOptionValueList
+            setVariantOptions
         }
     }
 
     return (
         <Box style={styles.box}>
-            <Grid 
-                container
-                spacing={2}
-            >
-                <Grid 
-                    item
-                    xs={12}
-                    md={12}
-                    lg={8}
-                >
-                    <Stack>
+            <Stack>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={12} lg={8}>
                         <MainForm 
                             attributes={getMainAttributes()}
                             callbacks={getMainCallbacks()}
                         />
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={4}>
+                        <Stack>
+                            <MiscFrom 
+                                attributes={getMiscAttibutes()}
+                                callbacks={getMiscCallbacks()}
+                            />
+                        </Stack>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={12} lg={12}>
                         <VariantForm 
                             attributes={getVariantAttributes()}
                             callbacks={getVariantCallbacks()}
                         />
-                    </Stack>
+                    </Grid>
                 </Grid>
-                <Grid 
-                    item
-                    xs={12}
-                    md={12}
-                    lg={4}
-                >
-                    <Stack>
-                        <MiscFrom 
-                            attributes={getMiscAttibutes()}
-                            callbacks={getMiscCallbacks()}
-                        />
-                    </Stack>
-                </Grid>
-            </Grid>
+            </Stack>
         </Box>
     );
 });
