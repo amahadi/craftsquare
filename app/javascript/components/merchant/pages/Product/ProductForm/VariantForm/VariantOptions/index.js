@@ -8,14 +8,13 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 export default function VariantOptions({
     options,
     setOptions
-}){ 
-
-    const [variantOptions, setVariantOptions] = useState(options);
+}){
 
     const handleAddMoreOptionButtonClick = () => {
         setOptions([...options, {
             title: "",
-            optionList: ""
+            optionList: "",
+            deleted: false
         }])
     }
 
@@ -24,7 +23,7 @@ export default function VariantOptions({
         // const deletedOption = document.getElementById(`variantOptionContainer_${index}`);
         // optionContainer.removeChild(deletedOption);
         const tmp = options;
-        tmp.splice(index, 1);
+        tmp[index].deleted = true;
         setOptions([...tmp]);
     }
 
@@ -39,8 +38,8 @@ export default function VariantOptions({
             <Stack id="variantOptionsStackContainer">
                 {
                     options.map((option, index) => (
+                        option.deleted ? null :
                         <div key={`variantOption_${index}`} id={`variantOptionContainer_${index}`} >
-                            { console.log("option", option) }
                             <VariantOption
                                 option={option}
                                 index={index}
@@ -48,7 +47,6 @@ export default function VariantOptions({
                                 onDeleteButtonClick={handleDeleteButtonClick}
                             />
                         </div>
-                                    
                     ))
                 }
             </Stack>
@@ -68,9 +66,9 @@ export default function VariantOptions({
                     is the variant value list. Separate each option in the option list \
                     with a comma(,)."
                 }
-            </FormHelperText>    
+            </FormHelperText>
             <Divider />
-            <Button 
+            <Button
                 variant="text"
                 startIcon={<AddCircleOutlineIcon />}
                 onClick={handleAddMoreOptionButtonClick}

@@ -30,12 +30,13 @@ export default function CreateProduct(){
 
     return (
         <Grid container spacing={5}>
-            <PageHeader 
+            <PageHeader
                 pageType={"new"}
                 resourceName={"Product"}
                 handleSaveButtonClick={handleSaveButtonClick}
             />
-            <ProductForm 
+            <ProductForm
+                type="new"
                 ref={getFormBodyRef}
             />
         </Grid>

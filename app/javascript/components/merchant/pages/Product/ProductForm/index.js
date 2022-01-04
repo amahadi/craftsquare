@@ -2,6 +2,7 @@ import React, { useState, forwardRef, useImperativeHandle } from "react";
 
 import { Box, Grid, Stack } from "@mui/material";
 
+import FormContext from "../../../_contexts/formContext";
 import MainForm from "./MainForm";
 import MiscFrom from "./MiscForm";
 import VariantForm from "./VariantForm";
@@ -10,7 +11,8 @@ const ProductForm = forwardRef((props, ref) => {
 
     const variantOptionObj = {
         title: "",
-        optionList: ""
+        optionList: "",
+        deleted: false
     }
 
     // const { title } = props;
@@ -69,14 +71,14 @@ const ProductForm = forwardRef((props, ref) => {
 
     const getMainCallbacks = () => {
         return {
-            setTitle, setDescription, 
+            setTitle, setDescription,
             setImages
         }
     }
 
     const getMiscAttibutes = () => {
         return {
-            status, tagList, 
+            status, tagList,
             ingredientList, productTypeList
         }
     }
@@ -108,34 +110,36 @@ const ProductForm = forwardRef((props, ref) => {
     }
 
     return (
-        <Box style={styles.box}>
-            <Stack>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={12} lg={8}>
-                        <MainForm 
-                            attributes={getMainAttributes()}
-                            callbacks={getMainCallbacks()}
-                        />
-                    </Grid>
-                    <Grid item xs={12} md={12} lg={4}>
-                        <Stack>
-                            <MiscFrom 
-                                attributes={getMiscAttibutes()}
-                                callbacks={getMiscCallbacks()}
+        <FormContext.Provider value={props}>
+            <Box style={styles.box}>
+                <Stack>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} md={12} lg={8}>
+                            <MainForm
+                                attributes={getMainAttributes()}
+                                callbacks={getMainCallbacks()}
                             />
-                        </Stack>
+                        </Grid>
+                        <Grid item xs={12} md={12} lg={4}>
+                            <Stack>
+                                <MiscFrom
+                                    attributes={getMiscAttibutes()}
+                                    callbacks={getMiscCallbacks()}
+                                />
+                            </Stack>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={12} lg={12}>
-                        <VariantForm 
-                            attributes={getVariantAttributes()}
-                            callbacks={getVariantCallbacks()}
-                        />
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} md={12} lg={12}>
+                            <VariantForm
+                                attributes={getVariantAttributes()}
+                                callbacks={getVariantCallbacks()}
+                            />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Stack>
-        </Box>
+                </Stack>
+            </Box>
+        </FormContext.Provider>
     );
 });
 
