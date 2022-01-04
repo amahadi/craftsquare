@@ -13,6 +13,7 @@ export default function CreateProduct(){
 
     const handleSaveButtonClick = () => {
         const formBody = getFormBodyRef.current.getFormBody();
+        return console.log(formBody);
         postJson(
             `${process.env.MERCHANT_API}/shops/${shop.id}/products`,
             { product: formBody }

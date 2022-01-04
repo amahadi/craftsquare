@@ -5,13 +5,19 @@ import { Box, Grid, Stack } from "@mui/material";
 import FormContext from "../../../_contexts/formContext";
 import MainForm from "./MainForm";
 import MiscFrom from "./MiscForm";
-import VariantForm from "./VariantForm";
+import VariantsForm from "./VariantsForm";
 
 const ProductForm = forwardRef((props, ref) => {
 
-    const variantOptionObj = {
+    const variantsObj = {
         title: "",
-        optionList: "",
+        description: "",
+        weight: "",
+        weightUnit: "",
+        inventoryQuantity: "",
+        price: "",
+        ingredientList: "",
+        variantOptions: [],
         deleted: false
     }
 
@@ -26,18 +32,7 @@ const ProductForm = forwardRef((props, ref) => {
     const [images, setImages] = useState([]);
 
     // variant attributes
-    const [variantTitle, setVariantTitle] = useState("");
-    const [variantDescription, setVariantDescription] = useState("");
-    const [variantWeight, setVariantWeight] = useState("");
-    const [variantWeightUnit, setVariantWeightUnit] = useState("");
-    const [variantInventoryQuantity, setVariantInventoryQuantity] = useState(0);
-    const [variantPrice, setVariantPrice] = useState("");
-    const [variantIngredientList, setVariantIngredientList] = useState("");
-    const [variantImages, setVariantImages] = useState([]);
-
-    // variant options attributes
-    const [variantOptions, setVariantOptions] = useState([variantOptionObj]);
-
+    const [variants, setVariants] = useState([variantsObj]);
 
     const styles = {
         box: {
@@ -45,6 +40,18 @@ const ProductForm = forwardRef((props, ref) => {
             width: "80%",
             margin: "auto"
         }
+    }
+
+    const getVariantOptions = () => {
+        const variantOptionsObj = variantOptions
+            .filter(option => !option.deleted)
+            .map((option) => {
+                return {
+                    title: option.title,
+                    value_list: option.optionList
+                }
+            });
+        return variantOptionsObj;
     }
 
     useImperativeHandle(
@@ -56,7 +63,8 @@ const ProductForm = forwardRef((props, ref) => {
                     tag_list: tagList,
                     ingredient_list: ingredientList,
                     product_type_list: productTypeList,
-                    images: images
+                    images: images,
+                    variant_options_attributes: getVariantOptions()
                 }
             }
         }),
@@ -131,9 +139,9 @@ const ProductForm = forwardRef((props, ref) => {
                     </Grid>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
-                            <VariantForm
-                                attributes={getVariantAttributes()}
-                                callbacks={getVariantCallbacks()}
+                            <VariantsForm
+                                variants={variants}
+                                setVariants={setVariants}
                             />
                         </Grid>
                     </Grid>

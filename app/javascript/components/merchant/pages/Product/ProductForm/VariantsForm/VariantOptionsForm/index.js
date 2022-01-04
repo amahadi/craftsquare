@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {Grid, Divider, Button, Stack, FormHelperText, IconButton} from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import VariantOption from "./VariantOption";
+import VariantOptionForm from "./VariantOptionForm";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
-export default function VariantOptions({
+export default function VariantOptionsForm({
     options,
     setOptions
 }){
@@ -40,7 +40,7 @@ export default function VariantOptions({
                     options.map((option, index) => (
                         option.deleted ? null :
                         <div key={`variantOption_${index}`} id={`variantOptionContainer_${index}`} >
-                            <VariantOption
+                            <VariantOptionForm
                                 option={option}
                                 index={index}
                                 onDoneButtonClick={handleDoneButtonClick}

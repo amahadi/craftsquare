@@ -8,7 +8,7 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 import FormContext from "../../../../../_contexts/formContext";
 
-export default function VariantOption({
+export default function VariantOptionForm({
     option,
     index,
     onEditButtonClick=null,
