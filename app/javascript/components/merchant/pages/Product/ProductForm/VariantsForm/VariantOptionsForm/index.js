@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import {Grid, Divider, Button, Stack, FormHelperText, IconButton} from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import VariantOptionForm from "./VariantOptionForm";
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 export default function VariantOptionsForm({
     options,
@@ -67,7 +65,6 @@ export default function VariantOptionsForm({
                     with a comma(,)."
                 }
             </FormHelperText>
-            <Divider />
             <Button
                 variant="text"
                 startIcon={<AddCircleOutlineIcon />}
@@ -75,6 +72,7 @@ export default function VariantOptionsForm({
             >
                 Add more options
             </Button>
+            <Divider />
         </Stack>
     )
 }

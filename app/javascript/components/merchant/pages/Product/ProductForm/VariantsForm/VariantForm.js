@@ -62,6 +62,15 @@ export default function VariantForm({
     setVariantInventoryQuantity(e.target.value);
   }
 
+  const handleEditButtonClick = () => {
+
+  }
+
+  const handleDeleteButtonClick = () => {
+
+  }
+
+  const handleDoneButtonClick = () => { }
 
 
   const getWeightUnitComponent = () => {

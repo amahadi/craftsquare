@@ -1,6 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 
-import { Box, Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack, Button } from "@mui/material";
 
 import FormContext from "../../../_contexts/formContext";
 import MainForm from "./MainForm";
@@ -8,18 +8,6 @@ import MiscFrom from "./MiscForm";
 import VariantsForm from "./VariantsForm";
 
 const ProductForm = forwardRef((props, ref) => {
-
-    const variantsObj = {
-        title: "",
-        description: "",
-        weight: "",
-        weightUnit: "",
-        inventoryQuantity: "",
-        price: "",
-        ingredientList: "",
-        variantOptions: [],
-        deleted: false
-    }
 
     // const { title } = props;
     // product attributes
@@ -32,7 +20,7 @@ const ProductForm = forwardRef((props, ref) => {
     const [images, setImages] = useState([]);
 
     // variant attributes
-    const [variants, setVariants] = useState([variantsObj]);
+    const [variants, setVariants] = useState([]);
 
     const styles = {
         box: {
