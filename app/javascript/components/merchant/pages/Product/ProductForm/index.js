@@ -1,4 +1,4 @@
-import React, { useState, forwardRef,useImperativeHandle } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 
 import { Box, Grid, Stack } from "@mui/material";
 
@@ -9,7 +9,6 @@ import VariantForm from "./VariantForm";
 const ProductForm = forwardRef((props, ref) => {
 
     const variantOptionObj = {
-        index: 0,
         title: "",
         optionList: ""
     }

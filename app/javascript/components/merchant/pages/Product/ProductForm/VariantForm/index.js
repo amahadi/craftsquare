@@ -8,7 +8,7 @@ import {
 
 import VariantOptions from "./VariantOptions";
 
-export default function index({
+export default function VariantForm({
     attributes,
     callbacks
 }){
