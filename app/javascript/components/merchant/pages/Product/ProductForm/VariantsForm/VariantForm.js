@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   Paper, Stack, TextField,
   FormControl, InputLabel, Select, MenuItem, FormHelperText,
-  Grid
+  Grid, Button, IconButton
 } from "@mui/material";
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
+import FormContext from "../../../../_contexts/formContext";
 import VariantOptions from "./VariantOptionsForm";
 
 export default function VariantForm({
@@ -15,6 +18,8 @@ export default function VariantForm({
   onDeleteButtonClick = null,
   onDoneButtonClick = null
 }) {
+
+  const formContext = useContext(FormContext);
 
   const variantOptionObj = {
     title: "",
@@ -30,6 +35,8 @@ export default function VariantForm({
   const [variantPrice, setVariantPrice] = useState(variant.price);
   const [variantIngredientList, setVariantIngredientList] = useState(variant.ingredientList);
   // const [variantImages, setVariantImages] = useState([]);
+
+  const [editMode, setEditMode] = useState(formContext.type === "new");
 
   //variantOption form
   const [variantOptions, setVariantOptions] = useState([variantOptionObj]);
@@ -62,15 +69,64 @@ export default function VariantForm({
     setVariantInventoryQuantity(e.target.value);
   }
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = (e) => {
+    setEditMode(true);
+  }
+
+  const handleDeleteButtonClick = (e) => {
 
   }
 
-  const handleDeleteButtonClick = () => {
-
+  const handleDoneButtonClick = (e) => {
+    setEditMode(false);
   }
 
-  const handleDoneButtonClick = () => { }
+  const getActionButtons = () => {
+    return (
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6} lg={4}></Grid>
+        <Grid item xs={12} md={6} lg={4}></Grid>
+        {
+          editMode
+            ?
+            <Grid item xs={12} md={6} lg={4}>
+              <Stack direction="row" justifyContent="end">
+                <Button
+                  variant="outlined"
+                  onClick={handleDoneButtonClick}
+                >
+                  Done
+                </Button>
+              </Stack>
+            </Grid>
+            :
+            <Grid item xs={12} md={6} lg={4}>
+              <Stack
+                direction="row"
+                justifyContent="end"
+              >
+                <IconButton
+                  aria-label="Edit"
+                  size="small"
+                  value={index}
+                  onClick={handleEditButtonClick}
+                >
+                  <EditRoundedIcon />
+                </IconButton>
+                <IconButton
+                  aria-label="Delete"
+                  size="small"
+                  value={index}
+                  onClick={handleDeleteButtonClick}
+                >
+                  <DeleteRoundedIcon />
+                </IconButton>
+              </Stack>
+            </Grid>
+        }
+      </Grid>
+    );
+  }
 
 
   const getWeightUnitComponent = () => {
@@ -107,6 +163,11 @@ export default function VariantForm({
       }}
     >
       <Stack>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6} lg={4}></Grid>
+          <Grid item xs={12} md={6} lg={4}></Grid>
+          {getActionButtons()}
+        </Grid>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} lg={6}>
             <TextField

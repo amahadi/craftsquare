@@ -72,12 +72,11 @@ export default function VariantsForm({
                         <Grid
                             container
                             spacing={2}
+                            alignContent="flex-end"
                             sx={{margin: "auto"}}
                         >
-                            <Grid item xs={12} md={6} lg={4}></Grid>
-                            <Grid item xs={12} md={6} lg={4}></Grid>
                             <Grid item xs={12} md={6} lg={4}>
-                                <Stack direction="row">
+                                <Stack direction="row" justifyContent="start">
                                     <Button
                                         variant="outlined"
                                         onClick={handleAddMoreButtonClick}
@@ -86,6 +85,8 @@ export default function VariantsForm({
                                     </Button>
                                 </Stack>
                             </Grid>
+                            <Grid item xs={12} md={6} lg={4}></Grid>
+                            <Grid item xs={12} md={6} lg={4}></Grid>
                         </Grid>
                     </Grid>
                     : null
