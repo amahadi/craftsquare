@@ -36,6 +36,22 @@ export default function VariantsForm({
         }
     }
 
+    const handleEditButtonClick = () => {}
+
+    const handleDeleteButtonClick = (index) => {
+        const tmp = variants;
+        tmp[index].deleted = true;
+        setVariants([...variants])
+    }
+
+    const handleDoneButtonClick = (variantObj, index) => {
+        const tmp = variants;
+        tmp.splice(index, 1, variantObj);
+        setVariants([...tmp]);
+    }
+
+    console.log(variants);
+
     return (
         <Stack>
             <FormControlLabel
@@ -64,6 +80,9 @@ export default function VariantsForm({
                                         <VariantForm
                                             variant={variant}
                                             index={index}
+                                            onEditButtonClick={handleEditButtonClick}
+                                            onDeleteButtonClick={handleDeleteButtonClick}
+                                            onDoneButtonClick={handleDoneButtonClick}
                                         />
                                     </Grid>
                                     : null

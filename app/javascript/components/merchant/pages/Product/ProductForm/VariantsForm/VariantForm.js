@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import {
   Paper, Stack, TextField,
@@ -41,6 +41,23 @@ export default function VariantForm({
   //variantOption form
   const [variantOptions, setVariantOptions] = useState([variantOptionObj]);
 
+  useEffect(() => {
+    if(onDoneButtonClick){
+      const tmp = {
+        title: variantTitle,
+        description: variantDescription,
+        weight: variantWeight,
+        weigntUnit: variantWeightUnit,
+        inventoryQuantity: variantInventoryQuantity,
+        price: variantPrice,
+        ingredientList: variantIngredientList,
+        variantOptions: variantOptions,
+        deleted: false
+      }
+      onDoneButtonClick(tmp, index);
+    }
+  }, variantOptions)
+
   const handleVariantTitleFieldChange = (e) => {
     setVariantTitle(e.target.value);
   }
@@ -74,29 +91,56 @@ export default function VariantForm({
   }
 
   const handleDeleteButtonClick = (e) => {
-
+    if(onDeleteButtonClick){
+      onDeleteButtonClick(e.currentTarget.value);
+    }
   }
 
   const handleDoneButtonClick = (e) => {
     setEditMode(false);
+    if(onDoneButtonClick){
+      const tmp = {
+        title: variantTitle,
+        description: variantDescription,
+        weight: variantWeight,
+        weigntUnit: variantWeightUnit,
+        inventoryQuantity: variantInventoryQuantity,
+        price: variantPrice,
+        ingredientList: variantIngredientList,
+        variantOptions: variantOptions,
+        deleted: false
+      }
+      onDoneButtonClick(tmp, index);
+    }
   }
 
   const getActionButtons = () => {
     return (
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6} lg={4}></Grid>
-        <Grid item xs={12} md={6} lg={4}></Grid>
+        <Grid item xs={12} md={6} lg={3}></Grid>
+        <Grid item xs={12} md={6} lg={3}></Grid>
+        <Grid item xs={12} md={6} lg={3}></Grid>
         {
           editMode
             ?
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6} lg={3}>
               <Stack direction="row" justifyContent="end">
                 <Button
                   variant="outlined"
+                  value={index}
                   onClick={handleDoneButtonClick}
                 >
                   Done
                 </Button>
+                <IconButton
+                  sx={{marginLeft: "16px"}}
+                  aria-label="Delete"
+                  size="small"
+                  value={index}
+                  onClick={handleDeleteButtonClick}
+                >
+                  <DeleteRoundedIcon />
+                </IconButton>
               </Stack>
             </Grid>
             :
@@ -114,6 +158,7 @@ export default function VariantForm({
                   <EditRoundedIcon />
                 </IconButton>
                 <IconButton
+                  sx={{marginLeft: "16px"}}
                   aria-label="Delete"
                   size="small"
                   value={index}
@@ -139,6 +184,7 @@ export default function VariantForm({
         <Select
           labelId="id__variantWightUnit-label"
           id="id__variantWeightUnit-textfield"
+          disabled={!editMode}
           label="Weight unit"
           value={variantWeightUnit}
           variant="outlined"
@@ -177,6 +223,7 @@ export default function VariantForm({
               variant="outlined"
               fullWidth
               margin="normal"
+              disabled={!editMode}
               onChange={handleVariantTitleFieldChange}
               helperText="Set the variant title. For example, a product, shirt, can have variants based on colors. The variant title color goes here."
             />
@@ -190,6 +237,7 @@ export default function VariantForm({
               variant="outlined"
               margin="normal"
               fullWidth
+              disabled={!editMode}
               helperText="Price of the specific variant."
               onChange={handleVariantPricefieldChange}
             />
@@ -204,6 +252,7 @@ export default function VariantForm({
           multiline
           rows={4}
           margin="normal"
+          disabled={!editMode}
           helperText="Define the variant description. For example, a product, shirt, can have multiple variants based on material. The material description goes here."
           onChange={handleVariantDescriptionFieldChange}
         />
@@ -220,6 +269,7 @@ export default function VariantForm({
               variant="outlined"
               margin="normal"
               fullWidth
+              disabled={!editMode}
               helperText="Weight of the specific variant."
               onChange={handleVariantWeightfieldChange}
             />
@@ -235,6 +285,7 @@ export default function VariantForm({
               variant="outlined"
               fullWidth
               margin="normal"
+              disabled={!editMode}
               helperText="List the ingredient list for this specific variant. Leave blank to use from the product ingredients."
               onChange={handleVariantIngredientListFieldChange}
             />
@@ -247,6 +298,7 @@ export default function VariantForm({
               variant="outlined"
               fullWidth
               margin="normal"
+              disabled={!editMode}
               helperText="The initial quantity of this variant. The inventory quantity will be adjusted automatically with orders placed with this variant."
               onChange={handlevariantInventoryQuantityFieldChange}
             />
