@@ -21,12 +21,6 @@ export default function VariantForm({
 
   const formContext = useContext(FormContext);
 
-  const variantOptionObj = {
-    title: "",
-    optionList: "",
-    deleted: false
-  }
-
   const [variantTitle, setVariantTitle] = useState(variant.title);
   const [variantDescription, setVariantDescription] = useState(variant.description);
   const [variantWeight, setVariantWeight] = useState(variant.weight);
@@ -39,24 +33,15 @@ export default function VariantForm({
   const [editMode, setEditMode] = useState(formContext.type === "new");
 
   //variantOption form
-  const [variantOptions, setVariantOptions] = useState([variantOptionObj]);
+  const [variantOptions, setVariantOptions] = useState([]);
+  const [hasOptions, setHasOptions] = useState(false);
 
   useEffect(() => {
     if(onDoneButtonClick){
-      const tmp = {
-        title: variantTitle,
-        description: variantDescription,
-        weight: variantWeight,
-        weigntUnit: variantWeightUnit,
-        inventoryQuantity: variantInventoryQuantity,
-        price: variantPrice,
-        ingredientList: variantIngredientList,
-        variantOptions: variantOptions,
-        deleted: false
-      }
+      const tmp = getVariantOptions();
       onDoneButtonClick(tmp, index);
     }
-  }, variantOptions)
+  }, [variantOptions])
 
   const handleVariantTitleFieldChange = (e) => {
     setVariantTitle(e.target.value);
@@ -99,18 +84,34 @@ export default function VariantForm({
   const handleDoneButtonClick = (e) => {
     setEditMode(false);
     if(onDoneButtonClick){
-      const tmp = {
-        title: variantTitle,
-        description: variantDescription,
-        weight: variantWeight,
-        weigntUnit: variantWeightUnit,
-        inventoryQuantity: variantInventoryQuantity,
-        price: variantPrice,
-        ingredientList: variantIngredientList,
-        variantOptions: variantOptions,
-        deleted: false
-      }
+      const tmp = getVariantOptions();
       onDoneButtonClick(tmp, index);
+    }
+  }
+
+  const getFilteredOptions = () => {
+    const options = variantOptions
+      .filter(option => !option.deleted)
+      .map((option) => (
+        {
+          title: option.title, 
+          optonList: option.optionList
+        }
+      ))
+    return options.length === 0 ? null : options;
+  }
+
+  const getVariantOptions = () => {
+    return {
+      title: variantTitle,
+      description: variantDescription,
+      weight: variantWeight,
+      weigntUnit: variantWeightUnit,
+      inventoryQuantity: variantInventoryQuantity,
+      price: variantPrice,
+      ingredientList: variantIngredientList,
+      variantOptions: getFilteredOptions(),
+      deleted: false
     }
   }
 
