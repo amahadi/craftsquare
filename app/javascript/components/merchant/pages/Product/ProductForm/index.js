@@ -30,16 +30,22 @@ const ProductForm = forwardRef((props, ref) => {
         }
     }
 
-    const getVariantOptions = () => {
-        const variantOptionsObj = variantOptions
-            .filter(option => !option.deleted)
-            .map((option) => {
-                return {
-                    title: option.title,
-                    value_list: option.optionList
+    const getVariants = () => {
+        const productVariants = variants
+            .filter(variant => !variant.deleted && variant.saved)
+            .map((variant) => (
+                {
+                    title: variant.title,
+                    description: variant.description,
+                    weight: variant.weight,
+                    weight_unit: variant.weightUnit,
+                    inventory_quantity: variant.inventoryQuantity,
+                    price: variant.price,
+                    ingredient_list: variant.ingredientList,
+                    variant_options_attributes: variant.variantOptions,
                 }
-            });
-        return variantOptionsObj;
+            ));
+        return productVariants;
     }
 
     useImperativeHandle(
@@ -52,7 +58,7 @@ const ProductForm = forwardRef((props, ref) => {
                     ingredient_list: ingredientList,
                     product_type_list: productTypeList,
                     images: images,
-                    variant_options_attributes: getVariantOptions()
+                    variants_attributes: getVariants()
                 }
             }
         }),

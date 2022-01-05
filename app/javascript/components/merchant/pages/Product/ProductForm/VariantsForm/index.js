@@ -12,6 +12,7 @@ export default function VariantsForm({
 
     const formContext = useContext(FormContext);
     const [hasVariants, setHasVariants] = useState(false);
+    const [deletedVariants, setDeletedVariants] = useState([]);
 
     const variantSchema = {
         title: "",
@@ -22,7 +23,8 @@ export default function VariantsForm({
         price: "",
         ingredientList: "",
         variantOptions: [],
-        deleted: false
+        deleted: false,
+        saved: false
     }
 
     const handleAddMoreButtonClick = () => {
@@ -30,10 +32,23 @@ export default function VariantsForm({
     }
 
     const handleVariantCheckboxChange = () => {
-        setHasVariants(!hasVariants);
-        if (formContext.type === "new" && variants.length === 0) {
-            setVariants([...variants, variantSchema]);
+        const currentVariantState = !hasVariants;
+
+        if (!currentVariantState) {
+            setDeletedVariants(variants);
+            setVariants([]);
         }
+
+        if (currentVariantState && formContext.type === "new" && variants.length === 0) {
+            const tmp = deletedVariants.filter(deletedVariant => !deletedVariant.deleted)
+            if (tmp.length === 0) {
+                setVariants([...variants, variantSchema]);
+            } else {
+                setVariants(tmp);
+            }
+        }
+
+        setHasVariants(!hasVariants);
     }
 
     const handleEditButtonClick = () => {}
@@ -50,7 +65,7 @@ export default function VariantsForm({
         setVariants([...tmp]);
     }
 
-    console.log(variants);
+    // console.log(variants);
 
     return (
         <Stack>

@@ -36,7 +36,8 @@ export default function VariantOptionForm({
             const tmp = {
                 title: optionTitle,
                 optionList: optionList,
-                deleted: false
+                deleted: false,
+                saved: true
             }
             onDoneButtonClick(tmp, e.currentTarget.value);
         }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
-    Grid, Divider, Button, Stack, FormHelperText, 
+    Grid, Divider, Button, Stack, FormHelperText,
     IconButton, FormControlLabel, Checkbox
 } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -20,7 +20,8 @@ export default function VariantOptionsForm({
     const optionSchema = {
         title: "",
         optionList: "",
-        deleted: false
+        deleted: false,
+        saved: false
     }
 
     const handleAddMoreOptionButtonClick = () => {
@@ -47,7 +48,7 @@ export default function VariantOptionsForm({
             setDeletedOptions(options);
             setOptions([]);
         }
-        
+
         if (currentOptionState && formContext.type === "new" && options.length === 0) {
             const tmp = deletedOptions.filter(deletedOption => !deletedOption.deleted)
             if(tmp.length === 0){

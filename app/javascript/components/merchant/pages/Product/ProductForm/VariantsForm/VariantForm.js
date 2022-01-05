@@ -34,12 +34,12 @@ export default function VariantForm({
 
   //variantOption form
   const [variantOptions, setVariantOptions] = useState([]);
-  const [hasOptions, setHasOptions] = useState(false);
 
   useEffect(() => {
     if(onDoneButtonClick){
-      const tmp = getVariantOptions();
-      onDoneButtonClick(tmp, index);
+      const options = getFilteredOptions();
+      variant.variantOptions = options;
+      onDoneButtonClick(variant, index);
     }
   }, [variantOptions])
 
@@ -63,12 +63,12 @@ export default function VariantForm({
     setVariantPrice(e.target.value);
   }
 
-  const handleVariantIngredientListFieldChange = (e) => {
-    setVariantIngredientList(e.target.value);
+  const handleVariantIngredientListFieldChange = () => {
+    setVariantIngredientList(index);
   }
 
-  const handlevariantInventoryQuantityFieldChange = (e) => {
-    setVariantInventoryQuantity(e.target.value);
+  const handlevariantInventoryQuantityFieldChange = () => {
+    setVariantInventoryQuantity(index);
   }
 
   const handleEditButtonClick = (e) => {
@@ -84,24 +84,25 @@ export default function VariantForm({
   const handleDoneButtonClick = (e) => {
     setEditMode(false);
     if(onDoneButtonClick){
-      const tmp = getVariantOptions();
+      const tmp = getVariant();
+      tmp.saved = true;
       onDoneButtonClick(tmp, index);
     }
   }
 
   const getFilteredOptions = () => {
     const options = variantOptions
-      .filter(option => !option.deleted)
+      .filter(option => !option.deleted && option.saved)
       .map((option) => (
         {
-          title: option.title, 
+          title: option.title,
           optonList: option.optionList
         }
       ))
     return options.length === 0 ? null : options;
   }
 
-  const getVariantOptions = () => {
+  const getVariant = () => {
     return {
       title: variantTitle,
       description: variantDescription,
@@ -111,7 +112,8 @@ export default function VariantForm({
       price: variantPrice,
       ingredientList: variantIngredientList,
       variantOptions: getFilteredOptions(),
-      deleted: false
+      deleted: false,
+      saved: true
     }
   }
 
