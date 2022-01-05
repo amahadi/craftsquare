@@ -57,6 +57,7 @@ const ProductForm = forwardRef((props, ref) => {
                     tag_list: tagList,
                     ingredient_list: ingredientList,
                     product_type_list: productTypeList,
+                    status: status,
                     images: images,
                     variants_attributes: getVariants()
                 }
@@ -89,25 +90,6 @@ const ProductForm = forwardRef((props, ref) => {
         return {
             setStatus, setTagList,
             setIngredientList, setProductTypeList,
-        }
-    }
-
-    const getVariantAttributes = () => {
-        return {
-            variantTitle, variantDescription, variantWeight,
-            variantWeightUnit, variantInventoryQuantity, variantPrice,
-            variantIngredientList, variantImages,
-            variantOptions
-        }
-    }
-
-    const getVariantCallbacks = () => {
-        return {
-            setVariantTitle, setVariantDescription, setVariantWeight,
-            setVariantWeightUnit, setVariantInventoryQuantity,
-            setVariantPrice, setVariantIngredientList,
-            setVariantImages,
-            setVariantOptions
         }
     }
 

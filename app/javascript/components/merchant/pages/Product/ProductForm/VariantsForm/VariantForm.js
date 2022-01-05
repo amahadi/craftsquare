@@ -63,12 +63,12 @@ export default function VariantForm({
     setVariantPrice(e.target.value);
   }
 
-  const handleVariantIngredientListFieldChange = () => {
-    setVariantIngredientList(index);
+  const handleVariantIngredientListFieldChange = (e) => {
+    setVariantIngredientList(e.target.value);
   }
 
-  const handlevariantInventoryQuantityFieldChange = () => {
-    setVariantInventoryQuantity(index);
+  const handlevariantInventoryQuantityFieldChange = (e) => {
+    setVariantInventoryQuantity(e.target.value);
   }
 
   const handleEditButtonClick = (e) => {
@@ -96,7 +96,7 @@ export default function VariantForm({
       .map((option) => (
         {
           title: option.title,
-          optonList: option.optionList
+          value_list: option.optionList
         }
       ))
     return options.length === 0 ? null : options;
@@ -147,7 +147,7 @@ export default function VariantForm({
               </Stack>
             </Grid>
             :
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6} lg={3}>
               <Stack
                 direction="row"
                 justifyContent="end"

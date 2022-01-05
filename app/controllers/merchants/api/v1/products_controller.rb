@@ -9,12 +9,22 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
 
     def show
         @product = @shop.products.find(params[:id])
-        return respond_success_with(@product, [], [:images])
+        return respond_success_with(@product,
+            [
+                { variants: { include: [:variant_options] } }
+            ],
+            [:images]
+        )
     end
 
     def create
         @product = @shop.products.create!(product_params)
-        return respond_success_with(@product, [], [:images])
+        return respond_success_with(@product,
+            [
+                { variants: { include: [:variant_options] } }
+            ],
+            [:images]
+        )
     end
 
     def update
