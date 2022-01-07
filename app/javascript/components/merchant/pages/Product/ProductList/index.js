@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Grid, Button, Card, CardContent, Typography, CardActions, Box } from "@mui/material";
 
 import ShopContext from "../../../_contexts/shopContext";
-import { getJson } from "../../../../utils";
+import { getJson, CircularLoader } from "../../../../utils";
 import PageHeader from "../../../_components/PageHeader";
 import DataTable from "../../../_components/DataTable";
 
@@ -14,11 +14,50 @@ export default function ProductList(){
 
     const shop = useContext(ShopContext);
     const [products, setProducts] = useState([]);
+    const [pagination, setPagination] = useState(null);
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
 
     // DataTable variables
     const [filters, setFilters] = useState(null);
+    const productSchema = [
+        {
+            id: 'title',
+            numeric: false,
+            disablePadding: true,
+            label: 'Title',
+        },
+        {
+            id: 'description',
+            numeric: false,
+            disablePadding: false,
+            label: 'Description',
+        },
+        {
+            id: "status",
+            numeric: false,
+            disablePadding: false,
+            label: "Status"
+        }
+        // {
+        //     id: 'fat',
+        //     numeric: true,
+        //     disablePadding: false,
+        //     label: 'Fat (g)',
+        // },
+        // {
+        //     id: 'carbs',
+        //     numeric: true,
+        //     disablePadding: false,
+        //     label: 'Carbs (g)',
+        // },
+        // {
+        //     id: 'protein',
+        //     numeric: true,
+        //     disablePadding: false,
+        //     label: 'Protein (g)',
+        // },
+    ];
 
     const styles = {
         header: {
@@ -43,18 +82,20 @@ export default function ProductList(){
     useEffect(() => {
         let isMounted = true;
         if(loading){
-            let productsUrl = filters 
-                ? 
+            let productsUrl = filters
+                ?
                 `${process.env.MERCHANT_API}/shops/${shop.id}/products`
                 :
                 `${process.env.MERCHANT_API}/shops/${shop.id}/products?filter=filter`
             getJson(
-               productsUrl 
+               productsUrl
             )
             .then(
                 response => {
-                    if(isMounted){
+                    console.log(response);
+                    if (isMounted) {
                         setProducts(response.data);
+                        setPagination(response.pagination);
                         setLoading(false);
                     }
                 },
@@ -75,13 +116,24 @@ export default function ProductList(){
 
     return (
         <Grid container spacing={5}>
-            <PageHeader 
+            <PageHeader
                 pageType={"index"}
                 resourceName={"Products"}
                 handleAddNewButtonClick={handleAddNewButtonClick}
             />
             <Box style={styles.box}>
-                <DataTable />
+                {
+                    loading
+                        ?
+                        <CircularLoader />
+                        :
+                        <DataTable
+                            schema={productSchema}
+                            data={products}
+                            pagination={pagination}
+                            defaultOrderBy="id"
+                        />
+                }
             </Box>
         </Grid>
     );

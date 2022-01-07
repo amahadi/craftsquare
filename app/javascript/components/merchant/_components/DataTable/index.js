@@ -79,9 +79,14 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function DataTable() {
+export default function DataTable({
+  schema,
+  data,
+  pagination,
+  defaultOrderBy
+}) {
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState(defaultOrderBy);
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -152,17 +157,18 @@ export default function DataTable() {
             size={dense ? 'small' : 'medium'}
           >
             <DataTableHead
+              schema={schema}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={data.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(data, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -193,12 +199,16 @@ export default function DataTable() {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {row.title}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.description}</TableCell>
+                      <TableCell align="right">{row.status}</TableCell>
+                      {
+                        /**
+                         * <TableCell align="right">{row.carbs}</TableCell>
+                         * <TableCell align="right">{row.protein}</TableCell>
+                         */
+                      }
                     </TableRow>
                   );
                 })}
