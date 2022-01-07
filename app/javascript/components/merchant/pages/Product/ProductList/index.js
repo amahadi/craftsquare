@@ -20,42 +20,38 @@ export default function ProductList(){
 
     // DataTable variables
     const [filters, setFilters] = useState(null);
-    const productSchema = [
+
+    const columns = [
+        // { field: 'id', headerName: 'ID', width: 90 },
         {
-            id: 'title',
-            numeric: false,
-            disablePadding: true,
-            label: 'Title',
+            field: 'title',
+            headerName: 'Title',
+            width: 150,
+            type: 'string',
+            editable: true,
         },
         {
-            id: 'description',
-            numeric: false,
-            disablePadding: false,
-            label: 'Description',
+            field: 'description',
+            headerName: 'Description',
+            width: 150,
+            type: 'string',
+            editable: true,
         },
         {
-            id: "status",
-            numeric: false,
-            disablePadding: false,
-            label: "Status"
-        }
+            field: 'status',
+            headerName: 'Status',
+            type: 'string',
+            width: 110,
+            editable: true,
+        },
         // {
-        //     id: 'fat',
-        //     numeric: true,
-        //     disablePadding: false,
-        //     label: 'Fat (g)',
-        // },
-        // {
-        //     id: 'carbs',
-        //     numeric: true,
-        //     disablePadding: false,
-        //     label: 'Carbs (g)',
-        // },
-        // {
-        //     id: 'protein',
-        //     numeric: true,
-        //     disablePadding: false,
-        //     label: 'Protein (g)',
+        //     field: 'fullName',
+        //     headerName: 'Full name',
+        //     description: 'This column has a value getter and is not sortable.',
+        //     sortable: false,
+        //     width: 160,
+        //     valueGetter: (params) =>
+        //         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
         // },
     ];
 
@@ -124,15 +120,13 @@ export default function ProductList(){
             <Box style={styles.box}>
                 {
                     loading
-                        ?
-                        <CircularLoader />
-                        :
-                        <DataTable
-                            schema={productSchema}
-                            data={products}
-                            pagination={pagination}
-                            defaultOrderBy="id"
-                        />
+                    ?
+                    <CircularLoader />
+                    :
+                    <DataTable
+                        data={products}
+                        columns={columns}
+                    />
                 }
             </Box>
         </Grid>
