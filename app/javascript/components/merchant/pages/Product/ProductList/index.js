@@ -53,21 +53,30 @@ export default function ProductList(){
     })
 
     const columns = [
-        // { field: 'id', headerName: 'ID', width: 90 },
+        { name: 'id', options: { display: 'excluded' } },
         {
             name: 'title',
             label: 'Title',
-            options: {}
+            options: {
+                filter: false,
+                sort: true
+            }
         },
         {
             name: 'description',
             label: 'Description',
-            options: {}
+            options: {
+                filter: false,
+                sort: true
+            }
         },
         {
             name: 'status',
             label: 'Status',
-            options: {}
+            options: {
+                filter: true,
+                sort: true
+            }
         }
     ];
 
@@ -95,6 +104,11 @@ export default function ProductList(){
         navigate(`/merchants/shops/${shop.id}/products/new`);
     }
 
+    const handleOnRowClick = (rowData, rowMeta) => {
+        const productId = rowData[0];
+        navigate(`/merchants/shops/${shop.id}/products/${productId}`);
+    }
+
     return (
         <Grid container spacing={5}>
             <PageHeader
@@ -109,9 +123,10 @@ export default function ProductList(){
                     <CircularLoader />
                     :
                     <DataTable
-                        locading={loading}
+                        loading={loading}
                         data={products}
                         columns={columns}
+                        onRowClick={handleOnRowClick}
                     />
                 }
             </Box>

@@ -9,18 +9,42 @@ import VariantsForm from "./VariantsForm";
 
 const ProductForm = forwardRef((props, ref) => {
 
+    const { product } = props;
+
+    console.log(product);
+
+    const getVariantsFromProduct = () => {
+        if (product) {
+            return product.variants.map((variant) => {
+                return {
+                    id: variant.id,
+                    productId: variant.product_id,
+                    title: variant.title,
+                    description: variant.description,
+                    weight: variant.weight,
+                    weightUnit: variant.weight_unit,
+                    inventoryQuantiry: variant.inventory_quantity,
+                    price: variant.price,
+                    ingredientList: variant.ingredient_list && variant.ingredient_list.join(", ") || []
+                }
+            })
+        } else {
+            return [];
+        }
+    }
+
     // const { title } = props;
     // product attributes
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [tagList, setTagList] = useState("");
-    const [ingredientList, setIngredientList] = useState("");
-    const [productTypeList, setProductTypeList] = useState("");
-    const [status, setStatus] = useState("draft");
+    const [title, setTitle] = useState(product && product.title || "");
+    const [description, setDescription] = useState(product && product.description || "");
+    const [tagList, setTagList] = useState(product && product.tag_list && product.tag_list.join(", ") || "");
+    const [ingredientList, setIngredientList] = useState(product && product.ingredient_list && product.ingredient_list.join(", ") || "");
+    const [productTypeList, setProductTypeList] = useState(product && product.product_type_list && product.product_type_list.join(", ") || "");
+    const [status, setStatus] = useState(product && product.status || "draft");
     const [images, setImages] = useState([]);
 
     // variant attributes
-    const [variants, setVariants] = useState([]);
+    const [variants, setVariants] = useState(getVariantsFromProduct());
 
     const styles = {
         box: {

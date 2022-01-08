@@ -19,6 +19,7 @@ import UpdateShop from "./pages/Shop/UpdateShop";
 
 import Product from "./pages/Product";
 import CreateProduct from "./pages/Product/CreateProduct";
+import UpdateProduct from "./pages/Product/UpdateProduct";
 
 import Order from "./pages/Order";
 import Advert from "./pages/Advert";
@@ -46,7 +47,7 @@ export default function MerchantRoutes(props) {
             <Route path='/merchants/shops/' element={<ShopList />} />
             <Route path='/merchants/shops/new' element={<CreateShop />} />
             <Route path='/merchants/shops/:id' element={<UpdateShop />} />
-            
+
             {/** Merchant profile routes */}
             <Route path='merchants/profile' element={<Profile />} />
 
@@ -55,6 +56,7 @@ export default function MerchantRoutes(props) {
             {/** Product routes */}
             <Route path='/merchants/shops/:id/products' element={<Product />} />
             <Route path='/merchants/shops/:id/products/new' element={<CreateProduct />} />
+            <Route path='/merchants/shops/:id/products/:productId' element={<UpdateProduct />} />
             {/** Order routes */}
             <Route path='/merchants/shops/:id/orders' element={<Order />} />
             {/** Advert routes */}
@@ -63,7 +65,7 @@ export default function MerchantRoutes(props) {
             <Route path='/merchants/shops/:id/customers' element={<Customer />} />
             {/** Report routes */}
             <Route path='/merchants/shops/:id/reports' element={<Report />} />
-              
+
           </Routes>
         </Router>
       </ShopContext.Provider>
