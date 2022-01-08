@@ -21,38 +21,54 @@ export default function ProductList(){
     // DataTable variables
     const [filters, setFilters] = useState(null);
 
+    useEffect(() => {
+        let isMounted = true;
+        if (loading) {
+            let productsUrl = filters
+                ?
+                `${process.env.MERCHANT_API}/shops/${shop.id}/products`
+                :
+                `${process.env.MERCHANT_API}/shops/${shop.id}/products?filter=filter`
+            getJson(
+                productsUrl
+            )
+            .then(
+                response => {
+                    if (isMounted) {
+                        setProducts(response.data);
+                        setPagination(response.pagination);
+                        setLoading(false);
+                    }
+                },
+                error => {
+                    if (isMounted) {
+                        setErrors(error);
+                        console.log(error);
+                        setLoading(false);
+                    }
+                }
+            )
+        }
+        return () => { isMounted = false; }
+    })
+
     const columns = [
         // { field: 'id', headerName: 'ID', width: 90 },
         {
-            field: 'title',
-            headerName: 'Title',
-            width: 150,
-            type: 'string',
-            editable: true,
+            name: 'title',
+            label: 'Title',
+            options: {}
         },
         {
-            field: 'description',
-            headerName: 'Description',
-            width: 150,
-            type: 'string',
-            editable: true,
+            name: 'description',
+            label: 'Description',
+            options: {}
         },
         {
-            field: 'status',
-            headerName: 'Status',
-            type: 'string',
-            width: 110,
-            editable: true,
-        },
-        // {
-        //     field: 'fullName',
-        //     headerName: 'Full name',
-        //     description: 'This column has a value getter and is not sortable.',
-        //     sortable: false,
-        //     width: 160,
-        //     valueGetter: (params) =>
-        //         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-        // },
+            name: 'status',
+            label: 'Status',
+            options: {}
+        }
     ];
 
     const styles = {
@@ -75,37 +91,6 @@ export default function ProductList(){
         }
     }
 
-    useEffect(() => {
-        let isMounted = true;
-        if(loading){
-            let productsUrl = filters
-                ?
-                `${process.env.MERCHANT_API}/shops/${shop.id}/products`
-                :
-                `${process.env.MERCHANT_API}/shops/${shop.id}/products?filter=filter`
-            getJson(
-               productsUrl
-            )
-            .then(
-                response => {
-                    console.log(response);
-                    if (isMounted) {
-                        setProducts(response.data);
-                        setPagination(response.pagination);
-                        setLoading(false);
-                    }
-                },
-                error => {
-                    if(isMounted){
-                        setErrors(error);
-                        console.log(error);
-                        setLoading(false);
-                    }
-                }
-            )
-        }
-    })
-
     const handleAddNewButtonClick = () => {
         navigate(`/merchants/shops/${shop.id}/products/new`);
     }
@@ -114,7 +99,7 @@ export default function ProductList(){
         <Grid container spacing={5}>
             <PageHeader
                 pageType={"index"}
-                resourceName={"Products"}
+                resourceName={"Product"}
                 handleAddNewButtonClick={handleAddNewButtonClick}
             />
             <Box style={styles.box}>
@@ -124,6 +109,7 @@ export default function ProductList(){
                     <CircularLoader />
                     :
                     <DataTable
+                        locading={loading}
                         data={products}
                         columns={columns}
                     />
