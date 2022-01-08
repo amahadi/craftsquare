@@ -11,8 +11,6 @@ const ProductForm = forwardRef((props, ref) => {
 
     const { product } = props;
 
-    console.log(product);
-
     const getVariantsFromProduct = () => {
         if (product) {
             return product.variants.map((variant) => {
@@ -25,7 +23,10 @@ const ProductForm = forwardRef((props, ref) => {
                     weightUnit: variant.weight_unit,
                     inventoryQuantiry: variant.inventory_quantity,
                     price: variant.price,
-                    ingredientList: variant.ingredient_list && variant.ingredient_list.join(", ") || []
+                    ingredientList: variant.ingredient_list && variant.ingredient_list.join(", ") || [],
+                    variant_options: variant.variant_options,
+                    deleted: false,
+                    saved: true
                 }
             })
         } else {

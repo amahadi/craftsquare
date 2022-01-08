@@ -21,6 +21,21 @@ export default function VariantForm({
 
   const formContext = useContext(FormContext);
 
+  const getVariantOptionsFromVariant = () => {
+    if(variant){
+      return variant.variant_options.map((variant_option) => {
+        return {
+          optionTitle: variant_option.title,
+          optionList: variant_option.value_list,
+          deleted: false,
+          saved: true
+        }
+      });
+    } else {
+      return [];
+    }
+  } 
+
   const [variantTitle, setVariantTitle] = useState(variant.title);
   const [variantDescription, setVariantDescription] = useState(variant.description);
   const [variantWeight, setVariantWeight] = useState(variant.weight);
@@ -33,7 +48,7 @@ export default function VariantForm({
   const [editMode, setEditMode] = useState(formContext.type === "new");
 
   //variantOption form
-  const [variantOptions, setVariantOptions] = useState([]);
+  const [variantOptions, setVariantOptions] = useState(getVariantOptionsFromVariant());
 
   useEffect(() => {
     if(onDoneButtonClick){
@@ -107,7 +122,7 @@ export default function VariantForm({
       title: variantTitle,
       description: variantDescription,
       weight: variantWeight,
-      weigntUnit: variantWeightUnit,
+      weightUnit: variantWeightUnit,
       inventoryQuantity: variantInventoryQuantity,
       price: variantPrice,
       ingredientList: variantIngredientList,
@@ -193,8 +208,8 @@ export default function VariantForm({
           variant="outlined"
           onChange={handleVariantWeightUnitfieldChange}
         >
-          <MenuItem value="draft">kg</MenuItem>
-          <MenuItem value="active">lb</MenuItem>
+          <MenuItem value="kg">kg</MenuItem>
+          <MenuItem value="lb">lb</MenuItem>
         </Select>
         <FormHelperText>
           Weight unit used to measure the weight.

@@ -46,7 +46,7 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
             variants_attributes: [
                 :title, :description, :weight, :weight_unit,
                 :inventory_quantity, :price, :ingredient_list,
-                images: [:data, :filename, :content_type],
+                # images: [:data, :filename, :content_type],
                 variant_options_attributes: [:title, :value_list]
             ]
         )

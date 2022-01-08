@@ -11,7 +11,7 @@ export default function VariantsForm({
 }) {
 
     const formContext = useContext(FormContext);
-    const [hasVariants, setHasVariants] = useState(false);
+    const [hasVariants, setHasVariants] = useState(variants.length > 0);
     const [deletedVariants, setDeletedVariants] = useState([]);
 
     const variantSchema = {
@@ -64,8 +64,6 @@ export default function VariantsForm({
         tmp.splice(index, 1, variantObj);
         setVariants([...tmp]);
     }
-
-    // console.log(variants);
 
     return (
         <Stack>

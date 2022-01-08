@@ -14,7 +14,7 @@ export default function VariantOptionsForm({
 }){
 
     const formContext = useContext(FormContext);
-    const [hasOptions, setHasOptions] = useState(false);
+    const [hasOptions, setHasOptions] = useState(options.length > 0);
     const [deletedOptions, setDeletedOptions] = useState([]);
 
     const optionSchema = {
