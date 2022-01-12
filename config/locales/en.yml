@@ -48,5 +48,5 @@ en:
             email: Email must be provided
             password: Password must be provided
           first_name_has_valid_characters: First name is not valid, numeric and invalid name character is not allowed as first name.
-          last_name_has_valid_characters: First name is not valid, numeric and invalid name character is not allowed as first name.
+          last_name_has_valid_characters: Last name is not valid, numeric and invalid name character is not allowed as last name.
           over_valid_age_limit: You need to be at least 16 years old to sign up as a merchant.
