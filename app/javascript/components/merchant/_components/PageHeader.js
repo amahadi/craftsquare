@@ -151,7 +151,7 @@ export default function PageHeader({
             return getNewPageHeader();
         }
         else if(pageType === "update"){
-            return <h2>{`Update ${resourceName}`}</h2>
+            return getUpdatePageHeader();
         }
         else return getIndexPageHeader();
     }
