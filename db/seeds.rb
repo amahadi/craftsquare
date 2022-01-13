@@ -12,9 +12,7 @@ unless merchant.present?
     merchant = Merchant.create(
         email: "merchant@example.com",
         password: "password",
-        password_confirmation: "password",
-        first_name: "Example",
-        last_name: "Merchant"
+        password_confirmation: "password"
     )
 end
 
