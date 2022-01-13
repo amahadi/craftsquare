@@ -26,4 +26,13 @@ module LogHandler
       BACKTRACE=#{backtrace(exception).present? ? backtrace(exception) : 'N/A'}"
     )
   end
+
+  def log_fatals(exception)
+    logger.fatal(
+      "PATH=#{params[:controller]} \
+      ACTION=#{params[:action]} \
+      EXCEPTION=#{exception} \
+      BACKTRACE=#{backtrace(exception).present? ? backtrace(exception) : 'N/A'}"
+    )
+  end
 end

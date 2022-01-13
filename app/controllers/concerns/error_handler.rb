@@ -10,4 +10,9 @@ module ErrorHandler
     log_errors(exception)
     respond_validation_error(exception)
   end
+
+  def rescue_internal_server_error(exception)
+    log_fatals(exception)
+    respond_internal_server_error(exception)
+  end
 end

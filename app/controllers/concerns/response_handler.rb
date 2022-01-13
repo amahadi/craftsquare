@@ -42,4 +42,14 @@ module ResponseHandler
       }
     }
   end
+
+  def respond_internal_server_error(exception)
+    return render status: 500, json: {
+      success: false,
+      errors: {
+        message: 'Internal server error',
+        detail: exception
+      }
+    }
+  end
 end
