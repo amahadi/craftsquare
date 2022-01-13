@@ -61,7 +61,7 @@ export default function UpdateProduct() {
     return (
         <Grid container spacing={5}>
             <PageHeader
-                pageType={"details"}
+                pageType={"update"}
                 resourceName={"Product"}
                 handleSaveButtonClick={handleSaveButtonClick}
             />

@@ -21,7 +21,7 @@ const ProductForm = forwardRef((props, ref) => {
                     description: variant.description,
                     weight: variant.weight,
                     weightUnit: variant.weight_unit,
-                    inventoryQuantiry: variant.inventory_quantity,
+                    inventoryQuantity: variant.inventory_quantity,
                     price: variant.price,
                     ingredientList: variant.ingredient_list && variant.ingredient_list.join(", ") || [],
                     variant_options: variant.variant_options,
