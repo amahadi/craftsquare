@@ -1,0 +1,3 @@
+dummy_merchant:
+  email: dummy_merchant@example.com
+  encrypted_password: password
