@@ -25,7 +25,7 @@ export default function VariantForm({
     if(variant && variant.variant_options){
       return variant.variant_options.map((variant_option) => {
         return {
-          optionTitle: variant_option.title,
+          title: variant_option.title,
           optionList: variant_option.value_list,
           deleted: false,
           saved: true
@@ -36,6 +36,7 @@ export default function VariantForm({
     }
   }
 
+  const variantId = variant.id;
   const [variantTitle, setVariantTitle] = useState(variant.title);
   const [variantDescription, setVariantDescription] = useState(variant.description);
   const [variantWeight, setVariantWeight] = useState(variant.weight);
@@ -119,6 +120,7 @@ export default function VariantForm({
 
   const getVariant = () => {
     return {
+      id: variantId,
       title: variantTitle,
       description: variantDescription,
       weight: variantWeight,
@@ -134,7 +136,7 @@ export default function VariantForm({
 
   const getActionButtons = () => {
     return (
-      <Grid container spacing={2}>
+      <Grid container spacing={2} justifyContent="flex-end">
         <Grid item xs={12} md={6} lg={3}></Grid>
         <Grid item xs={12} md={6} lg={3}></Grid>
         <Grid item xs={12} md={6} lg={3}></Grid>

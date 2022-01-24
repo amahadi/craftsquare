@@ -25,7 +25,6 @@ export default function UpdateProduct() {
             .then(
                 response => {
                     if (isMounted) {
-                        console.log(response);
                         setProduct(response.data);
                         setLoading(false);
                     }
@@ -69,6 +68,7 @@ export default function UpdateProduct() {
                 product
                 ?
                 <ProductForm
+                    type="update"
                     product={product}
                     ref={getFormBodyRef}
                 />

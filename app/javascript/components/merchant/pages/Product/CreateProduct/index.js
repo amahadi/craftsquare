@@ -1,4 +1,5 @@
-import React, {useRef, useContext} from "react";
+import React, { useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import PageHeader from "../../../_components/PageHeader";
 import ProductForm from "../ProductForm";
@@ -6,14 +7,15 @@ import ProductForm from "../ProductForm";
 import ShopContext from "../../../_contexts/shopContext";
 import { postJson } from "../../../../utils";
 
-export default function CreateProduct(){
+export default function CreateProduct() {
+
+    const navigate = useNavigate();
 
     const getFormBodyRef = useRef();
     const shop = useContext(ShopContext);
 
     const handleSaveButtonClick = () => {
         const formBody = getFormBodyRef.current.getFormBody();
-        console.log(formBody);
         postJson(
             `${process.env.MERCHANT_API}/shops/${shop.id}/products`,
             { product: formBody }
@@ -21,6 +23,7 @@ export default function CreateProduct(){
         .then(
             response => {
                 console.log(response);
+                navigate(`/merchants/shops/${shop.id}/products/${response.id}`);
             },
             error => {
                 console.log(error);

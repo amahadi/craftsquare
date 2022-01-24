@@ -60,6 +60,7 @@ const ProductForm = forwardRef((props, ref) => {
             .filter(variant => !variant.deleted && variant.saved)
             .map((variant) => (
                 {
+                    id: variant.id,
                     title: variant.title,
                     description: variant.description,
                     weight: variant.weight,

@@ -13,12 +13,11 @@ export default function App(props) {
         merchant
         ?
         <Home
-          merchant={merchant} 
+          merchant={merchant}
         />
         :
         <MerchantRoutes />
       }
-      
     </div>
   );
 

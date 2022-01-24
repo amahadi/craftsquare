@@ -15,6 +15,7 @@ export default function VariantsForm({
     const [deletedVariants, setDeletedVariants] = useState([]);
 
     const variantSchema = {
+        id: null,
         title: "",
         description: "",
         weight: "",
