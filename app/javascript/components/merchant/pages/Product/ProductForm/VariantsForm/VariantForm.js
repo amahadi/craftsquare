@@ -9,7 +9,10 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 import FormContext from "../../../../_contexts/formContext";
+import ToastContext from "../../../../_contexts/ToastContext";
 import VariantOptions from "./VariantOptionsForm";
+
+import { postJson, putJson } from "../../../../../utils";
 
 export default function VariantForm({
   variant,
@@ -20,6 +23,7 @@ export default function VariantForm({
 }) {
 
   const formContext = useContext(FormContext);
+  const setToast = useContext(ToastContext);
 
   const getVariantOptionsFromVariant = () => {
     if(variant && variant.variant_options){
@@ -46,7 +50,9 @@ export default function VariantForm({
   const [variantIngredientList, setVariantIngredientList] = useState(variant.ingredientList);
   // const [variantImages, setVariantImages] = useState([]);
 
-  const [editMode, setEditMode] = useState(formContext.type === "new");
+  const [editMode, setEditMode] = useState(
+    formContext.type === "new" || (formContext.type === "update" && !variantId)
+  );
 
   //variantOption form
   const [variantOptions, setVariantOptions] = useState(getVariantOptionsFromVariant());
@@ -103,6 +109,36 @@ export default function VariantForm({
       const tmp = getVariant();
       tmp.saved = true;
       onDoneButtonClick(tmp, index);
+    } else {
+      const variantBody = getVariantBody();
+      if (variantId) {
+        putJson(
+          `${process.env.MERCHANT_API}/products/${formContext.product.id}/variants/${variantId}`,
+          { variant: variantBody }
+        )
+        .then(
+          response => {
+            console.log("updated", response);
+            setToast({ type: 'success', message: "Variant updated successfully!" });
+          },
+          error => {}
+        )
+        .catch((e) => console.log(e))
+      }
+      else {
+        postJson(
+          `${process.env.MERCHANT_API}/products/${formContext.product.id}/variants`,
+          { variants: [variantBody] }
+        )
+        .then(
+          response => {
+            console.log("created", response);
+            setToast({ type: 'success', message: "Variant added successfully!" });
+          },
+          error => { }
+        )
+        .catch((e) => console.log(e))
+      }
     }
   }
 
@@ -131,6 +167,20 @@ export default function VariantForm({
       variantOptions: getFilteredOptions(),
       deleted: false,
       saved: true
+    }
+  }
+
+  const getVariantBody = () => {
+    return {
+      id: variantId,
+      title: variantTitle,
+      description: variantDescription,
+      weight: variantWeight,
+      weight_unit: variantWeightUnit,
+      inventory_quantity: variantInventoryQuantity,
+      price: variantPrice,
+      ingredient_list: variantIngredientList,
+      variant_options_attributes: getFilteredOptions()
     }
   }
 

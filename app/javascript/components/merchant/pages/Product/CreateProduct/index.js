@@ -1,6 +1,7 @@
 import React, { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
+import ToastContext from "../../../_contexts/ToastContext";
 import PageHeader from "../../../_components/PageHeader";
 import ProductForm from "../ProductForm";
 
@@ -13,6 +14,7 @@ export default function CreateProduct() {
 
     const getFormBodyRef = useRef();
     const shop = useContext(ShopContext);
+    const setToast = useContext(ToastContext);
 
     const handleSaveButtonClick = () => {
         const formBody = getFormBodyRef.current.getFormBody();
@@ -24,6 +26,7 @@ export default function CreateProduct() {
             response => {
                 console.log(response);
                 navigate(`/merchants/shops/${shop.id}/products/${response.id}`);
+                setToast({ type: 'success', message: 'New product is created successfully!' })
             },
             error => {
                 console.log(error);

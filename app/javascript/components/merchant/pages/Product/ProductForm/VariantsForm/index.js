@@ -48,6 +48,14 @@ export default function VariantsForm({
                 setVariants(tmp);
             }
         }
+        else if (currentVariantState && formContext.type === "update" && variants.length === 0) {
+            const tmp = deletedVariants.filter(deletedVariant => !deletedVariant.deleted)
+            if (tmp.length === 0) {
+                setVariants([...variants, variantSchema]);
+            } else {
+                setVariants(tmp);
+            }
+        }
 
         setHasVariants(!hasVariants);
     }
@@ -81,47 +89,47 @@ export default function VariantsForm({
             />
             {
                 hasVariants
-                    ?
-                    <Grid container spacing={2}>
-                        {
-                            variants.map((variant, index) => (
-                                variant.deleted ? ""
-                                :
-                                <Grid
-                                    key={`GridItem__variant__${index}`}
-                                    item
-                                    xs={12} md={12} lg={12}>
-                                    <VariantForm
-                                        variant={variant}
-                                        index={index}
-                                        onEditButtonClick={handleEditButtonClick}
-                                        onDeleteButtonClick={handleDeleteButtonClick}
-                                        onDoneButtonClick={handleDoneButtonClick}
-                                    />
-                                </Grid>
-                            ))
-                        }
-                        <Grid
-                            container
-                            spacing={2}
-                            alignContent="flex-end"
-                            sx={{margin: "auto"}}
-                        >
-                            <Grid item xs={12} md={6} lg={4}>
-                                <Stack direction="row" justifyContent="start">
-                                    <Button
-                                        variant="outlined"
-                                        onClick={handleAddMoreButtonClick}
-                                    >
-                                        Add more variants
-                                    </Button>
-                                </Stack>
+                ?
+                <Grid container spacing={2}>
+                    {
+                        variants.map((variant, index) => (
+                            variant.deleted ? ""
+                            :
+                            <Grid
+                                key={`GridItem__variant__${index}`}
+                                item
+                                xs={12} md={12} lg={12}>
+                                <VariantForm
+                                    variant={variant}
+                                    index={index}
+                                    onEditButtonClick={handleEditButtonClick}
+                                    onDeleteButtonClick={formContext.type === "new" ? handleDeleteButtonClick : null}
+                                    onDoneButtonClick={formContext.type === "new" ? handleDoneButtonClick : null}
+                                />
                             </Grid>
-                            <Grid item xs={12} md={6} lg={4}></Grid>
-                            <Grid item xs={12} md={6} lg={4}></Grid>
+                        ))
+                    }
+                    <Grid
+                        container
+                        spacing={2}
+                        alignContent="flex-end"
+                        sx={{margin: "auto"}}
+                    >
+                        <Grid item xs={12} md={6} lg={4}>
+                            <Stack direction="row" justifyContent="start">
+                                <Button
+                                    variant="outlined"
+                                    onClick={handleAddMoreButtonClick}
+                                >
+                                    Add more variants
+                                </Button>
+                            </Stack>
                         </Grid>
+                        <Grid item xs={12} md={6} lg={4}></Grid>
+                        <Grid item xs={12} md={6} lg={4}></Grid>
                     </Grid>
-                    : null
+                </Grid>
+                : null
             }
 
         </Stack>
