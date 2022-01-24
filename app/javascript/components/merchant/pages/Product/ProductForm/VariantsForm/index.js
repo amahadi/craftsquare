@@ -83,23 +83,22 @@ export default function VariantsForm({
                     ?
                     <Grid container spacing={2}>
                         {
-                            variants.map((variant, index) => {
-                                return variant.deleted === false
-                                    ?
-                                    <Grid
-                                        key={`GridItem__variant__${index}`}
-                                        item
-                                        xs={12} md={12} lg={12}>
-                                        <VariantForm
-                                            variant={variant}
-                                            index={index}
-                                            onEditButtonClick={handleEditButtonClick}
-                                            onDeleteButtonClick={handleDeleteButtonClick}
-                                            onDoneButtonClick={handleDoneButtonClick}
-                                        />
-                                    </Grid>
-                                    : null
-                            })
+                            variants.map((variant, index) => (
+                                variant.deleted ? ""
+                                :
+                                <Grid
+                                    key={`GridItem__variant__${index}`}
+                                    item
+                                    xs={12} md={12} lg={12}>
+                                    <VariantForm
+                                        variant={variant}
+                                        index={index}
+                                        onEditButtonClick={handleEditButtonClick}
+                                        onDeleteButtonClick={handleDeleteButtonClick}
+                                        onDoneButtonClick={handleDoneButtonClick}
+                                    />
+                                </Grid>
+                            ))
                         }
                         <Grid
                             container

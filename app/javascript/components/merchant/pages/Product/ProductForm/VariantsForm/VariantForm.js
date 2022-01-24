@@ -22,7 +22,7 @@ export default function VariantForm({
   const formContext = useContext(FormContext);
 
   const getVariantOptionsFromVariant = () => {
-    if(variant){
+    if(variant && variant.variant_options){
       return variant.variant_options.map((variant_option) => {
         return {
           optionTitle: variant_option.title,
@@ -34,7 +34,7 @@ export default function VariantForm({
     } else {
       return [];
     }
-  } 
+  }
 
   const [variantTitle, setVariantTitle] = useState(variant.title);
   const [variantDescription, setVariantDescription] = useState(variant.description);

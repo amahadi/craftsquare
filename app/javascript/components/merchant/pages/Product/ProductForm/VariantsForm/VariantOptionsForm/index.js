@@ -66,7 +66,7 @@ export default function VariantOptionsForm({
             <Stack id="variantOptionsStackContainer">
                 {
                     options.map((option, index) => (
-                        option.deleted ? null :
+                        option.deleted ? "" :
                         <div key={`variantOption_${index}`} id={`variantOptionContainer_${index}`} >
                             <VariantOptionForm
                                 option={option}
