@@ -158,6 +158,7 @@ export default function VariantForm({
       .filter(option => !option.deleted && option.saved)
       .map((option) => (
         {
+          id: option.id,
           title: option.title,
           value_list: option.optionList
         }
@@ -191,7 +192,7 @@ export default function VariantForm({
       inventory_quantity: variantInventoryQuantity,
       price: variantPrice,
       ingredient_list: variantIngredientList,
-      // variant_options_attributes: getFilteredOptions()
+      variant_options_attributes: getFilteredOptions()
     }
   }
 

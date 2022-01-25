@@ -48,20 +48,20 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
 
     def variant_params
         params.require(:variant).permit(
-            :title, :description, :weight, :weight_unit,
+            :id, :title, :description, :weight, :weight_unit,
             :inventory_quantity, :price, :ingredient_list,
             images: [:data, :filename, :content_type],
-            variant_options_attributes: [:title, :value_list]
+            variant_options_attributes: [:id, :title, :value_list]
         )
     end
 
     def variants_params
         params.permit(
             variants: [
-                :title, :description, :weight, :weight_unit,
+                :id, :title, :description, :weight, :weight_unit,
                 :inventory_quantity, :price, :ingredient_list,
                 images: [:data, :filename, :content_type],
-                variant_options_attributes: [:title, :value_list]
+                variant_options_attributes: [:id, :title, :value_list]
             ]
         )
     end

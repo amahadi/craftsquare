@@ -79,6 +79,7 @@ export default function VariantOptionForm({
         setEditMode(false);
         if(onDoneButtonClick){
             const tmp = {
+                id: optionId,
                 title: optionTitle,
                 optionList: optionList,
                 deleted: false,

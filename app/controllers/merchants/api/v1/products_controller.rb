@@ -53,7 +53,7 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
     end
 
     def parse_variant_images
-        params[:product][:variants_attributes].each do |variant|
+        params[:product][:variants_attributes]&.each do |variant|
             variant[:images] = image_params_from(variant[:images])
         end
     end

@@ -85,7 +85,7 @@ const ProductForm = forwardRef((props, ref) => {
                     product_type_list: productTypeList,
                     status: status,
                     images: images,
-                    variants_attributes: getVariants()
+                    variants_attributes: props.type === "new" ? getVariants() : null
                 }
             }
         }),
