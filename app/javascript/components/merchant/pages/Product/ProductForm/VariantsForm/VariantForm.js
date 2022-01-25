@@ -29,6 +29,7 @@ export default function VariantForm({
     if(variant && variant.variant_options){
       return variant.variant_options.map((variant_option) => {
         return {
+          id: variant_option.ud,
           title: variant_option.title,
           optionList: variant_option.value_list,
           deleted: false,
@@ -103,6 +104,38 @@ export default function VariantForm({
     }
   }
 
+  const addNewVariant = () => {
+    const variantBody = getVariantBody();
+    postJson(
+      `${process.env.MERCHANT_API}/products/${formContext.product.id}/variants`,
+      { variants: [variantBody] }
+    )
+    .then(
+      response => {
+        console.log("created", response);
+        setToast({ type: 'success', message: "Variant added successfully!" });
+      },
+      error => { }
+    )
+    .catch((e) => console.log(e))
+  }
+
+  const updateExistingVariant = () => {
+    const variantBody = getVariantBody();
+    putJson(
+      `${process.env.MERCHANT_API}/products/${formContext.product.id}/variants/${variantId}`,
+      { variant: variantBody }
+    )
+    .then(
+      response => {
+        console.log("updated", response);
+        setToast({ type: 'success', message: "Variant updated successfully!" });
+      },
+      error => { }
+    )
+    .catch((e) => console.log(e))
+  }
+
   const handleDoneButtonClick = (e) => {
     setEditMode(false);
     if(onDoneButtonClick){
@@ -110,34 +143,12 @@ export default function VariantForm({
       tmp.saved = true;
       onDoneButtonClick(tmp, index);
     } else {
-      const variantBody = getVariantBody();
+
       if (variantId) {
-        putJson(
-          `${process.env.MERCHANT_API}/products/${formContext.product.id}/variants/${variantId}`,
-          { variant: variantBody }
-        )
-        .then(
-          response => {
-            console.log("updated", response);
-            setToast({ type: 'success', message: "Variant updated successfully!" });
-          },
-          error => {}
-        )
-        .catch((e) => console.log(e))
+        updateExistingVariant();
       }
       else {
-        postJson(
-          `${process.env.MERCHANT_API}/products/${formContext.product.id}/variants`,
-          { variants: [variantBody] }
-        )
-        .then(
-          response => {
-            console.log("created", response);
-            setToast({ type: 'success', message: "Variant added successfully!" });
-          },
-          error => { }
-        )
-        .catch((e) => console.log(e))
+        addNewVariant();
       }
     }
   }
@@ -375,6 +386,7 @@ export default function VariantForm({
           </Grid>
         </Grid>
         <VariantOptions
+          variantId={variantId}
           options={variantOptions}
           setOptions={setVariantOptions}
         />

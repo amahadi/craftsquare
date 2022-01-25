@@ -43,6 +43,7 @@ export default function UpdateProduct() {
 
     const handleSaveButtonClick = () => {
         setLoading(true);
+        let isMounted = true;
         const formBody = getFormBodyRef.current.getFormBody();
         putJson(
             `${process.env.MERCHANT_API}/shops/${shop.id}/products/${productId}`,
@@ -61,6 +62,7 @@ export default function UpdateProduct() {
             }
         )
         .catch((e) => console.log(e))
+        return () => { isMounted = false; }
     }
 
     return (
