@@ -3,12 +3,15 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
     before_action :shop
 
     def index
-        @products = @shop.products
+        @products = @shop.products.includes(:variants).where(variants: { status: 'active' })
         return respond_success_with(@products, [:variants], [:images])
     end
 
     def show
         @product = @shop.products.find(params[:id])
+        @product.variants = @product.variants.where(status: 'active')
+            .includes(:variant_options)
+            .where(variant_options: { status: 'active' })
         return respond_success_with(@product,
             [
                 { variants: { include: [:variant_options] } }
@@ -30,6 +33,13 @@ class Merchants::Api::V1::ProductsController < Merchants::Api::V1::BaseControlle
     def update
         @product = @shop.products.find(params[:id])
         @product.update(product_params)
+        @product.reload
+        return respond_success_with(@product, [], [:images])
+    end
+
+    def destroy
+        @product = @shop.products.find(params[:id])
+        @product.update(status: 'deleted')
         @product.reload
         return respond_success_with(@product, [], [:images])
     end

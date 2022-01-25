@@ -3,7 +3,7 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
     before_action :product
 
     def index
-        @variants = @product.variants
+        @variants = @product.variants.active
         return respond_success_with(
             @variants, [:variant_options], [:images]
         )
@@ -40,8 +40,10 @@ class Merchants::Api::V1::VariantsController < Merchants::Api::V1::BaseControlle
 
     def destroy
         @variant = @product.variants.find(params[:id])
-        @variant.destroy
-        return respond_success_with(@variant)
+        @variant.update!(status: 'deleted')
+        @variant.variant_options.each { |o| o.update!(status: 'deleted') }
+        @variant.reload
+        return respond_success_with(@variant, [:variant_options], [:images])
     end
 
     private

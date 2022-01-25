@@ -103,7 +103,7 @@ export default function VariantsForm({
                                     variant={variant}
                                     index={index}
                                     onEditButtonClick={handleEditButtonClick}
-                                    onDeleteButtonClick={formContext.type === "new" ? handleDeleteButtonClick : null}
+                                    onDeleteButtonClick={handleDeleteButtonClick}
                                     onDoneButtonClick={formContext.type === "new" ? handleDoneButtonClick : null}
                                 />
                             </Grid>

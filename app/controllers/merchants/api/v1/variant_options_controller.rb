@@ -14,6 +14,13 @@ class Merchants::Api::V1::VariantOptionsController < Merchants::Api::V1::BaseCon
     return respond_success_with(@variant_option)
   end
 
+  def destroy
+    @variant_option = @variant.variant_options.find(params[:id])
+    @variant_option.update!(status: 'deleted')
+    @variant_option.reload
+    return respond_success_with(@variant_option)
+  end
+
   private
 
   def variant_option_params

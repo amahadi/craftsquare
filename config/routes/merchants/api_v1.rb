@@ -13,7 +13,7 @@ namespace :merchants do
         resources :variant_configurations
       end
       resources :variants, only: [] do
-        resources :variant_options, only: [:create, :update]
+        resources :variant_options, only: [:create, :update, :destroy]
       end
     end
   end

@@ -8,6 +8,7 @@ class CreateVariants < ActiveRecord::Migration[6.1]
       t.string :weight_unit
       t.integer :inventory_quantity
       t.decimal :price
+      t.integer :status, default: 0 # active, deleted
       t.timestamps
 
       # taggable -- ingredients

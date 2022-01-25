@@ -11,6 +11,6 @@ class Product < ApplicationRecord
 
     has_many_base64_attached :images
 
-    enum status: [:draft, :active, :inactive]
+    enum status: [:draft, :active, :inactive, :deleted]
 
 end

@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_201557) do
   create_table "variant_options", force: :cascade do |t|
     t.bigint "variant_id"
     t.string "title"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["variant_id"], name: "index_variant_options_on_variant_id"
@@ -217,6 +218,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_201557) do
     t.string "weight_unit"
     t.integer "inventory_quantity"
     t.decimal "price"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_variants_on_product_id"

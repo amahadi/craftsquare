@@ -82,7 +82,7 @@ export default function VariantOptionsForm({
                                 option={option}
                                 index={index}
                                 onDoneButtonClick={variantId ? null : handleDoneButtonClick}
-                                onDeleteButtonClick={variantId ? null : handleDeleteButtonClick}
+                                onDeleteButtonClick={handleDeleteButtonClick}
                             />
                         </div>
                     ))

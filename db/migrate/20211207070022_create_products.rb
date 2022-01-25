@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.belongs_to :shop
       t.string :title
       t.string :description
-      t.integer :status, default: 0 # draft, active, inactive
+      t.integer :status, default: 0 # draft, active, inactive, deleted
       t.datetime :published_at
       t.timestamps
 

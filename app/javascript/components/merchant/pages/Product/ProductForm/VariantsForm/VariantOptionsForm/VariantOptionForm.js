@@ -9,7 +9,7 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import FormContext from "../../../../../_contexts/formContext";
 import ToastContext from "../../../../../_contexts/ToastContext";
 
-import { postJson, putJson } from "../../../../../../utils";
+import { postJson, putJson, deleteJson } from "../../../../../../utils";
 
 export default function VariantOptionForm({
     variantId,
@@ -102,8 +102,24 @@ export default function VariantOptionForm({
         }
     }
 
+    const deleteExistingOption = () => {
+        deleteJson(
+            `${process.env.MERCHANT_API}/variants/${variantId}/variant_options/${optionId}`
+        )
+        .then(
+            response => {
+                setToast({ type: 'success', message: "Variant option deleted successfully!" });
+            },
+            error => { }
+        )
+        .catch((e) => console.log(e))
+    }
+
     const handleVariantOptionDeleteButtonClick = (e) => {
-        if(onDeleteButtonClick){
+        if (optionId) {
+            deleteExistingOption();
+            onDeleteButtonClick(e.currentTarget.value);
+        } else {
             onDeleteButtonClick(e.currentTarget.value);
         }
     }

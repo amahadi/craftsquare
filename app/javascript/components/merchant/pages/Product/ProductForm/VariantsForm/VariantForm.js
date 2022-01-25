@@ -12,7 +12,7 @@ import FormContext from "../../../../_contexts/formContext";
 import ToastContext from "../../../../_contexts/ToastContext";
 import VariantOptions from "./VariantOptionsForm";
 
-import { postJson, putJson } from "../../../../../utils";
+import { postJson, putJson, deleteJson } from "../../../../../utils";
 
 export default function VariantForm({
   variant,
@@ -98,8 +98,25 @@ export default function VariantForm({
     setEditMode(true);
   }
 
+  const deleteExistingVariant = () => {
+    deleteJson(
+      `${process.env.MERCHANT_API}/products/${formContext.product.id}/variants/${variantId}`
+    )
+    .then(
+      response => {
+        console.log("deleted", response);
+        setToast({ type: 'success', message: "Variant deleted successfully!" });
+      },
+      error => { }
+    )
+    .catch((e) => console.log(e))
+  }
+
   const handleDeleteButtonClick = (e) => {
-    if(onDeleteButtonClick){
+    if (variantId){
+      deleteExistingVariant();
+      onDeleteButtonClick(e.currentTarget.value);
+    } else {
       onDeleteButtonClick(e.currentTarget.value);
     }
   }
