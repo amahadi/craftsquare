@@ -12,7 +12,7 @@ const ProductForm = forwardRef((props, ref) => {
     const { product } = props;
 
     const getVariantsFromProduct = () => {
-        if (product) {
+        if (product && product.variants) {
             return product.variants.map((variant) => {
                 return {
                     id: variant.id,

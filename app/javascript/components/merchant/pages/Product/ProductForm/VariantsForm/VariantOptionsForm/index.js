@@ -9,6 +9,7 @@ import VariantOptionForm from "./VariantOptionForm";
 import FormContext from "../../../../../_contexts/formContext";
 
 export default function VariantOptionsForm({
+    variantId,
     options,
     setOptions
 }){
@@ -77,10 +78,11 @@ export default function VariantOptionsForm({
                         option.deleted ? "" :
                         <div key={`variantOption_${index}`} id={`variantOptionContainer_${index}`} >
                             <VariantOptionForm
+                                variantId={variantId}
                                 option={option}
                                 index={index}
-                                onDoneButtonClick={handleDoneButtonClick}
-                                onDeleteButtonClick={handleDeleteButtonClick}
+                                onDoneButtonClick={variantId ? null : handleDoneButtonClick}
+                                onDeleteButtonClick={variantId ? null : handleDeleteButtonClick}
                             />
                         </div>
                     ))

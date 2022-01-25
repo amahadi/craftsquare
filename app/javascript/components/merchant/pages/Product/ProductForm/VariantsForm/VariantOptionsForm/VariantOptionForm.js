@@ -7,8 +7,12 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 import FormContext from "../../../../../_contexts/formContext";
+import ToastContext from "../../../../../_contexts/ToastContext";
+
+import { postJson, putJson } from "../../../../../../utils";
 
 export default function VariantOptionForm({
+    variantId,
     option,
     index,
     onEditButtonClick=null,
@@ -17,6 +21,7 @@ export default function VariantOptionForm({
 }) {
 
     const formContext = useContext(FormContext);
+    const setToast = useContext(ToastContext);
 
     const optionId = option.id;
     const [optionTitle, setOptionTitle] = useState(option.title);
@@ -33,6 +38,43 @@ export default function VariantOptionForm({
         setOptionList(e.target.value);
     }
 
+    const getOptionBody = () => {
+        return {
+            title: optionTitle,
+            value_list: optionList
+        }
+    }
+
+    const addNewOption = () => {
+        const optionBody = getOptionBody();
+        postJson(
+            `${process.env.MERCHANT_API}/variants/${variantId}/variant_options`,
+            optionBody
+        )
+        .then(
+            response => {
+                setToast({ type: 'success', message: "Variant option added successfully!" });
+            },
+            error => { }
+        )
+        .catch((e) => console.log(e))
+    }
+
+    const updateExistingOption = () => {
+        const optionBody = getOptionBody();
+        putJson(
+            `${process.env.MERCHANT_API}/variants/${variantId}/variant_options/${optionId}`,
+            optionBody
+        )
+        .then(
+            response => {
+                setToast({ type: 'success', message: "Variant option updated successfully!" });
+            },
+            error => {}
+        )
+        .catch((e) => console.log(e))
+    }
+
     const handleOnVariantDoneButton = (e) => {
         setEditMode(false);
         if(onDoneButtonClick){
@@ -43,6 +85,12 @@ export default function VariantOptionForm({
                 saved: true
             }
             onDoneButtonClick(tmp, e.currentTarget.value);
+        } else {
+            if (optionId) {
+                updateExistingOption();
+            } else {
+                addNewOption();
+            }
         }
     }
 

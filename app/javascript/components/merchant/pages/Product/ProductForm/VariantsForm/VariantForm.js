@@ -191,7 +191,7 @@ export default function VariantForm({
       inventory_quantity: variantInventoryQuantity,
       price: variantPrice,
       ingredient_list: variantIngredientList,
-      variant_options_attributes: getFilteredOptions()
+      // variant_options_attributes: getFilteredOptions()
     }
   }
 

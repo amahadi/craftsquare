@@ -12,6 +12,9 @@ namespace :merchants do
       resources :adverts, only: [] do
         resources :variant_configurations
       end
+      resources :variants, only: [] do
+        resources :variant_options, only: [:create, :update]
+      end
     end
   end
 end
