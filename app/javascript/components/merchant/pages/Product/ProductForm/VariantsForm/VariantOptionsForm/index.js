@@ -57,6 +57,14 @@ export default function VariantOptionsForm({
                 setOptions(tmp);
             }
         }
+        else if (currentOptionState && formContext.type === "update" && options.length === 0) {
+            const tmp = deletedOptions.filter(deletedOption => !deletedOption.deleted)
+            if (tmp.length === 0) {
+                setOptions([...options, optionSchema]);
+            } else {
+                setOptions(tmp);
+            }
+        }
 
         setHasOptions(!hasOptions);
     }
@@ -95,7 +103,6 @@ export default function VariantOptionsForm({
                     />
                 }
             />
-            {hasOptions ? getOptionComponents() : null}
             <FormHelperText>
                 {
                     "List the different options available for a specific variant.\
@@ -106,13 +113,21 @@ export default function VariantOptionsForm({
                     with a comma(,)."
                 }
             </FormHelperText>
-            <Button
-                variant="text"
-                startIcon={<AddCircleOutlineIcon />}
-                onClick={handleAddMoreOptionButtonClick}
-            >
-                Add more options
-            </Button>
+            {
+                hasOptions
+                ?
+                <>
+                    {getOptionComponents()}
+                    <Button
+                        variant="text"
+                        startIcon={<AddCircleOutlineIcon />}
+                        onClick={handleAddMoreOptionButtonClick}
+                    >
+                        Add more options
+                    </Button>
+                </>
+                : null
+            }
             <Divider />
         </Stack>
     )

@@ -18,9 +18,12 @@ export default function VariantOptionForm({
 
     const formContext = useContext(FormContext);
 
+    const optionId = option.id;
     const [optionTitle, setOptionTitle] = useState(option.title);
     const [optionList, setOptionList] = useState(option.optionList);
-    const [editMode, setEditMode] = useState(formContext && formContext.type === "new");
+    const [editMode, setEditMode] = useState(
+        formContext && formContext.type === "new" || (formContext.type === "update" && !optionId)
+    );
 
     const handleVariantOptionTitleFieldChange = (e) => {
        setOptionTitle(e.target.value);

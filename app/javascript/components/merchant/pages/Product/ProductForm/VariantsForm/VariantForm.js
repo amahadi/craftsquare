@@ -29,7 +29,7 @@ export default function VariantForm({
     if(variant && variant.variant_options){
       return variant.variant_options.map((variant_option) => {
         return {
-          id: variant_option.ud,
+          id: variant_option.id,
           title: variant_option.title,
           optionList: variant_option.value_list,
           deleted: false,
