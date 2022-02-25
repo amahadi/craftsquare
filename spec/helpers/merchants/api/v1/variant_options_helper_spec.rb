@@ -11,5 +11,5 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe Merchants::Api::V1::VariantOptionsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # pending "add some examples to (or delete) #{__FILE__}"
 end
