@@ -10,6 +10,7 @@ class Customer < ActiveRecord::Base
   include HomemadeInstanceMethods::Customer
 
   has_many :addresses, dependent: :destroy
+  has_many :notifications
 
   accepts_nested_attributes_for :addresses
 end

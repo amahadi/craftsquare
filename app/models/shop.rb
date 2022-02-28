@@ -2,6 +2,7 @@ class Shop < ApplicationRecord
   belongs_to :merchant
   has_many :products
   has_many :adverts
+  has_many :notifications
 
   include HomemadeInstanceMethods::Shop
 
