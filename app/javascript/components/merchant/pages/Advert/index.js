@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default function Advert(){
+import AdvertList from "./AdvertList";
+
+export default function Advert() {
 
     return (
-        <h2>
-            Hello Advert!
-        </h2>
-    )
+        <AdvertList />
+    );
 }
