@@ -4,6 +4,9 @@ import {
   InputLabel
 } from "@mui/material";
 
+import PickUpTimeForm from "./PickUpTimeForm";
+import DropOffTimeForm from "./DropOffTimeForm";
+
 export default function MainForm({
   attributes,
   callbacks
@@ -74,6 +77,38 @@ export default function MainForm({
           />
         </Stack>
       </Paper>
+      {
+
+        attributes.deliveryMethod === "pick_up_only" || attributes.deliveryMethod === "both"
+        ?
+          <Paper
+            sx={{
+              marginTop: "16px",
+              padding: "20px",
+              width: "100%"
+            }}
+          >
+            <PickUpTimeForm />
+          </Paper>
+        :
+          null
+      }
+      {
+        attributes.deliveryMethod === "both" || attributes.deliveryMethod === "drop_off_only"
+        ?
+          <Paper
+            sx={{
+              marginTop: "16px",
+              padding: "20px",
+              width: "100%"
+            }}
+          >
+            <DropOffTimeForm />
+          </Paper>
+        :
+          null
+      }
+
     </Stack>
 
   );
