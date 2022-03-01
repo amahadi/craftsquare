@@ -24,9 +24,8 @@ export default function CreateAdvert() {
     )
       .then(
         response => {
-          console.log(response);
           navigate(`/merchants/shops/${shop.id}/adverts/${response.id}`);
-          setToast({ type: 'success', message: 'New product is created successfully!' })
+          setToast({ type: 'success', message: 'New advert is created successfully!' })
         },
         error => {
           console.log(error);
