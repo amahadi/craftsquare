@@ -23,6 +23,7 @@ import UpdateProduct from "./pages/Product/UpdateProduct";
 
 import Order from "./pages/Order";
 import Advert from "./pages/Advert";
+import CreateAdvert from "./pages/Advert/CreateAdvert";
 import Customer from "./pages/Customer";
 import Report from "./pages/Report";
 
@@ -61,6 +62,7 @@ export default function MerchantRoutes(props) {
             <Route path='/merchants/shops/:id/orders' element={<Order />} />
             {/** Advert routes */}
             <Route path='/merchants/shops/:id/adverts' element={<Advert />} />
+            <Route path='/merchants/shops/:id/adverts/new' element={<CreateAdvert />} />
             {/** Customer routes */}
             <Route path='/merchants/shops/:id/customers' element={<Customer />} />
             {/** Report routes */}
