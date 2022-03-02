@@ -5,6 +5,7 @@ import { Box, Grid, Stack, Button } from "@mui/material";
 import FormContext from "../../../_contexts/formContext";
 import MainForm from "./MainForm";
 import MiscFrom from "./MiscForm";
+import DeliveryDateTimesForm from "./DeliveryDateTimesForm";
 import ProductForm from "./ProductForm";
 
 const AdvertForm = forwardRef((props, ref) => {
@@ -15,8 +16,6 @@ const AdvertForm = forwardRef((props, ref) => {
   const [description, setDescription] = useState(advert && advert.description || "");
   const [startDate, setStartDate] = useState(advert && advert.start_date || Date());
   const [endDate, setEndDate] = useState(advert && advert.end_date || Date());
-  const [pickUpTimes, setPickUpTime] = useState(advert && advert.pic_up_times || []);
-  const [dropOffTimes, setDropOffTimes] = useState(advert && advert.drop_off_times || []);
 
   // advert misc attributes
   const [status, setStatus] = useState(advert && advert.status || "draft");
@@ -25,6 +24,9 @@ const AdvertForm = forwardRef((props, ref) => {
 
   // product attributes
   const [product, setProduct] = useState(advert && advert.selected_product || "");
+
+  // delivery date times attributes
+  const [deliveryDateTimes, setDeliveryDateTimes] = useState(advert && advert.delivery_date_times || []);
 
 
   useImperativeHandle(
@@ -53,16 +55,14 @@ const AdvertForm = forwardRef((props, ref) => {
     return {
       title, description,
       startDate, endDate,
-      deliveryMethod,
-      pickUpTimes, dropOffTimes
+      deliveryMethod
     }
   }
 
   const getMainCallbacks = () => {
     return {
       setTitle, setDescription,
-      setStartDate, setEndDate,
-      setPickUpTime, setDropOffTimes
+      setStartDate, setEndDate
     }
   }
 
@@ -96,6 +96,12 @@ const AdvertForm = forwardRef((props, ref) => {
                   callbacks={getMiscCallbacks()}
                 />
               </Stack>
+            </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={12} lg={12}>
+              <DeliveryDateTimesForm
+              />
             </Grid>
           </Grid>
           <Grid container spacing={2}>
