@@ -9,19 +9,19 @@ class Merchants::Api::V1::AdvertsController < Merchants::Api::V1::BaseController
 
   def show
     @advert = @shop.adverts.find(params[:id])
-    return respond_success_with(@advert, [], [:selected_product])
+    return respond_success_with(@advert, [:delivery_date_times], [:selected_product])
   end
 
   def create
     @advert = @shop.adverts.create!(advert_params)
-    return respond_success_with(@advert, [], [:selected_product])
+    return respond_success_with(@advert, [:delivery_date_times], [:selected_product])
   end
 
   def update
     @advert = @shop.adverts.find(params[:id])
     @advert.update(advert_params)
     @advert.reload
-    return respond_success_with(@advert, [], [:selected_product])
+    return respond_success_with(@advert, [:delivery_date_times], [:selected_product])
   end
 
   def destroy
@@ -36,8 +36,8 @@ class Merchants::Api::V1::AdvertsController < Merchants::Api::V1::BaseController
     params.require(:advert).permit(
       :product_id, :title, :description, :start_date, :end_date, :status,
       :delivery_method, :note,
-      pick_up_times: [:day, :from, :to, :delivery_method],
-      variant_configurations_attributes: [:id, :variant_id, :option_list]
+      variant_configurations_attributes: [:id, :variant_id, :option_list],
+      delivery_date_times_attributes: [:id, :day_of_week, :from_time, :to_time, :delivery_type]
     )
   end
 
