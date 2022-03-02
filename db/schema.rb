@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_003813) do
 
   create_table "delivery_date_times", force: :cascade do |t|
     t.bigint "advert_id"
-    t.string "day_of_week"
+    t.integer "weekday"
     t.time "from_time"
     t.time "to_time"
     t.integer "delivery_type"

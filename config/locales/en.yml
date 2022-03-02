@@ -19,3 +19,11 @@ en:
           first_name_has_valid_characters: First name is not valid, numeric and invalid name character is not allowed as first name.
           last_name_has_valid_characters: Last name is not valid, numeric and invalid name character is not allowed as last name.
           over_valid_age_limit: You need to be at least 16 years old to sign up as a merchant.
+      delivery_date_time:
+        validation:
+          presence:
+            weekday: Day of week must be provided
+            from_time: From time must be provided
+            to_time: To time must be provided
+            delivery_type: At least one delivery type must be provided
+          from_time_should_be_less_than_to_time: From time should be less than to time
