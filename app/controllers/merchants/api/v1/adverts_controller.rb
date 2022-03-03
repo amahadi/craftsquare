@@ -37,7 +37,7 @@ class Merchants::Api::V1::AdvertsController < Merchants::Api::V1::BaseController
       :product_id, :title, :description, :start_date, :end_date, :status,
       :delivery_method, :note,
       variant_configurations_attributes: [:id, :variant_id, :option_list],
-      delivery_date_times_attributes: [:id, :day_of_week, :from_time, :to_time, :delivery_type]
+      delivery_date_times_attributes: [:id, :weekday, :from_time, :to_time, :delivery_type]
     )
   end
 

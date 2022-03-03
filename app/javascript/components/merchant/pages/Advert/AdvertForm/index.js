@@ -5,13 +5,30 @@ import { Box, Grid, Stack, Button } from "@mui/material";
 import FormContext from "../../../_contexts/formContext";
 import MainForm from "./MainForm";
 import MiscFrom from "./MiscForm";
-import DeliveryDateTimesForm from "./DeliveryDateTimesForm";
+import DeliveryDateTimes from "./DeliveryDateTimesForm";
 import ProductForm from "./ProductForm";
 
 const AdvertForm = forwardRef((props, ref) => {
   const { advert } = props;
 
+  const getDeliveryDateTimesFromAdvert = () => {
+    if (advert && advert.delivery_date_times) {
+      return advert.delivery_date_times.map((delivery_date_time) => {
+        return {
+          id: delivery_date_time.id,
+          weekday: delivery_date_time.weekday,
+          fromTime: delivery_date_time.from_time,
+          toTime: delivery_date_time.to_time,
+          deliveryType: delivery_date_time.delivery_type
+        }
+      })
+    } else {
+      return []
+    }
+  }
+
   // advert attributes
+  const advertId = advert && advert.id;
   const [title, setTitle] = useState(advert && advert.title || "");
   const [description, setDescription] = useState(advert && advert.description || "");
   const [startDate, setStartDate] = useState(advert && advert.start_date || Date());
@@ -26,7 +43,7 @@ const AdvertForm = forwardRef((props, ref) => {
   const [product, setProduct] = useState(advert && advert.selected_product || "");
 
   // delivery date times attributes
-  const [deliveryDateTimes, setDeliveryDateTimes] = useState(advert && advert.delivery_date_times || []);
+  const [deliveryDateTimes, setDeliveryDateTimes] = useState(getDeliveryDateTimesFromAdvert());
 
 
   useImperativeHandle(
@@ -100,7 +117,10 @@ const AdvertForm = forwardRef((props, ref) => {
           </Grid>
           <Grid container spacing={2}>
             <Grid item xs={12} md={12} lg={12}>
-              <DeliveryDateTimesForm
+              <DeliveryDateTimes
+                advertId={advertId}
+                deliveryDateTimes={deliveryDateTimes}
+                setDeliveryDateTimes={setDeliveryDateTimes}
               />
             </Grid>
           </Grid>
