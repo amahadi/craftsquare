@@ -6,6 +6,7 @@ import {
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import FormContext from "../../../../_contexts/formContext";
+import DeliveryDateTimeForm from "./DeliveryDateTimeForm";
 
 export default function DeliveryDateTimes(
   advertId,
@@ -14,7 +15,7 @@ export default function DeliveryDateTimes(
 ) {
 
   const formContext = useContext(FormContext);
-  const [hadDeliveryDateTimes, setHasDeliveryDateTimes] = useState(deliveryDateTimes.length > 0);
+  const [hasDeliveryDateTimes, setHasDeliveryDateTimes] = useState(deliveryDateTimes.length > 0);
   const [deletedDeliveryDateTimes, setDeletedDeliveryDateTimes] = useState([]);
 
   const DeliveryDateTimeSchema = {
@@ -27,7 +28,7 @@ export default function DeliveryDateTimes(
   }
 
   const handleAddMoreDeliveryDateTimeButtonClick = () => {
-    setOptions([...deliveryDateTimes, DeliveryDateTimeSchema])
+    setDeliveryDateTimes([...deliveryDateTimes, DeliveryDateTimeSchema])
   }
 
   const handleDeleteButtonClick = (index) => {
@@ -58,7 +59,17 @@ export default function DeliveryDateTimes(
           //       />
           //     </div>
           // ))
-          "Delivery Date Times components"
+          deliveryDateTimes.map((deliveryDateTime, index) => {
+            deliveryDateTime.deleted ? "" :
+              <DeliveryDateTimeForm
+                advertId={advertId}
+                deliveryDateTime={deliveryDateTime}
+                index={index}
+                onDeleteButtonClick={onDeleteButtonClick}
+                onDoneButtonClick={onDoneButtonClick}
+              />
+          })
+          // "Delivery Date Times components"
         }
       </Stack>
     );
@@ -77,7 +88,7 @@ export default function DeliveryDateTimes(
         }
       </FormHelperText>
       {
-        hadDeliveryDateTimes
+        hasDeliveryDateTimes
           ?
           <React.Fragment>
             {getDeliveryDateTimeComponents()}
@@ -89,7 +100,7 @@ export default function DeliveryDateTimes(
               Add more delivery date times
             </Button>
           </React.Fragment>
-          : null
+          : setDeliveryDateTimes([...deliveryDateTimes, DeliveryDateTimeSchema])
       }
     </Stack>
   );
