@@ -11,6 +11,15 @@ import DeliveryDateTimes from "./DeliveryDateTimes";
 const AdvertForm = forwardRef((props, ref) => {
   const { advert } = props;
 
+  const deliveryDateTimeSchema = {
+    weekday: "",
+    fromTime: "",
+    toTime: "",
+    deliveryType: "",
+    deleted: false,
+    saved: false
+  }
+
   const getDeliveryDateTimesFromAdvert = () => {
     if (advert && advert.delivery_date_times) {
       return advert.delivery_date_times.map((delivery_date_time) => {
@@ -23,7 +32,7 @@ const AdvertForm = forwardRef((props, ref) => {
         }
       })
     } else {
-      return []
+      return [deliveryDateTimeSchema];
     }
   }
 
@@ -40,7 +49,7 @@ const AdvertForm = forwardRef((props, ref) => {
   const [note, setNote] = useState(advert && advert.note || "");
 
   // product attributes
-  const [product, setProduct] = useState(advert && advert.selected_product || "");
+  const [product, setProduct] = useState(advert && advert.selected_product || {});
 
   // delivery date times attributes
   const [deliveryDateTimes, setDeliveryDateTimes] = useState(getDeliveryDateTimesFromAdvert());
@@ -120,6 +129,7 @@ const AdvertForm = forwardRef((props, ref) => {
               <DeliveryDateTimes
                 advertId={advertId}
                 deliveryDateTimes={deliveryDateTimes}
+                deliveryDateTimeSchema={deliveryDateTimeSchema}
                 setDeliveryDateTimes={setDeliveryDateTimes}
               />
             </Grid>

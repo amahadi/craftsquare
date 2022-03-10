@@ -8,27 +8,15 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FormContext from "../../../../_contexts/formContext";
 import DeliveryDateTimeForm from "./DeliveryDateTimeForm";
 
-export default function DeliveryDateTimes(
-  advertId,
-  deliveryDateTimes,
-  setDeliveryDateTimes
-) {
+export default function DeliveryDateTimes(props) {
+
+  const { advertId, deliveryDateTimes, deliveryDateTimeSchema, setDeliveryDateTimes } = props;
 
   const formContext = useContext(FormContext);
-  const [hasDeliveryDateTimes, setHasDeliveryDateTimes] = useState(deliveryDateTimes.length > 0);
   const [deletedDeliveryDateTimes, setDeletedDeliveryDateTimes] = useState([]);
 
-  const DeliveryDateTimeSchema = {
-    weekday: "",
-    fromTime: "",
-    toTime: "",
-    deliveryType: "",
-    deleted: false,
-    saved: false
-  }
-
   const handleAddMoreDeliveryDateTimeButtonClick = () => {
-    setDeliveryDateTimes([...deliveryDateTimes, DeliveryDateTimeSchema])
+    setDeliveryDateTimes([...deliveryDateTimes, deliveryDateTimeSchema])
   }
 
   const handleDeleteButtonClick = (index) => {
@@ -59,17 +47,18 @@ export default function DeliveryDateTimes(
           //       />
           //     </div>
           // ))
-          deliveryDateTimes.map((deliveryDateTime, index) => {
+          deliveryDateTimes.map((deliveryDateTime, index) => (
             deliveryDateTime.deleted ? "" :
-              <DeliveryDateTimeForm
-                advertId={advertId}
-                deliveryDateTime={deliveryDateTime}
-                index={index}
-                onDeleteButtonClick={onDeleteButtonClick}
-                onDoneButtonClick={onDoneButtonClick}
-              />
-          })
-          // "Delivery Date Times components"
+              <div key={`deliveryDateTime_${index}`} id={`deliveryDateTime_${index}`}>
+                <DeliveryDateTimeForm
+                  advertId={advertId}
+                  deliveryDateTime={deliveryDateTime}
+                  index={index}
+                  onDeleteButtonClick={handleDeleteButtonClick}
+                  onDoneButtonClick={handleDoneButtonClick}
+                />
+              </div>
+          ))
         }
       </Stack>
     );
@@ -88,19 +77,16 @@ export default function DeliveryDateTimes(
         }
       </FormHelperText>
       {
-        hasDeliveryDateTimes
-          ?
-          <React.Fragment>
-            {getDeliveryDateTimeComponents()}
-            <Button
-              variant="text"
-              startIcon={<AddCircleOutlineIcon />}
-              onClick={handleAddMoreDeliveryDateTimeButtonClick}
-            >
-              Add more delivery date times
-            </Button>
-          </React.Fragment>
-          : setDeliveryDateTimes([...deliveryDateTimes, DeliveryDateTimeSchema])
+        <React.Fragment>
+          {getDeliveryDateTimeComponents()}
+          <Button
+            variant="text"
+            startIcon={<AddCircleOutlineIcon />}
+            onClick={handleAddMoreDeliveryDateTimeButtonClick}
+          >
+            Add more delivery date times
+          </Button>
+        </React.Fragment>
       }
     </Stack>
   );
