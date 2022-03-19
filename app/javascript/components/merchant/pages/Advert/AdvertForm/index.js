@@ -12,10 +12,10 @@ const AdvertForm = forwardRef((props, ref) => {
   const { advert } = props;
 
   const deliveryDateTimeSchema = {
-    weekday: "",
-    fromTime: "",
-    toTime: "",
-    deliveryType: "",
+    weekday: null,
+    fromTime: null,
+    toTime: null,
+    deliveryType: null,
     deleted: false,
     saved: false
   }

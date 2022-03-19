@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
-  Grid, Divider, Button, Stack, FormHelperText,
+  Grid, Divider, Button, Paper, Stack, FormHelperText,
   IconButton, FormControlLabel, Checkbox
 } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -33,39 +33,50 @@ export default function DeliveryDateTimes(props) {
 
   const getDeliveryDateTimeComponents = () => {
     return (
-      <Stack id="deliveryDateTimesStackContainer">
-        {
-          // options.map((option, index) => (
-          //   option.deleted ? "" :
-          //     <div key={`variantOption_${index}`} id={`variantOptionContainer_${index}`} >
-          //       <VariantOptionForm
-          //         variantId={variantId}
-          //         option={option}
-          //         index={index}
-          //         onDoneButtonClick={variantId ? null : handleDoneButtonClick}
-          //         onDeleteButtonClick={handleDeleteButtonClick}
-          //       />
-          //     </div>
-          // ))
-          deliveryDateTimes.map((deliveryDateTime, index) => (
-            deliveryDateTime.deleted ? "" :
-              <div key={`deliveryDateTime_${index}`} id={`deliveryDateTime_${index}`}>
-                <DeliveryDateTimeForm
-                  advertId={advertId}
-                  deliveryDateTime={deliveryDateTime}
-                  index={index}
-                  onDeleteButtonClick={handleDeleteButtonClick}
-                  onDoneButtonClick={handleDoneButtonClick}
-                />
-              </div>
-          ))
-        }
-      </Stack>
+
+        <Stack id="deliveryDateTimesStackContainer">
+          {
+            // options.map((option, index) => (
+            //   option.deleted ? "" :
+            //     <div key={`variantOption_${index}`} id={`variantOptionContainer_${index}`} >
+            //       <VariantOptionForm
+            //         variantId={variantId}
+            //         option={option}
+            //         index={index}
+            //         onDoneButtonClick={variantId ? null : handleDoneButtonClick}
+            //         onDeleteButtonClick={handleDeleteButtonClick}
+            //       />
+            //     </div>
+            // ))
+
+            deliveryDateTimes.map((deliveryDateTime, index) => (
+              deliveryDateTime.deleted ? "" :
+                <div key={`deliveryDateTime_${index}`} id={`deliveryDateTime_${index}`}>
+                  <DeliveryDateTimeForm
+                    advertId={advertId}
+                    deliveryDateTime={deliveryDateTime}
+                    index={index}
+                    onDeleteButtonClick={handleDeleteButtonClick}
+                    onDoneButtonClick={handleDoneButtonClick}
+                  />
+                </div>
+            )
+            )
+          }
+        </Stack>
+
     );
   }
 
   return (
-    <Stack id="deliveryDateTimesContainer">
+    <Paper
+      id="deliveryDateTimeContainer"
+      sx={{
+        padding: "20px",
+        width: "100%",
+        marginTop: "10px"
+      }}
+    >
       <FormHelperText>
         {
           "List the different options available for a specific variant.\
@@ -88,6 +99,6 @@ export default function DeliveryDateTimes(props) {
           </Button>
         </React.Fragment>
       }
-    </Stack>
+    </Paper>
   );
 }
