@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
 
 import {
-  Grid, TextField, Stack, Button, IconButton, FormControl, Select, MenuItem, InputLabel
+  Grid, TextField, Stack, Button, IconButton, FormControl, Select, MenuItem, InputLabel, Divider
 } from "@mui/material";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 
 import FormContext from "../../../../_contexts/formContext";
 import ToastContext from "../../../../_contexts/ToastContext";
@@ -24,12 +25,16 @@ export default function DeliveryDateTimeForm(
   const setToast = useContext(ToastContext);
 
   // Delivery date time attributes
+  const deliveryDateTimeId = deliveryDateTime.id;
   const [weekday, setWeekday] = useState(deliveryDateTime.weekday || "");
   const [fromTime, setFromTime] = useState(deliveryDateTime.fromTime || "");
   const [toTime, setToTime] = useState(deliveryDateTime.toTime || "");
   const [deliveryType, setDeliveryType] = useState(deliveryDateTime.deliveryType || "");
   const [deleted, setDeleted] = useState(deliveryDateTime.deleted || false);
   const [saved, setSaved] = useState(deliveryDateTime.saved || false);
+  const [editMode, setEditMode] = useState(
+    formContext && formContext.type === "new" || (formContext.type === "update" && !deliveryDateTimeId)
+  );
 
   const weekdays = [
     { label: "Saturday", value: "saturday" },
@@ -49,6 +54,8 @@ export default function DeliveryDateTimeForm(
 
   // setters
 
+  /** handler of the field change */
+
   const handleWeekdayFieldChange = (event) => {
     setWeekday(event.target.value);
   }
@@ -65,88 +72,161 @@ export default function DeliveryDateTimeForm(
     setDeliveryType(event.target.value);
   }
 
+  /** handler of the field change */
+
+  /* Action button click handler callbacks */
+
+  const handleEditButtonClick = () => {
+
+  }
+
+  const handleDoneButtonClick = () => {
+
+  }
+
+  const handleDeleteButtonClick = () => {
+
+  }
+
+  /* Action button click handler callbacks */
+
+
+  /** Component generator functions */
+
+  const getActionButtonsComponent = () => {
+    return (
+
+      <Stack direction="row">
+        {
+          editMode ?
+            <IconButton
+              aria-label="Done"
+              size="small"
+              value={index}
+              onClick={handleDoneButtonClick}
+            >
+              <DoneRoundedIcon />
+            </IconButton>
+            :
+            <IconButton
+              aria-label="Edit"
+              size="small"
+              value={index}
+              onClick={handleEditButtonClick}
+            >
+              <EditRoundedIcon />
+            </IconButton>
+        }
+        <IconButton
+          aria-label="Delete"
+          size="small"
+          value={index}
+          onClick={handleDeleteButtonClick}
+        >
+          <DeleteRoundedIcon />
+        </IconButton>
+      </Stack>
+    );
+  }
+
+  /** Component generator functions */
+
   return (
-    <Grid
-      id={`deliveryDateTimeForm_${index}_container`}
-      className={`deliveryDateTimeForm_container`}
-      container
-      spacing={2}
-    >
-      <Grid item xs={12} md={6} lg={3}>
-        <FormControl fullWidth>
-          <InputLabel id={`deliveryDateTImeForm_${index}_weekday_select_inputLabel`}>Weekday</InputLabel>
-          <Select
-            labelId={`deliveryDateTImeForm_${index}_weekday_select_inputLabel`}
-            id={`deliveryDateTImeForm_${index}_weekday_select_label`}
-            value={weekday}
-            label="Weekday"
-            onChange={handleWeekdayFieldChange}
+    <div>
+      <Grid
+        id={`deliveryDateTimeForm_${index}_container`}
+        className={`deliveryDateTimeForm_container`}
+        container
+        spacing={2}
+      >
+        <Grid item xs={12} md={10} lg={11}>
+          <Grid
+            id={`deliveryDateTimeForm_${index}_date_time_container`}
+            container
+            spacing={2}
           >
-            {
-              weekdays.map((weekday, day) => (
-                <MenuItem
-                  key={`deliveryDateTimeForm_${index}_weekday_${day}`}
-                  id={`deliveryDateTimeForm_${index}_weekday_${day}`}
-                  value={weekday.value}
+            <Grid item xs={12} md={6} lg={3}>
+              <FormControl fullWidth>
+                <InputLabel id={`deliveryDateTImeForm_${index}_weekday_select_inputLabel`}>Weekday</InputLabel>
+                <Select
+                  labelId={`deliveryDateTImeForm_${index}_weekday_select_inputLabel`}
+                  id={`deliveryDateTImeForm_${index}_weekday_select_label`}
+                  value={weekday}
+                  label="Weekday"
+                  onChange={handleWeekdayFieldChange}
                 >
-                  {weekday.label}
-                </MenuItem>
-              ))
-            }
-          </Select>
-        </FormControl>
-      </Grid>
+                  {
+                    weekdays.map((weekday, day) => (
+                      <MenuItem
+                        key={`deliveryDateTimeForm_${index}_weekday_${day}`}
+                        id={`deliveryDateTimeForm_${index}_weekday_${day}`}
+                        value={weekday.value}
+                      >
+                        {weekday.label}
+                      </MenuItem>
+                    ))
+                  }
+                </Select>
+              </FormControl>
+            </Grid>
 
-      <Grid item xs={12} md={6} lg={3}>
-        <TextField
-          id={`deliveryDateTimeForm_${index}_fromTime`}
-          label="From time"
-          type="time"
-          defaultValue="07:30"
-          sx={{
-            width: "100%"
-          }}
-          onChange={handleFromTimeFieldChange}
-        />
-      </Grid>
+            <Grid item xs={12} md={6} lg={3}>
+              <TextField
+                id={`deliveryDateTimeForm_${index}_fromTime`}
+                label="From time"
+                type="time"
+                defaultValue="07:30"
+                sx={{
+                  width: "100%"
+                }}
+                onChange={handleFromTimeFieldChange}
+              />
+            </Grid>
 
-      <Grid item xs={12} md={6} lg={3}>
-        <TextField
-          id={`deliveryDateTimeForm_${index}_toTime`}
-          label="To time"
-          type="time"
-          defaultValue="16:30"
-          sx={{
-            width: "100%"
-          }}
-          onChange={handleToTimeFieldChange}
-        />
-      </Grid>
+            <Grid item xs={12} md={6} lg={3}>
+              <TextField
+                id={`deliveryDateTimeForm_${index}_toTime`}
+                label="To time"
+                type="time"
+                defaultValue="16:30"
+                sx={{
+                  width: "100%"
+                }}
+                onChange={handleToTimeFieldChange}
+              />
+            </Grid>
 
-      <Grid item xs={12} md={6} lg={3}>
-        <FormControl fullWidth>
-          <InputLabel id={`deliveryDateTImeForm_${index}_deliveryType_select_inputLabel`}>Delivery type</InputLabel>
-          <Select
-            labelId={`deliveryDateTImeForm_${index}_deliveryType_select_inputLabel`}
-            id={`deliveryDateTImeForm_${index}_deliveryType_select_label`}
-            value={deliveryType}
-            label="Delivery type"
-            onChange={handleDeliveryTypeFieldChange}
-          >
-            {
-              deliveryTypes.map((type, typeIndex) => (
-                <MenuItem
-                  key={`deliveryDateTimeForm_${index}_deliveryType_${typeIndex}`}
-                  id={`deliveryDateTimeForm_${index}_deliveryType_${typeIndex}`}
-                  value={type.value}
+            <Grid item xs={12} md={6} lg={3}>
+              <FormControl fullWidth>
+                <InputLabel id={`deliveryDateTImeForm_${index}_deliveryType_select_inputLabel`}>Delivery type</InputLabel>
+                <Select
+                  labelId={`deliveryDateTImeForm_${index}_deliveryType_select_inputLabel`}
+                  id={`deliveryDateTImeForm_${index}_deliveryType_select_label`}
+                  value={deliveryType}
+                  label="Delivery type"
+                  onChange={handleDeliveryTypeFieldChange}
                 >
-                  {type.label}
-                </MenuItem>
-              ))
-            }
-          </Select>
-        </FormControl>
+                  {
+                    deliveryTypes.map((type, typeIndex) => (
+                      <MenuItem
+                        key={`deliveryDateTimeForm_${index}_deliveryType_${typeIndex}`}
+                        id={`deliveryDateTimeForm_${index}_deliveryType_${typeIndex}`}
+                        value={type.value}
+                      >
+                        {type.label}
+                      </MenuItem>
+                    ))
+                  }
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} md={2} lg={1}>
+          {getActionButtonsComponent()}
+        </Grid>
       </Grid>
-    </Grid>
+      <Divider variant="middle"></Divider>
+    </div>
   );
 }

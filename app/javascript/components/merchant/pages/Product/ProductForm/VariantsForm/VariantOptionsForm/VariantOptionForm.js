@@ -5,6 +5,7 @@ import {
 } from "@mui/material";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 
 import FormContext from "../../../../../_contexts/formContext";
 import ToastContext from "../../../../../_contexts/ToastContext";
@@ -166,13 +167,14 @@ export default function VariantOptionForm({
                         marginTop: "16px",
                         marginLeft: "-16px"
                     }}>
-                    <Button
+                    <IconButton
+                        aria-label="Done"
+                        size="small"
                         value={index}
-                        variant="text"
                         onClick={handleOnVariantDoneButton}
                     >
-                        Done
-                    </Button>
+                        <DoneRoundedIcon />
+                    </IconButton>
                     <IconButton
                         aria-label="Delete"
                         size="small"
