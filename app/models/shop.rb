@@ -4,7 +4,7 @@ class Shop < ApplicationRecord
   has_many :adverts
   has_many :notifications
 
-  include HomemadeInstanceMethods::Shop
+  include CS::InstanceMethods::Shop
 
   geocoded_by :address
   after_validation :geocode

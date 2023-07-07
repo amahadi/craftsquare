@@ -7,7 +7,7 @@ class Customer < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   include DeviseTokenAuth::Concerns::User
-  include HomemadeInstanceMethods::Customer
+  # include CS::InstanceMethods::Customer
 
   has_many :addresses, dependent: :destroy
   has_many :notifications

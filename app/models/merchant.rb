@@ -11,7 +11,7 @@ class Merchant < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  include HomemadeValidations::Merchant
+  # include CS::Validations::Merchant
 
   validates :email, presence:
     { message: I18n.t('errors.model.merchant.validation.presence.email') }, on: :create

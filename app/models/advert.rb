@@ -9,7 +9,7 @@ class Advert < ApplicationRecord
     accepts_nested_attributes_for :delivery_date_times
 
     include Api::Advert
-    include HomemadeClassMethods::Advert
+    include CS::ClassMethods::Advert
 
     enum status: [:draft, :active, :inactive]
     enum delivery_method: [:both, :pick_up_only, :drop_off_only]
